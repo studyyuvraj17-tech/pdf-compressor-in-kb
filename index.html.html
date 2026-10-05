@@ -16,51 +16,15 @@
 <meta name="twitter:title" content="Compress PDF to KB Online – Free PDF Compressor">
 <meta name="twitter:description" content="Compress PDF files to a specific KB size such as 100 KB, 200 KB, 500 KB or 1 MB.">
 <script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@type":"WebApplication",
-  "name":"PDFCompressInKB",
-  "url":"https://www.pdfcompressinkb.com/",
-  "description":"Free browser-based PDF compressor for reducing a PDF to a target size in KB or MB.",
-  "applicationCategory":"UtilitiesApplication",
-  "operatingSystem":"Any",
-  "browserRequirements":"Requires a modern web browser with JavaScript enabled",
-  "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}
-}
+{"@context":"https://schema.org","@type":"WebApplication","name":"PDFCompressInKB","url":"https://www.pdfcompressinkb.com/","description":"Free browser-based PDF compressor for reducing a PDF to a target size in KB or MB.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
 </script>
 <script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@type":"FAQPage",
-  "mainEntity":[
-    {
-      "@type":"Question",
-      "name":"How can I compress a PDF to 100 KB?",
-      "acceptedAnswer":{"@type":"Answer","text":"Choose or drop your PDF, enter 100 KB as the target size, and click Compress. The tool optimizes the PDF toward the selected target."}
-    },
-    {
-      "@type":"Question",
-      "name":"Can I compress a PDF to 200 KB?",
-      "acceptedAnswer":{"@type":"Answer","text":"Yes. Enter 200 KB as the target size and start compression."}
-    },
-    {
-      "@type":"Question",
-      "name":"Does compressing a PDF reduce quality?",
-      "acceptedAnswer":{"@type":"Answer","text":"PDF compression can reduce image quality when a file needs substantial size reduction. This tool attempts to preserve quality first and only reduces it further when needed to approach the target."}
-    },
-    {
-      "@type":"Question",
-      "name":"Is this PDF compressor free?",
-      "acceptedAnswer":{"@type":"Answer","text":"Yes. The PDF compressor is free to use."}
-    }
-  ]
-}
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How can I compress a PDF to 100 KB?","acceptedAnswer":{"@type":"Answer","text":"Choose or drop your PDF, enter 100 KB as the target size, and click Compress. The tool optimizes the PDF toward the selected target."}},{"@type":"Question","name":"Can I compress a PDF to 200 KB?","acceptedAnswer":{"@type":"Answer","text":"Yes. Enter 200 KB as the target size and start compression."}},{"@type":"Question","name":"How can I resize a PDF file to 200KB online?","acceptedAnswer":{"@type":"Answer","text":"You can resize a PDF file to 200KB online by uploading your PDF, setting the target size to 200 KB, and clicking Compress. The tool optimizes the PDF toward the selected size while trying to preserve as much quality as possible."}},{"@type":"Question","name":"Does compressing a PDF reduce quality?","acceptedAnswer":{"@type":"Answer","text":"PDF compression can reduce image quality when a file needs substantial size reduction. This tool attempts to preserve quality first and only reduces it further when needed to approach the target."}},{"@type":"Question","name":"Is this PDF compressor free?","acceptedAnswer":{"@type":"Answer","text":"Yes. The PDF compressor is free to use."}}]}
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
 <style>
-:root{--bg:#fafaf9;--fg:#1c1917;--muted:#78716c;--line:#d6d3d1;--card:#fff;--accent:#1c1917;--accent-fg:#fafaf9;--ok:#15803d;--warn:#b45309;--err:#b91c1c;
-box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root{--bg:#fafaf9;--fg:#1c1917;--muted:#78716c;--line:#d6d3d1;--card:#fff;--accent:#1c1917;--accent-fg:#fafaf9;--ok:#15803d;--warn:#b45309;--err:#b91c1c;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0c0a09;--fg:#fafaf9;--muted:#a8a29e;--line:#44403c;--card:#1c1917;--accent:#fafaf9;--accent-fg:#0c0a09;--ok:#4ade80;--warn:#fbbf24;--err:#f87171}}
 :root[data-theme="dark"]{--bg:#0c0a09;--fg:#fafaf9;--muted:#a8a29e;--line:#44403c;--card:#1c1917;--accent:#fafaf9;--accent-fg:#0c0a09;--ok:#4ade80;--warn:#fbbf24;--err:#f87171}
 *{box-sizing:border-box}
@@ -106,218 +70,22 @@ summary{cursor:pointer;font-weight:600}
 details p{margin:8px 0 0}
 footer{margin-top:28px;padding-top:20px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);text-align:center}
 .sr-note{font-size:13px}
-@media (max-width:600px){
-  body{padding:18px 14px}
-  h1{font-size:26px}
-  .row{align-items:stretch}
-  button{padding-inline:16px}
-}
+@media (max-width:600px){body{padding:18px 14px}h1{font-size:26px}.row{align-items:stretch}button{padding-inline:16px}}
 </style>
 </head>
 <body>
 <main>
-  <section aria-labelledby="page-title">
-    <h1 id="page-title">Compress PDF to KB Online</h1>
-    <p class="lead">Reduce a PDF to a target size such as 100 KB, 200 KB, 500 KB or 1 MB. Choose your PDF, set the target size and compress it in your browser.</p>
-  </section>
-
-  <div class="tool">
-    <label id="drop" for="file">
-      <b id="fname">Choose or drop a PDF</b>
-      <small id="fsize">Stays on your device</small>
-    </label>
-    <input type="file" id="file" accept="application/pdf">
-
-    <div class="row">
-      <div class="num"><input id="kb" type="number" min="10" value="200" inputmode="numeric" aria-label="Target size in KB"><span>KB</span></div>
-      <button id="go" disabled>Compress</button>
-    </div>
-    <div class="chips" id="chips" aria-label="Common PDF target sizes"><a>50</a><a>100</a><a>200</a><a>500</a><a>1000</a></div>
-
-    <div id="bar" aria-hidden="true"><i></i></div>
-    <div id="out" aria-live="polite"></div>
-  </div>
-
-  <div class="content">
-    <section aria-labelledby="how-title">
-      <h2 id="how-title">How to Compress a PDF to a Specific KB Size</h2>
-      <ol class="steps">
-        <li><strong>Upload your PDF:</strong> Choose a PDF file or drag and drop it into the compressor.</li>
-        <li><strong>Enter the target size:</strong> Select a size such as 100 KB, 200 KB, 500 KB or 1 MB.</li>
-        <li><strong>Compress the PDF:</strong> Click Compress and let the browser optimize the file toward your target.</li>
-        <li><strong>Download the result:</strong> Download the compressed PDF when processing finishes.</li>
-      </ol>
-    </section>
-
-    <section aria-labelledby="why-title">
-      <h2 id="why-title">Why Use This PDF Compressor?</h2>
-      <h3>Target a specific file size</h3>
-      <p>Set a target in KB instead of choosing only a generic compression level. This is useful when an application, form or website has a file-size limit.</p>
-      <h3>Simple browser-based workflow</h3>
-      <p>Upload a PDF, choose a target, compress it and download the result without installing desktop software.</p>
-      <h3>Quality is protected first</h3>
-      <p>The compressor first attempts to preserve quality and only makes stronger reductions when the requested target requires them.</p>
-    </section>
-
-    <section aria-labelledby="faq-title">
-      <h2 id="faq-title">Frequently Asked Questions</h2>
-      <details>
-        <summary>How can I compress a PDF to 100 KB?</summary>
-        <p>Choose your PDF, enter 100 KB as the target size and click Compress. The tool optimizes the PDF toward the selected target.</p>
-      </details>
-      <details>
-        <summary>Can I compress a PDF to 200 KB?</summary>
-        <p>Yes. Enter 200 KB as the target size before starting compression.</p>
-      </details>
-      <details>
-        <summary>Does compressing a PDF reduce quality?</summary>
-        <p>It can, especially when a file needs a large size reduction. This tool attempts to preserve quality first and only reduces it further when necessary to approach the target.</p>
-      </details>
-      <details>
-        <summary>Is this PDF compressor free?</summary>
-        <p>Yes. The PDF compressor is free to use.</p>
-      </details>
-      <details>
-        <summary>Do I need to install software?</summary>
-        <p>No installation is required. A modern browser with JavaScript enabled is enough to use the tool.</p>
-      </details>
-    </section>
-
-    <p class="sr-note">Note: The compressor may convert pages to images when a large reduction is required, which can affect text selection in the resulting PDF.</p>
-  </div>
-
-  <footer>PDFCompressInKB — Free PDF compression to a target KB or MB size.</footer>
+<section aria-labelledby="page-title"><h1 id="page-title">Compress PDF to KB Online</h1><p class="lead">Reduce a PDF to a target size such as 100 KB, 200 KB, 500 KB or 1 MB. Choose your PDF, set the target size and compress it in your browser.</p></section>
+<div class="tool"><label id="drop" for="file"><b id="fname">Choose or drop a PDF</b><small id="fsize">Stays on your device</small></label><input type="file" id="file" accept="application/pdf"><div class="row"><div class="num"><input id="kb" type="number" min="10" value="200" inputmode="numeric" aria-label="Target size in KB"><span>KB</span></div><button id="go" disabled>Compress</button></div><div class="chips" id="chips" aria-label="Common PDF target sizes"><a>50</a><a>100</a><a>200</a><a>500</a><a>1000</a></div><div id="bar" aria-hidden="true"><i></i></div><div id="out" aria-live="polite"></div></div>
+<div class="content">
+<section aria-labelledby="how-title"><h2 id="how-title">How to Compress a PDF to a Specific KB Size</h2><ol class="steps"><li><strong>Upload your PDF:</strong> Choose a PDF file or drag and drop it into the compressor.</li><li><strong>Enter the target size:</strong> Select a size such as 100 KB, 200 KB, 500 KB or 1 MB.</li><li><strong>Compress the PDF:</strong> Click Compress and let the browser optimize the file toward your target.</li><li><strong>Download the result:</strong> Download the compressed PDF when processing finishes.</li></ol></section>
+<section aria-labelledby="why-title"><h2 id="why-title">Why Use This PDF Compressor?</h2><h3>Target a specific file size</h3><p>Set a target in KB instead of choosing only a generic compression level. This is useful when an application, form or website has a file-size limit.</p><h3>Simple browser-based workflow</h3><p>Upload a PDF, choose a target, compress it and download the result without installing desktop software.</p><h3>Quality is protected first</h3><p>The compressor first attempts to preserve quality and only makes stronger reductions when the requested target requires them.</p></section>
+<section aria-labelledby="faq-title"><h2 id="faq-title">Frequently Asked Questions</h2><details><summary>How can I compress a PDF to 100 KB?</summary><p>Choose your PDF, enter 100 KB as the target size and click Compress. The tool optimizes the PDF toward the selected target.</p></details><details><summary>Can I compress a PDF to 200 KB?</summary><p>Yes. Enter 200 KB as the target size before starting compression.</p></details><details><summary>How can I resize a PDF file to 200KB online?</summary><p>You can resize a PDF file to <strong>200KB online</strong> by uploading your PDF, setting the target size to 200 KB, and clicking Compress. The tool optimizes the PDF toward the selected size while trying to preserve as much quality as possible.</p></details><details><summary>Does compressing a PDF reduce quality?</summary><p>It can, especially when a file needs a large size reduction. This tool attempts to preserve quality first and only reduces it further when necessary to approach the target.</p></details><details><summary>Is this PDF compressor free?</summary><p>Yes. The PDF compressor is free to use.</p></details><details><summary>Do I need to install software?</summary><p>No installation is required. A modern browser with JavaScript enabled is enough to use the tool.</p></details></section>
+<p class="sr-note">Note: The compressor may convert pages to images when a large reduction is required, which can affect text selection in the resulting PDF.</p>
+</div><footer>PDFCompressInKB — Free PDF compression to a target KB or MB size.</footer>
 </main>
-
 <script>
-(function(){
-  var $ = function(id){return document.getElementById(id);};
-  var file = null, busy = false, bytes = null;
-  var params = new URLSearchParams(window.location.search);
-  var requestedSize = parseInt(params.get("size"), 10);
-  if(Number.isFinite(requestedSize) && requestedSize >= 10){
-    $("kb").value = Math.min(requestedSize, 100000);
-    $("page-title").textContent = "Compress PDF to " + requestedSize + " KB Online";
-  }
-  try { pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"; } catch(e){}
-  function fmt(b){ return b >= 1048576 ? (b/1048576).toFixed(2)+" MB" : Math.round(b/1024)+" KB"; }
-  function say(h){ $("out").innerHTML = h; }
-  function progress(p){ var b=$("bar"); b.style.display = p == null ? "none" : "block"; if(p != null) b.firstElementChild.style.width = Math.round(p*100)+"%"; }
-  function setFile(f){
-    if(!f) return;
-    if(f.type !== "application/pdf" && !/\.pdf$/i.test(f.name)){ say('<span class="err">That is not a PDF.</span>'); return; }
-    file = f; $("fname").textContent = f.name; $("fsize").textContent = fmt(f.size);
-    $("go").disabled = false; say("");
-  }
-  $("file").addEventListener("change", function(e){ setFile(e.target.files[0]); });
-  var drop = $("drop");
-  ["dragenter","dragover"].forEach(function(t){ drop.addEventListener(t, function(e){ e.preventDefault(); drop.classList.add("over"); }); });
-  ["dragleave","drop"].forEach(function(t){ drop.addEventListener(t, function(e){ e.preventDefault(); drop.classList.remove("over"); }); });
-  drop.addEventListener("drop", function(e){ setFile(e.dataTransfer.files[0]); });
-  $("chips").addEventListener("click", function(e){ if(e.target.tagName === "A") $("kb").value = e.target.textContent; });
-  function toBlob(canvas, q){ return new Promise(function(res){ canvas.toBlob(res, "image/jpeg", q); }); }
-  async function renderPages(pdf, scale, onPage){
-    var out = [];
-    for(var i = 1; i <= pdf.numPages; i++){
-      var page = await pdf.getPage(i);
-      var vp = page.getViewport({scale: scale});
-      var c = document.createElement("canvas");
-      c.width = Math.max(1, Math.floor(vp.width)); c.height = Math.max(1, Math.floor(vp.height));
-      var ctx = c.getContext("2d");
-      ctx.fillStyle = "#fff"; ctx.fillRect(0,0,c.width,c.height);
-      await page.render({canvasContext: ctx, viewport: vp}).promise;
-      var base = page.getViewport({scale: 1});
-      out.push({canvas: c, w: base.width, h: base.height});
-      if(onPage) onPage(i);
-    }
-    return out;
-  }
-  function freePages(pages){ pages.forEach(function(p){ p.canvas.width = 0; p.canvas.height = 0; }); }
-  async function sizeAt(pages, q){
-    var total = 0, blobs = [];
-    for(var i = 0; i < pages.length; i++){
-      var b = await toBlob(pages[i].canvas, q);
-      blobs.push(b); total += b.size + 600;
-    }
-    return {total: total + 1500, blobs: blobs};
-  }
-  async function build(pages, blobs){
-    var doc = await PDFLib.PDFDocument.create();
-    for(var i = 0; i < pages.length; i++){
-      var img = await doc.embedJpg(await blobs[i].arrayBuffer());
-      var pg = doc.addPage([pages[i].w, pages[i].h]);
-      pg.drawImage(img, {x:0, y:0, width: pages[i].w, height: pages[i].h});
-    }
-    return new Blob([await doc.save()], {type: "application/pdf"});
-  }
-  async function attempt(pdf, scales, qMin, qMax, target, progFrom, progTo){
-    var lastTry = null;
-    for(var s = 0; s < scales.length; s++){
-      var pages = await renderPages(pdf, scales[s], function(i){
-        progress(progFrom + ((s + i/pdf.numPages) / scales.length) * (progTo - progFrom));
-      });
-      var first = await sizeAt(pages, qMin);
-      if(first.total > target){
-        if(lastTry) freePages(lastTry.pages);
-        lastTry = {pages: pages, blobs: first.blobs, fit: false};
-        continue;
-      }
-      var lo = qMin, hi = qMax, fit = first;
-      for(var k = 0; k < 5; k++){
-        var mid = (lo + hi) / 2, r = await sizeAt(pages, mid);
-        if(r.total <= target){ lo = mid; fit = r; } else { hi = mid; }
-      }
-      if(lastTry) freePages(lastTry.pages);
-      return {pages: pages, blobs: fit.blobs, fit: true};
-    }
-    return lastTry;
-  }
-  async function run(){
-    if(busy || !file) return;
-    var target = Math.max(10, parseInt($("kb").value, 10) || 0) * 1024;
-    if(file.size <= target){ say('<span class="ok">Already ' + fmt(file.size) + ", under your target.</span>"); return; }
-    busy = true; $("go").disabled = true; say("Compressing…"); progress(0.03);
-    var result = null, note = "", tone = "ok";
-    try{
-      bytes = await file.arrayBuffer();
-      try{
-        var doc = await PDFLib.PDFDocument.load(bytes, {ignoreEncryption: true, updateMetadata: false});
-        var lossless = new Blob([await doc.save({useObjectStreams: true})], {type: "application/pdf"});
-        if(lossless.size <= target){ result = lossless; note = "No quality loss. Text is still selectable."; }
-      }catch(e){}
-      if(!result){
-        var pdf = await pdfjsLib.getDocument({data: bytes.slice(0)}).promise;
-        progress(0.1);
-        var best = await attempt(pdf, [2, 1.6, 1.3, 1.1], 0.75, 0.92, target, 0.1, 0.5);
-        if(best && best.fit){
-          result = await build(best.pages, best.blobs);
-          note = "Quality kept high. Pages are now images, so text isn't selectable.";
-          freePages(best.pages);
-        } else {
-          if(best) freePages(best.pages);
-          var rough = await attempt(pdf, [1, 0.8, 0.6, 0.45, 0.3, 0.2], 0.3, 0.85, target, 0.5, 0.92);
-          result = await build(rough.pages, rough.blobs);
-          freePages(rough.pages);
-          note = rough.fit ? "Your target needed some quality loss. Try a slightly higher KB for a sharper file." : "Couldn't reach the target without heavy loss. This is the smallest possible.";
-          tone = rough.fit ? "warn" : "err";
-        }
-      }
-      progress(1);
-      var hit = result.size <= target * 1.02;
-      if(!hit && tone === "ok") tone = "warn";
-      var url = URL.createObjectURL(result);
-      var name = file.name.replace(/\.pdf$/i, "").replace(/"/g, "") + "-compressed.pdf";
-      say('<span class="' + tone + '">' + fmt(file.size) + " → " + fmt(result.size) + "</span><small>" + note + "</small>" +
-          '<a class="dl" href="' + url + '" download="' + name + '">Download</a>');
-    }catch(err){
-      console.error(err);
-      say('<span class="err">Could not read this PDF. It may be password-protected or damaged.</span>');
-    }
-    setTimeout(function(){ progress(null); }, 500);
-    busy = false; $("go").disabled = false;
-  }
-  $("go").addEventListener("click", run);
-})();
+(function(){var $=function(id){return document.getElementById(id)},file=null,busy=false,bytes=null;var params=new URLSearchParams(window.location.search),requestedSize=parseInt(params.get("size"),10);if(Number.isFinite(requestedSize)&&requestedSize>=10){$("kb").value=Math.min(requestedSize,100000);$("page-title").textContent="Compress PDF to "+requestedSize+" KB Online"}try{pdfjsLib.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"}catch(e){}function fmt(b){return b>=1048576?(b/1048576).toFixed(2)+" MB":Math.round(b/1024)+" KB"}function say(h){$("out").innerHTML=h}function progress(p){var b=$("bar");b.style.display=p==null?"none":"block";if(p!=null)b.firstElementChild.style.width=Math.round(p*100)+"%"}function setFile(f){if(!f)return;if(f.type!=="application/pdf"&&!/\.pdf$/i.test(f.name)){say('<span class="err">That is not a PDF.</span>');return}file=f;$("fname").textContent=f.name;$("fsize").textContent=fmt(f.size);$("go").disabled=false;say("")}$("file").addEventListener("change",function(e){setFile(e.target.files[0])});var drop=$("drop");["dragenter","dragover"].forEach(function(t){drop.addEventListener(t,function(e){e.preventDefault();drop.classList.add("over")})});["dragleave","drop"].forEach(function(t){drop.addEventListener(t,function(e){e.preventDefault();drop.classList.remove("over")})});drop.addEventListener("drop",function(e){setFile(e.dataTransfer.files[0])});$("chips").addEventListener("click",function(e){if(e.target.tagName==="A")$("kb").value=e.target.textContent});function toBlob(canvas,q){return new Promise(function(res){canvas.toBlob(res,"image/jpeg",q)})}async function renderPages(pdf,scale,onPage){var out=[];for(var i=1;i<=pdf.numPages;i++){var page=await pdf.getPage(i),vp=page.getViewport({scale:scale}),c=document.createElement("canvas");c.width=Math.max(1,Math.floor(vp.width));c.height=Math.max(1,Math.floor(vp.height));var ctx=c.getContext("2d");ctx.fillStyle="#fff";ctx.fillRect(0,0,c.width,c.height);await page.render({canvasContext:ctx,viewport:vp}).promise;var base=page.getViewport({scale:1});out.push({canvas:c,w:base.width,h:base.height});if(onPage)onPage(i)}return out}function freePages(pages){pages.forEach(function(p){p.canvas.width=0;p.canvas.height=0})}async function sizeAt(pages,q){var total=0,blobs=[];for(var i=0;i<pages.length;i++){var b=await toBlob(pages[i].canvas,q);blobs.push(b);total+=b.size+600}return{total:total+1500,blobs:blobs}}async function build(pages,blobs){var doc=await PDFLib.PDFDocument.create();for(var i=0;i<pages.length;i++){var img=await doc.embedJpg(await blobs[i].arrayBuffer()),pg=doc.addPage([pages[i].w,pages[i].h]);pg.drawImage(img,{x:0,y:0,width:pages[i].w,height:pages[i].h})}return new Blob([await doc.save()],{type:"application/pdf"})}async function attempt(pdf,scales,qMin,qMax,target,progFrom,progTo){var lastTry=null;for(var s=0;s<scales.length;s++){var pages=await renderPages(pdf,scales[s],function(i){progress(progFrom+((s+i/pdf.numPages)/scales.length)*(progTo-progFrom))});var first=await sizeAt(pages,qMin);if(first.total>target){if(lastTry)freePages(lastTry.pages);lastTry={pages:pages,blobs:first.blobs,fit:false};continue}var lo=qMin,hi=qMax,fit=first;for(var k=0;k<5;k++){var mid=(lo+hi)/2,r=await sizeAt(pages,mid);if(r.total<=target){lo=mid;fit=r}else hi=mid}if(lastTry)freePages(lastTry.pages);return{pages:pages,blobs:fit.blobs,fit:true}}return lastTry}async function run(){if(busy||!file)return;var target=Math.max(10,parseInt($("kb").value,10)||0)*1024;if(file.size<=target){say('<span class="ok">Already '+fmt(file.size)+", under your target.</span>");return}busy=true;$("go").disabled=true;say("Compressing…");progress(.03);var result=null,note="",tone="ok";try{bytes=await file.arrayBuffer();try{var doc=await PDFLib.PDFDocument.load(bytes,{ignoreEncryption:true,updateMetadata:false}),lossless=new Blob([await doc.save({useObjectStreams:true})],{type:"application/pdf"});if(lossless.size<=target){result=lossless;note="No quality loss. Text is still selectable."}}catch(e){}if(!result){var pdf=await pdfjsLib.getDocument({data:bytes.slice(0)}).promise;progress(.1);var best=await attempt(pdf,[2,1.6,1.3,1.1],.75,.92,target,.1,.5);if(best&&best.fit){result=await build(best.pages,best.blobs);note="Quality kept high. Pages are now images, so text isn't selectable.";freePages(best.pages)}else{if(best)freePages(best.pages);var rough=await attempt(pdf,[1,.8,.6,.45,.3,.2],.3,.85,target,.5,.92);result=await build(rough.pages,rough.blobs);freePages(rough.pages);note=rough.fit?"Your target needed some quality loss. Try a slightly higher KB for a sharper file.":"Couldn't reach the target without heavy loss. This is the smallest possible.";tone=rough.fit?"warn":"err"}}progress(1);var hit=result.size<=target*1.02;if(!hit&&tone==="ok")tone="warn";var url=URL.createObjectURL(result),name=file.name.replace(/\.pdf$/i,"").replace(/"/g,"")+"-compressed.pdf";say('<span class="'+tone+'">'+fmt(file.size)+" → "+fmt(result.size)+"</span><small>"+note+'</small><a class="dl" href="'+url+'" download="'+name+'">Download</a>')}catch(err){console.error(err);say('<span class="err">Could not read this PDF. It may be password-protected or damaged.</span>')}setTimeout(function(){progress(null)},500);busy=false;$("go").disabled=false}$("go").addEventListener("click",run)})();
 </script>
 </body>
 </html>
