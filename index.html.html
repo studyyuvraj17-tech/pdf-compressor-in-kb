@@ -204,6 +204,12 @@ footer{margin-top:28px;padding-top:20px;border-top:1px solid var(--line);font-si
 (function(){
   var $ = function(id){return document.getElementById(id);};
   var file = null, busy = false, bytes = null;
+  var params = new URLSearchParams(window.location.search);
+  var requestedSize = parseInt(params.get("size"), 10);
+  if(Number.isFinite(requestedSize) && requestedSize >= 10){
+    $("kb").value = Math.min(requestedSize, 100000);
+    $("page-title").textContent = "Compress PDF to " + requestedSize + " KB Online";
+  }
   try { pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"; } catch(e){}
   function fmt(b){ return b >= 1048576 ? (b/1048576).toFixed(2)+" MB" : Math.round(b/1024)+" KB"; }
   function say(h){ $("out").innerHTML = h; }
