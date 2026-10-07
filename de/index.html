@@ -71,6 +71,7 @@ details p{margin:8px 0 0}
 footer{margin-top:28px;padding-top:20px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);text-align:center}
 .sr-note{font-size:13px}
 @media (max-width:600px){body{padding:18px 14px}h1{font-size:26px}.row{align-items:stretch}button{padding-inline:16px}}
+.site-brand-logo{display:block;width:260px;margin:0 auto 22px;text-decoration:none}.site-brand-logo img{display:block;width:100%;height:auto}@media(max-width:480px){.site-brand-logo{width:220px}}
 </style>
 <link rel="alternate" hreflang="en" href="https://www.pdfcompressinkb.com">
 <link rel="alternate" hreflang="es" href="https://www.pdfcompressinkb.com/es">
@@ -81,9 +82,10 @@ footer{margin-top:28px;padding-top:20px;border-top:1px solid var(--line);font-si
 <link rel="alternate" hreflang="ko" href="https://www.pdfcompressinkb.com/ko">
 <link rel="alternate" hreflang="it" href="https://www.pdfcompressinkb.com/it">
 <link rel="alternate" hreflang="x-default" href="https://www.pdfcompressinkb.com">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 </head>
 <body>
-<main>
+<main><a class="site-brand-logo" href="/" aria-label="PDFCompressInKB home"><img src="/assets/logo.svg" alt="PDFCompressInKB" width="260" height="60"></a>
 <div class="language-switcher" style="display:flex;align-items:center;justify-content:flex-end;gap:10px;margin:0 0 22px;padding:10px 0;font-size:14px"><span style="font-weight:600;color:var(--fg)">🌐 Sprache</span><select aria-label="Sprache" onchange="if(this.value)window.location.href=this.value" style="appearance:auto;border:1px solid var(--line);border-radius:9px;background:var(--card);color:var(--fg);padding:8px 34px 8px 10px;font:inherit;cursor:pointer"><option value="/">English</option><option value="/es/">Español</option><option value="/ja/">日本語</option><option value="/fr/">Français</option><option value="/de/" selected>Deutsch</option><option value="/pt/">Português</option><option value="/ko/">한국어</option><option value="/it/">Italiano</option></select></div>
 <section aria-labelledby="page-title"><h1 id="page-title">PDF online auf KB komprimieren</h1><p class="lead">Reduzieren Sie ein PDF auf eine Zielgröße wie 100 KB, 200 KB, 500 KB oder 1 MB. PDF auswählen, Zielgröße festlegen und direkt im Browser komprimieren.</p></section>
 <div class="tool"><label id="drop" for="file"><b id="fname">PDF auswählen oder ablegen</b><small id="fsize">Bleibt auf Ihrem Gerät</small></label><input type="file" id="file" accept="application/pdf"><div class="row"><div class="num"><input id="kb" type="number" min="10" value="200" inputmode="numeric" aria-label="Target size in KB"><span>KB</span></div><button id="go" disabled>Komprimieren</button></div><div class="chips" id="chips" aria-label="Common PDF target sizes"><a>50</a><a>100</a><a>200</a><a>500</a><a>1000</a></div><div id="bar" aria-hidden="true"><i></i></div><div id="out" aria-live="polite"></div></div>
