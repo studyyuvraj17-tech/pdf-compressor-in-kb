@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Comprimi PDF in KB online – Comprimiore PDF gratuito</title>
+<meta name="description" content="Comprimi file PDF a una dimensione specifica come 100 KB, 200 KB, 500 KB o 1 MB. Comprimiore PDF online gratuito per caricamenti con limiti di dimensione.">
+<link rel="canonical" href="https://www.pdfcompressinkb.com/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#fafaf9">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.pdfcompressinkb.com/">
+<meta property="og:title" content="Comprimi PDF in KB online – Comprimiore PDF gratuito">
+<meta property="og:description" content="Comprimi PDF files to a specific KB size such as 100 KB, 200 KB, 500 KB or 1 MB.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Comprimi PDF in KB online – Comprimiore PDF gratuito">
+<meta name="twitter:description" content="Comprimi PDF files to a specific KB size such as 100 KB, 200 KB, 500 KB or 1 MB.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"PDFComprimiInKB","url":"https://www.pdfcompressinkb.com/","description":"Free browser-based PDF compressor for reducing a PDF to a target size in KB or MB.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How can I compress a PDF to 100 KB?","acceptedAnswer":{"@type":"Answer","text":"Choose or drop your PDF, enter 100 KB as the target size, and click Comprimi. The tool optimizes the PDF toward the selected target."}},{"@type":"Question","name":"Can I compress a PDF to 200 KB?","acceptedAnswer":{"@type":"Answer","text":"Yes. Enter 200 KB as the target size and start compression."}},{"@type":"Question","name":"How can I resize a PDF file to 200KB online?","acceptedAnswer":{"@type":"Answer","text":"You can resize a PDF file to 200KB online by uploading your PDF, setting the target size to 200 KB, and clicking Comprimi. The tool optimizes the PDF toward the selected size while trying to preserve as much quality as possible."}},{"@type":"Question","name":"How can I compress a PDF to 200KB without losing quality?","acceptedAnswer":{"@type":"Answer","text":"You can compress a PDF to 200KB while preserving as much quality as possible by uploading your PDF, setting 200 KB as the target size, and clicking Comprimi. If a PDF requires a large reduction, some quality loss may be unavoidable."}},{"@type":"Question","name":"Questo compressore PDF è gratuito?","acceptedAnswer":{"@type":"Answer","text":"Yes. The PDF compressor is free to use."}}]}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<style>
+:root{--bg:#fafaf9;--fg:#1c1917;--muted:#78716c;--line:#d6d3d1;--card:#fff;--accent:#1c1917;--accent-fg:#fafaf9;--ok:#15803d;--warn:#b45309;--err:#b91c1c;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0c0a09;--fg:#fafaf9;--muted:#a8a29e;--line:#44403c;--card:#1c1917;--accent:#fafaf9;--accent-fg:#0c0a09;--ok:#4ade80;--warn:#fbbf24;--err:#f87171}}
+:root[data-theme="dark"]{--bg:#0c0a09;--fg:#fafaf9;--muted:#a8a29e;--line:#44403c;--card:#1c1917;--accent:#fafaf9;--accent-fg:#0c0a09;--ok:#4ade80;--warn:#fbbf24;--err:#f87171}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding:24px}
+main{width:100%;max-width:760px}
+h1{font-size:30px;line-height:1.15;font-weight:700;margin:0 0 10px;letter-spacing:-.02em}
+.lead{margin:0 auto 24px;max-width:680px;color:var(--muted);line-height:1.6}
+.tool{max-width:420px;margin:0 auto}
+#drop{display:block;border:1.5px dashed var(--line);border-radius:12px;padding:32px 16px;text-align:center;color:var(--muted);cursor:pointer;background:var(--card);transition:border-color .15s}
+#drop:hover,#drop.over{border-color:var(--fg)}
+#drop b{color:var(--fg);font-weight:500;display:block;word-break:break-all}
+#drop small{display:block;margin-top:4px}
+input[type=file]{display:none}
+.row{display:flex;gap:8px;margin-top:12px;align-items:center}
+.num{flex:1;display:flex;align-items:center;border:1px solid var(--line);border-radius:10px;background:var(--card);padding:0 12px}
+.num input{flex:1;min-width:0;border:0;background:transparent;color:var(--fg);font-size:16px;padding:12px 0;outline:none}
+.num span{color:var(--muted);font-size:14px}
+button{font:inherit;font-size:15px;font-weight:500;border:0;border-radius:10px;background:var(--accent);color:var(--accent-fg);padding:12px 20px;cursor:pointer}
+button:disabled{opacity:.4;cursor:not-allowed}
+.chips{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.chips a{font-size:13px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:4px 10px;cursor:pointer;user-select:none}
+.chips a:hover{color:var(--fg);border-color:var(--fg)}
+#out{margin-top:20px;font-size:14px;min-height:20px;line-height:1.5}
+#out .ok{color:var(--ok)}#out .warn{color:var(--warn)}#out .err{color:var(--err)}
+#out small{display:block;color:var(--muted)}
+#out a.dl{display:block;margin-top:10px;text-align:center;text-decoration:none;border-radius:10px;background:var(--accent);color:var(--accent-fg);padding:12px;font-weight:500}
+#bar{height:3px;background:var(--line);border-radius:2px;margin-top:20px;overflow:hidden;display:none}
+#bar i{display:block;height:100%;width:0;background:var(--fg);transition:width .2s}
+.content{margin-top:44px}
+section{margin:0 0 34px}
+h2{font-size:21px;margin:0 0 12px}
+h3{font-size:17px;margin:20px 0 8px}
+p{line-height:1.65;color:var(--muted);margin:0 0 12px}
+.steps{padding-left:20px;color:var(--muted);line-height:1.7}
+.steps strong{color:var(--fg)}
+.target-links{display:flex;flex-wrap:wrap;gap:8px}
+.target-links a{color:var(--fg);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:7px 11px;background:var(--card);font-size:14px}
+.target-links a:hover{border-color:var(--fg)}
+details{border-top:1px solid var(--line);padding:14px 0}
+details:last-child{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;font-weight:600}
+details p{margin:8px 0 0}
+footer{margin-top:28px;padding-top:20px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);text-align:center}
+.sr-note{font-size:13px}
+@media (max-width:600px){body{padding:18px 14px}h1{font-size:26px}.row{align-items:stretch}button{padding-inline:16px}}
+</style>
+<link rel="alternate" hreflang="en" href="https://www.pdfcompressinkb.com">
+<link rel="alternate" hreflang="es" href="https://www.pdfcompressinkb.com/es">
+<link rel="alternate" hreflang="ja" href="https://www.pdfcompressinkb.com/ja">
+<link rel="alternate" hreflang="fr" href="https://www.pdfcompressinkb.com/fr">
+<link rel="alternate" hreflang="de" href="https://www.pdfcompressinkb.com/de">
+<link rel="alternate" hreflang="pt" href="https://www.pdfcompressinkb.com/pt">
+<link rel="alternate" hreflang="ko" href="https://www.pdfcompressinkb.com/ko">
+<link rel="alternate" hreflang="it" href="https://www.pdfcompressinkb.com/it">
+<link rel="alternate" hreflang="x-default" href="https://www.pdfcompressinkb.com">
+</head>
+<body>
+<nav aria-label="Language" style="text-align:right;margin-bottom:16px;font-size:13px"><a href="/">English</a> · <a href="/es/">Español</a> · <a href="/ja/">日本語</a> · <a href="/fr/">Français</a> · <a href="/de/">Deutsch</a> · <a href="/pt/">Português</a> · <a href="/ko/">한국어</a> · <a href="/it/">Italiano</a></nav><main>
+<section aria-labelledby="page-title"><h1 id="page-title">Comprimi PDF in KB online</h1><p class="lead">Riduci un PDF a una dimensione obiettivo come 100 KB, 200 KB, 500 KB o 1 MB. Scegli il PDF, imposta la dimensione e comprimilo nel browser.</p></section>
+<div class="tool"><label id="drop" for="file"><b id="fname">Scegli o trascina un PDF</b><small id="fsize">Rimane sul tuo dispositivo</small></label><input type="file" id="file" accept="application/pdf"><div class="row"><div class="num"><input id="kb" type="number" min="10" value="200" inputmode="numeric" aria-label="Target size in KB"><span>KB</span></div><button id="go" disabled>Comprimi</button></div><div class="chips" id="chips" aria-label="Common PDF target sizes"><a>50</a><a>100</a><a>200</a><a>500</a><a>1000</a></div><div id="bar" aria-hidden="true"><i></i></div><div id="out" aria-live="polite"></div></div>
+<div class="content">
+<section aria-labelledby="how-title"><h2 id="how-title">How to Comprimi a PDF to a Specific KB Size</h2><ol class="steps"><li><strong>Carica il PDF:</strong> scegli un PDF o trascinalo nel compressore.</li><li><strong>Inserisci la dimensione obiettivo:</strong> seleziona 100 KB, 200 KB, 500 KB o 1 MB.</li><li><strong>Comprimi the PDF:</strong> Click Comprimi and let the browser optimize the file toward your target.</li><li><strong>Scarica il risultato:</strong> scarica il PDF compresso al termine dell'elaborazione.</li></ol></section>
+<section aria-labelledby="why-title"><h2 id="why-title">Why Use This PDF Comprimior?</h2><h3>Imposta una dimensione specifica</h3><p>Set a target in KB instead of choosing only a generic compression level. This is useful when an application, form or website has a file-size limit.</p><h3>Procedura semplice nel browser</h3><p>Upload a PDF, choose a target, compress it and download the result without installing desktop software.</p><h3>La qualità viene protetta prima</h3><p>The compressor first attempts to preserve quality and only makes stronger reductions when the requested target requires them.</p></section>
+<section aria-labelledby="faq-title"><h2 id="faq-title">Domande frequenti</h2><details><summary>How can I compress a PDF to 100 KB?</summary><p>Choose your PDF, enter 100 KB as the target size and click Comprimi. The tool optimizes the PDF toward the selected target.</p></details><details><summary>Can I compress a PDF to 200 KB?</summary><p>Yes. Enter 200 KB as the target size before starting compression.</p></details><details><summary>How can I resize a PDF file to 200KB online?</summary><p>You can resize a PDF file to <strong>200KB online</strong> by uploading your PDF, setting the target size to 200 KB, and clicking Comprimi. The tool optimizes the PDF toward the selected size while trying to preserve as much quality as possible.</p></details><details><summary>How can I compress a PDF to 200KB without losing quality?</summary><p>You can compress a PDF to <strong>200KB</strong> while preserving as much quality as possible by uploading your PDF, setting 200 KB as the target size, and clicking Comprimi. If a PDF requires a large reduction, some quality loss may be unavoidable.</p></details><details><summary>Questo compressore PDF è gratuito?</summary><p>Yes. The PDF compressor is free to use.</p></details><details><summary>Do I need to install software?</summary><p>No installation is required. A modern browser with JavaScript enabled is enough to use the tool.</p></details></section>
+<p class="sr-note">Note: The compressor may convert pages to images when a large reduction is required, which can affect text selection in the resulting PDF.</p>
+</div><footer>PDFComprimiInKB — Free PDF compression to a target KB or MB size.</footer>
+</main>
+<script>
+(function(){var $=function(id){return document.getElementById(id)},file=null,busy=false,bytes=null;var params=new URLSearchParams(window.location.search),requestedSize=parseInt(params.get("size"),10);if(Number.isFinite(requestedSize)&&requestedSize>=10){$("kb").value=Math.min(requestedSize,100000);$("page-title").textContent="Comprimi PDF to "+requestedSize+" KB Online"}try{pdfjsLib.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"}catch(e){}function fmt(b){return b>=1048576?(b/1048576).toFixed(2)+" MB":Math.round(b/1024)+" KB"}function say(h){$("out").innerHTML=h}function progress(p){var b=$("bar");b.style.display=p==null?"none":"block";if(p!=null)b.firstElementChild.style.width=Math.round(p*100)+"%"}function setFile(f){if(!f)return;if(f.type!=="application/pdf"&&!/\.pdf$/i.test(f.name)){say('<span class="err">Questo non è un PDF.</span>');return}file=f;$("fname").textContent=f.name;$("fsize").textContent=fmt(f.size);$("go").disabled=false;say("")}$("file").addEventListener("change",function(e){setFile(e.target.files[0])});var drop=$("drop");["dragenter","dragover"].forEach(function(t){drop.addEventListener(t,function(e){e.preventDefault();drop.classList.add("over")})});["dragleave","drop"].forEach(function(t){drop.addEventListener(t,function(e){e.preventDefault();drop.classList.remove("over")})});drop.addEventListener("drop",function(e){setFile(e.dataTransfer.files[0])});$("chips").addEventListener("click",function(e){if(e.target.tagName==="A")$("kb").value=e.target.textContent});function toBlob(canvas,q){return new Promise(function(res){canvas.toBlob(res,"image/jpeg",q)})}async function renderPages(pdf,scale,onPage){var out=[];for(var i=1;i<=pdf.numPages;i++){var page=await pdf.getPage(i),vp=page.getViewport({scale:scale}),c=document.createElement("canvas");c.width=Math.max(1,Math.floor(vp.width));c.height=Math.max(1,Math.floor(vp.height));var ctx=c.getContext("2d");ctx.fillStyle="#fff";ctx.fillRect(0,0,c.width,c.height);await page.render({canvasContext:ctx,viewport:vp}).promise;var base=page.getViewport({scale:1});out.push({canvas:c,w:base.width,h:base.height});if(onPage)onPage(i)}return out}function freePages(pages){pages.forEach(function(p){p.canvas.width=0;p.canvas.height=0})}async function sizeAt(pages,q){var total=0,blobs=[];for(var i=0;i<pages.length;i++){var b=await toBlob(pages[i].canvas,q);blobs.push(b);total+=b.size+600}return{total:total+1500,blobs:blobs}}async function build(pages,blobs){var doc=await PDFLib.PDFDocument.create();for(var i=0;i<pages.length;i++){var img=await doc.embedJpg(await blobs[i].arrayBuffer()),pg=doc.addPage([pages[i].w,pages[i].h]);pg.drawImage(img,{x:0,y:0,width:pages[i].w,height:pages[i].h})}return new Blob([await doc.save()],{type:"application/pdf"})}async function attempt(pdf,scales,qMin,qMax,target,progFrom,progTo){var lastTry=null;for(var s=0;s<scales.length;s++){var pages=await renderPages(pdf,scales[s],function(i){progress(progFrom+((s+i/pdf.numPages)/scales.length)*(progTo-progFrom))});var first=await sizeAt(pages,qMin);if(first.total>target){if(lastTry)freePages(lastTry.pages);lastTry={pages:pages,blobs:first.blobs,fit:false};continue}var lo=qMin,hi=qMax,fit=first;for(var k=0;k<5;k++){var mid=(lo+hi)/2,r=await sizeAt(pages,mid);if(r.total<=target){lo=mid;fit=r}else hi=mid}if(lastTry)freePages(lastTry.pages);return{pages:pages,blobs:fit.blobs,fit:true}}return lastTry}async function run(){if(busy||!file)return;var target=Math.max(10,parseInt($("kb").value,10)||0)*1024;if(file.size<=target){say('<span class="ok">Already '+fmt(file.size)+", under your target.</span>");return}busy=true;$("go").disabled=true;say("Comprimiing…");progress(.03);var result=null,note="",tone="ok";try{bytes=await file.arrayBuffer();try{var doc=await PDFLib.PDFDocument.load(bytes,{ignoreEncryption:true,updateMetadata:false}),lossless=new Blob([await doc.save({useObjectStreams:true})],{type:"application/pdf"});if(lossless.size<=target){result=lossless;note="No quality loss. Text is still selectable."}}catch(e){}if(!result){var pdf=await pdfjsLib.getDocument({data:bytes.slice(0)}).promise;progress(.1);var best=await attempt(pdf,[2,1.6,1.3,1.1],.75,.92,target,.1,.5);if(best&&best.fit){result=await build(best.pages,best.blobs);note="Quality kept high. Pages are now images, so text isn't selectable.";freePages(best.pages)}else{if(best)freePages(best.pages);var rough=await attempt(pdf,[1,.8,.6,.45,.3,.2],.3,.85,target,.5,.92);result=await build(rough.pages,rough.blobs);freePages(rough.pages);note=rough.fit?"Your target needed some quality loss. Try a slightly higher KB for a sharper file.":"Couldn't reach the target without heavy loss. This is the smallest possible.";tone=rough.fit?"warn":"err"}}progress(1);var hit=result.size<=target*1.02;if(!hit&&tone==="ok")tone="warn";var url=URL.createObjectURL(result),name=file.name.replace(/\.pdf$/i,"").replace(/"/g,"")+"-compressed.pdf";say('<span class="'+tone+'">'+fmt(file.size)+" → "+fmt(result.size)+"</span><small>"+note+'</small><a class="dl" href="'+url+'" download="'+name+'">Scarica</a>')}catch(err){console.error(err);say('<span class="err">Could not read this PDF. It may be password-protected or damaged.</span>')}setTimeout(function(){progress(null)},500);busy=false;$("go").disabled=false}$("go").addEventListener("click",run)})();
+</script>
+</body>
+</html>
