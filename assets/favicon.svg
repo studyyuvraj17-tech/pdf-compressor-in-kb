@@ -1,1 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="#e5e7eb"/><text x="32" y="43" text-anchor="middle" font-size="34" font-family="Apple Color Emoji,Segoe UI Emoji,Noto Color Emoji,sans-serif">📄</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+<rect width="64" height="64" rx="12" fill="#ffffff"/>
+<path d="M16 8h23l13 13v35H16z" fill="#ef4444"/>
+<path d="M39 8v13h13" fill="#b91c1c"/>
+<path d="M39 8v13h13" fill="none" stroke="#991b1b" stroke-width="2"/>
+<text x="32" y="45" text-anchor="middle" font-size="13" font-weight="700" font-family="Arial,sans-serif" fill="#ffffff">PDF</text>
+</svg>
