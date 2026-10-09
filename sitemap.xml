@@ -664,6 +664,7 @@
   </url>
   <url>
     <loc>https://www.pdfcompressinkb.com/</loc>
+    <xhtml:link rel="alternate" hreflang="az" href="https://www.pdfcompressinkb.com/az/"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.pdfcompressinkb.com/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://www.pdfcompressinkb.com/es/"/>
     <xhtml:link rel="alternate" hreflang="ja" href="https://www.pdfcompressinkb.com/ja/"/>
@@ -1880,6 +1881,12 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://www.pdfcompressinkb.com/"/>
     <xhtml:link rel="alternate" hreflang="sr" href="https://www.pdfcompressinkb.com/sr/"/>
     <xhtml:link rel="alternate" hreflang="dz" href="https://www.pdfcompressinkb.com/dz/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.pdfcompressinkb.com/"/>
+  </url>
+  <url>
+    <loc>https://www.pdfcompressinkb.com/az/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.pdfcompressinkb.com/"/>
+    <xhtml:link rel="alternate" hreflang="az" href="https://www.pdfcompressinkb.com/az/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.pdfcompressinkb.com/"/>
   </url>
 </urlset>
