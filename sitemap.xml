@@ -686,21 +686,27 @@
   </url>
   <url>
 <loc>https://www.pdfcompressinkb.com/about/</loc>
+      <xhtml:link rel="alternate" hreflang="lt" href="https://www.pdfcompressinkb.com/lt/"/>
   </url>
   <url>
 <loc>https://www.pdfcompressinkb.com/contact/</loc>
+      <xhtml:link rel="alternate" hreflang="lt" href="https://www.pdfcompressinkb.com/lt/"/>
   </url>
   <url>
 <loc>https://www.pdfcompressinkb.com/how-it-works/</loc>
+      <xhtml:link rel="alternate" hreflang="lt" href="https://www.pdfcompressinkb.com/lt/"/>
   </url>
   <url>
 <loc>https://www.pdfcompressinkb.com/privacy-policy/</loc>
+      <xhtml:link rel="alternate" hreflang="lt" href="https://www.pdfcompressinkb.com/lt/"/>
   </url>
   <url>
 <loc>https://www.pdfcompressinkb.com/terms/</loc>
+      <xhtml:link rel="alternate" hreflang="lt" href="https://www.pdfcompressinkb.com/lt/"/>
   </url>
   <url>
 <loc>https://www.pdfcompressinkb.com/disclaimer/</loc>
+      <xhtml:link rel="alternate" hreflang="lt" href="https://www.pdfcompressinkb.com/lt/"/>
   </url>
   <url>
 <loc>https://www.pdfcompressinkb.com/no/</loc>
