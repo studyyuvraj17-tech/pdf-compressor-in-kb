@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Сжать PDF онлайн бесплатно — уменьшить размер PDF</title>
+<meta name="description" content="Бесплатно сожмите PDF онлайн и уменьшите размер PDF-файла до 100 КБ, 200 КБ, 500 КБ или 1 МБ. Без установки программ — прямо в браузере.">
+<link rel="canonical" href="https://www.pdfcompressinkb.com/ru/">
+
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#fafaf9">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.pdfcompressinkb.com/ru/">
+<meta property="og:title" content="Сжать PDF онлайн — бесплатное сжатие PDF до нужного размера">
+<meta property="og:description" content="Уменьшите размер PDF до 100 КБ, 200 КБ, 500 КБ или 1 МБ. Бесплатный онлайн-компрессор PDF для документов с ограничением размера.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Сжать PDF онлайн — бесплатное сжатие PDF до нужного размера">
+<meta name="twitter:description" content="Уменьшите размер PDF до 100 КБ, 200 КБ, 500 КБ или 1 МБ. Бесплатный онлайн-компрессор PDF для документов с ограничением размера.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"PDFCompressInKB — сжатие PDF","url":"https://www.pdfcompressinkb.com/ru/","description":"Бесплатный онлайн-инструмент для уменьшения размера PDF до заданного размера в КБ или МБ прямо в браузере.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Как сжать PDF до 100 КБ?","acceptedAnswer":{"@type":"Answer","text":"Выберите PDF-файл, укажите целевой размер 100 КБ и нажмите «Сжать». Инструмент попробует уменьшить файл до заданного размера."}},{"@type":"Question","name":"Можно ли сжать PDF до 200 КБ?","acceptedAnswer":{"@type":"Answer","text":"Да. Перед сжатием укажите 200 КБ в поле целевого размера."}},{"@type":"Question","name":"Как уменьшить размер PDF онлайн?","acceptedAnswer":{"@type":"Answer","text":"Выберите PDF, укажите нужный размер в КБ и нажмите «Сжать». Инструмент старается сохранить качество, насколько это возможно."}},{"@type":"Question","name":"Можно ли сжать PDF без потери качества?","acceptedAnswer":{"@type":"Answer","text":"Инструмент старается сохранить качество, однако при значительном уменьшении размера потеря деталей может быть неизбежна."}},{"@type":"Question","name":"Сжатие PDF бесплатно?","acceptedAnswer":{"@type":"Answer","text":"Да. Вы можете бесплатно сжимать PDF онлайн без установки программы."}},{"@type":"Question","name":"Нужно ли устанавливать программу?","acceptedAnswer":{"@type":"Answer","text":"Нет. Нужен только современный браузер с включённым JavaScript."}},{"@type":"Question","name":"Как бесплатно уменьшить размер PDF-файла?","acceptedAnswer":{"@type":"Answer","text":"Загрузите PDF, задайте целевой размер, например 100 КБ, 200 КБ, 500 КБ или 1 МБ, и нажмите «Сжать»."}}]}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<style>
+:root{--bg:#fafaf9;--fg:#1c1917;--muted:#78716c;--line:#d6d3d1;--card:#fff;--accent:#1c1917;--accent-fg:#fafaf9;--ok:#15803d;--warn:#b45309;--err:#b91c1c;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0c0a09;--fg:#fafaf9;--muted:#a8a29e;--line:#44403c;--card:#1c1917;--accent:#fafaf9;--accent-fg:#0c0a09;--ok:#4ade80;--warn:#fbbf24;--err:#f87171}}
+:root[data-theme="dark"]{--bg:#0c0a09;--fg:#fafaf9;--muted:#a8a29e;--line:#44403c;--card:#1c1917;--accent:#fafaf9;--accent-fg:#0c0a09;--ok:#4ade80;--warn:#fbbf24;--err:#f87171}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding:24px}
+main{width:100%;max-width:760px}
+h1{font-size:30px;line-height:1.15;font-weight:700;margin:0 0 10px;letter-spacing:-.02em}
+.lead{margin:0 auto 24px;max-width:680px;color:var(--muted);line-height:1.6}
+.tool{max-width:420px;margin:0 auto}
+#drop{display:block;border:1.5px dashed var(--line);border-radius:12px;padding:32px 16px;text-align:center;color:var(--muted);cursor:pointer;background:var(--card);transition:border-color .15s}
+#drop:hover,#drop.over{border-color:var(--fg)}
+#drop b{color:var(--fg);font-weight:500;display:block;word-break:break-all}
+#drop small{display:block;margin-top:4px}
+input[type=file]{display:none}
+.row{display:flex;gap:8px;margin-top:12px;align-items:center}
+.num{flex:1;display:flex;align-items:center;border:1px solid var(--line);border-radius:10px;background:var(--card);padding:0 12px}
+.num input{flex:1;min-width:0;border:0;background:transparent;color:var(--fg);font-size:16px;padding:12px 0;outline:none}
+.num span{color:var(--muted);font-size:14px}
+button{font:inherit;font-size:15px;font-weight:500;border:0;border-radius:10px;background:var(--accent);color:var(--accent-fg);padding:12px 20px;cursor:pointer}
+button:disabled{opacity:.4;cursor:not-allowed}
+.chips{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.chips a{font-size:13px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:4px 10px;cursor:pointer;user-select:none}
+.chips a:hover{color:var(--fg);border-color:var(--fg)}
+#out{margin-top:20px;font-size:14px;min-height:20px;line-height:1.5}
+#out .ok{color:var(--ok)}#out .warn{color:var(--warn)}#out .err{color:var(--err)}
+#out small{display:block;color:var(--muted)}
+#out a.dl{display:block;margin-top:10px;text-align:center;text-decoration:none;border-radius:10px;background:var(--accent);color:var(--accent-fg);padding:12px;font-weight:500}
+#bar{height:3px;background:var(--line);border-radius:2px;margin-top:20px;overflow:hidden;display:none}
+#bar i{display:block;height:100%;width:0;background:var(--fg);transition:width .2s}
+.content{margin-top:44px}
+section{margin:0 0 34px}
+h2{font-size:21px;margin:0 0 12px}
+h3{font-size:17px;margin:20px 0 8px}
+p{line-height:1.65;color:var(--muted);margin:0 0 12px}
+.steps{padding-left:20px;color:var(--muted);line-height:1.7}
+.steps strong{color:var(--fg)}
+.target-links{display:flex;flex-wrap:wrap;gap:8px}
+.target-links a{color:var(--fg);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:7px 11px;background:var(--card);font-size:14px}
+.target-links a:hover{border-color:var(--fg)}
+details{border-top:1px solid var(--line);padding:14px 0}
+details:last-child{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;font-weight:600}
+details p{margin:8px 0 0}
+footer{margin-top:28px;padding-top:20px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);text-align:center}
+.sr-note{font-size:13px}
+@media (max-width:600px){body{padding:18px 14px}h1{font-size:26px}.row{align-items:stretch}button{padding-inline:16px}}
+.site-brand-logo{display:block;width:260px;margin:0 auto 22px;text-decoration:none}.site-brand-logo img{display:block;width:100%;height:auto}@media(max-width:480px){.site-brand-logo{width:220px}}
+</style>
+<link rel="alternate" hreflang="en" href="https://www.pdfcompressinkb.com/">
+<link rel="alternate" hreflang="es" href="https://www.pdfcompressinkb.com/es/">
+<link rel="alternate" hreflang="ja" href="https://www.pdfcompressinkb.com/ja/">
+<link rel="alternate" hreflang="fr" href="https://www.pdfcompressinkb.com/fr/">
+<link rel="alternate" hreflang="de" href="https://www.pdfcompressinkb.com/de/">
+<link rel="alternate" hreflang="pt" href="https://www.pdfcompressinkb.com/pt/">
+<link rel="alternate" hreflang="ko" href="https://www.pdfcompressinkb.com/ko/">
+<link rel="alternate" hreflang="it" href="https://www.pdfcompressinkb.com/it/">
+<link rel="alternate" hreflang="ar" href="https://www.pdfcompressinkb.com/ar/">
+<link rel="alternate" hreflang="ru" href="https://www.pdfcompressinkb.com/ru/">
+<link rel="alternate" hreflang="x-default" href="https://www.pdfcompressinkb.com/">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<main><a class="site-brand-logo" href="/" aria-label="PDFCompressInKB home"><img src="/assets/logo.svg" alt="PDFCompressInKB" width="260" height="60"></a>
+<div style="display:flex;justify-content:flex-end;gap:10px;margin:0 0 22px;padding:10px 0;font-size:14px"><span style="font-weight:600;color:var(--fg)">🌐 Язык</span><select aria-label="Язык" onchange="if(this.value)window.location.href=this.value" style="appearance:auto;border:1px solid var(--line);border-radius:9px;background:var(--card);color:var(--fg);padding:8px 34px 8px 10px;font:inherit;cursor:pointer"><option value="/">English</option><option value="/es/">Español</option><option value="/ja/">日本語</option><option value="/fr/">Français</option><option value="/de/">Deutsch</option><option value="/pt/">Português</option><option value="/ko/">한국어</option><option value="/it/">Italiano</option><option value="/no/">Norsk 🇳🇴</option><option value="/ar/">العربية</option><option value="/ru/" selected>Русский</option></select></div>
+<section aria-labelledby="page-title"><h1 id="page-title">Сжать PDF онлайн бесплатно</h1><p class="lead">Уменьшите размер PDF-файла онлайн бесплатно. Выберите нужный размер — 100 КБ, 200 КБ, 500 КБ или 1 МБ — и скачайте сжатый PDF прямо в браузере.</p></section>
+<div class="tool"><label id="drop" for="file"><b id="fname">Выберите PDF или перетащите файл сюда</b><small id="fsize">Файл остаётся на вашем устройстве</small></label><input type="file" id="file" accept="application/pdf"><div class="row"><div class="num"><input id="kb" type="number" min="10" value="200" inputmode="numeric" aria-label="Целевой размер в КБ"><span>KB</span></div><button id="go" disabled>Сжать PDF</button></div><div class="chips" id="chips" aria-label="Популярные размеры PDF"><a>50</a><a>100</a><a>200</a><a>500</a><a>1000</a></div><div id="bar" aria-hidden="true"><i></i></div><div id="out" aria-live="polite"></div></div>
+<div class="content">
+<section aria-labelledby="how-title"><h2 id="how-title">Как сжать PDF-файл до нужного размера</h2><ol class="steps"><li><strong>Выберите PDF:</strong> Нажмите на область загрузки или перетащите файл.</li><li><strong>Укажите размер:</strong> Введите 100 КБ, 200 КБ, 500 КБ, 1 МБ или другое значение.</li><li><strong>Сожмите PDF:</strong> Нажмите «Сжать PDF» — браузер оптимизирует файл.</li><li><strong>Скачайте результат:</strong> Загрузите сжатый PDF после завершения обработки.</li></ol></section>
+<section aria-labelledby="why-title"><h2 id="why-title">Бесплатное сжатие PDF онлайн</h2><h3>Уменьшение PDF до заданного размера</h3><p>Укажите целевой размер файла в КБ, а не просто уровень сжатия. Это удобно, если сайт, форма или сервис ограничивает размер загружаемого документа.</p><h3>Сжатие PDF без установки программы</h3><p>Выберите PDF-файл, задайте размер, выполните сжатие и скачайте результат прямо из браузера.</p><h3>Сохранение качества</h3><p>Инструмент старается сохранить читаемость документа. Если требуется очень сильно уменьшить файл, качество изображений может снизиться, а текст в результате может перестать выделяться.</p></section>
+<section aria-labelledby="faq-title"><h2 id="faq-title">Часто задаваемые вопросы о сжатии PDF</h2><details><summary>Как сжать PDF до 100 КБ?</summary><p>Выберите PDF, укажите целевой размер 100 КБ и нажмите «Сжать PDF». Инструмент попробует уменьшить файл до заданного размера.</p></details><details><summary>Как сжать PDF до 200 КБ?</summary><p>Укажите 200 КБ в поле целевого размера и нажмите «Сжать PDF».</p></details><details><summary>Как уменьшить размер PDF онлайн?</summary><p>Выберите файл, введите нужный размер в КБ и нажмите «Сжать PDF». Затем скачайте готовый документ.</p></details><details><summary>Можно ли сжать PDF без потери качества?</summary><p>Инструмент старается сохранить качество, но при значительном уменьшении размера возможна потеря деталей. Результат зависит от содержимого исходного файла.</p></details><details><summary>Можно ли сжимать PDF бесплатно?</summary><p>Да, сжатие PDF доступно бесплатно и не требует установки программы.</p></details><details><summary>Нужно ли устанавливать программу для сжатия PDF?</summary><p>Нет. Инструмент работает в современном браузере с включённым JavaScript.</p></details><details><summary>Как бесплатно уменьшить размер PDF-файла?</summary><p>Выберите PDF, задайте целевой размер — например, 100 КБ, 200 КБ, 500 КБ или 1 МБ — и нажмите «Сжать PDF».</p></details></section><p class="sr-note">Важно: при сильном сжатии страницы могут преобразовываться в изображения. В таком PDF текст может быть недоступен для выделения и поиска.</p></div><footer>PDFCompressInKB — бесплатное сжатие PDF до нужного размера в КБ или МБ.</footer>
+</main>
+<script>
+(function(){var $=function(id){return document.getElementById(id)},file=null,busy=false,bytes=null;var params=new URLSearchParams(window.location.search),requestedSize=parseInt(params.get("size"),10);if(Number.isFinite(requestedSize)&&requestedSize>=10){$("kb").value=Math.min(requestedSize,100000);$("page-title").textContent="Сжать PDF до "+requestedSize+" КБ"}try{pdfjsLib.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"}catch(e){}function fmt(b){return b>=1048576?(b/1048576).toFixed(2)+" MB":Math.round(b/1024)+" KB"}function say(h){$("out").innerHTML=h}function progress(p){var b=$("bar");b.style.display=p==null?"none":"block";if(p!=null)b.firstElementChild.style.width=Math.round(p*100)+"%"}function setFile(f){if(!f)return;if(f.type!=="application/pdf"&&!/\.pdf$/i.test(f.name)){file=null;$("go").disabled=true;$("fname").textContent="";$("fsize").textContent="";$("file").value="";say('<span class="err">Это не PDF-файл.</span>');return}file=f;$("fname").textContent=f.name;$("fsize").textContent=fmt(f.size);$("go").disabled=false;say("")}$("file").addEventListener("change",function(e){setFile(e.target.files[0])});var drop=$("drop");["dragenter","dragover"].forEach(function(t){drop.addEventListener(t,function(e){e.preventDefault();drop.classList.add("over")})});["dragleave","drop"].forEach(function(t){drop.addEventListener(t,function(e){e.preventDefault();drop.classList.remove("over")})});drop.addEventListener("drop",function(e){setFile(e.dataTransfer.files[0])});$("chips").addEventListener("click",function(e){if(e.target.tagName==="A")$("kb").value=e.target.textContent});function toBlob(canvas,q){return new Promise(function(res){canvas.toBlob(res,"image/jpeg",q)})}async function renderPages(pdf,scale,onPage){var out=[];for(var i=1;i<=pdf.numPages;i++){var page=await pdf.getPage(i),vp=page.getViewport({scale:scale}),c=document.createElement("canvas");c.width=Math.max(1,Math.floor(vp.width));c.height=Math.max(1,Math.floor(vp.height));var ctx=c.getContext("2d");ctx.fillStyle="#fff";ctx.fillRect(0,0,c.width,c.height);await page.render({canvasContext:ctx,viewport:vp}).promise;var base=page.getViewport({scale:1});out.push({canvas:c,w:base.width,h:base.height});if(onPage)onPage(i)}return out}function freePages(pages){pages.forEach(function(p){p.canvas.width=0;p.canvas.height=0})}async function sizeAt(pages,q){var total=0,blobs=[];for(var i=0;i<pages.length;i++){var b=await toBlob(pages[i].canvas,q);blobs.push(b);total+=b.size+600}return{total:total+1500,blobs:blobs}}async function build(pages,blobs){var doc=await PDFLib.PDFDocument.create();for(var i=0;i<pages.length;i++){var img=await doc.embedJpg(await blobs[i].arrayBuffer()),pg=doc.addPage([pages[i].w,pages[i].h]);pg.drawImage(img,{x:0,y:0,width:pages[i].w,height:pages[i].h})}return new Blob([await doc.save()],{type:"application/pdf"})}async function attempt(pdf,scales,qMin,qMax,target,progFrom,progTo){var lastTry=null;for(var s=0;s<scales.length;s++){var pages=await renderPages(pdf,scales[s],function(i){progress(progFrom+((s+i/pdf.numPages)/scales.length)*(progTo-progFrom))});var first=await sizeAt(pages,qMin);if(first.total>target){if(lastTry)freePages(lastTry.pages);lastTry={pages:pages,blobs:first.blobs,fit:false};continue}var lo=qMin,hi=qMax,fit=first;for(var k=0;k<5;k++){var mid=(lo+hi)/2,r=await sizeAt(pages,mid);if(r.total<=target){lo=mid;fit=r}else hi=mid}if(lastTry)freePages(lastTry.pages);return{pages:pages,blobs:fit.blobs,fit:true}}return lastTry}async function run(){if(busy||!file)return;var requestedKB=parseInt($("kb").value,10);if(!Number.isFinite(requestedKB)||requestedKB<10||requestedKB>100000){say('<span class="err">Укажите целевой размер от 10 до 100000 КБ.</span>');return}var target=requestedKB*1024;if(file.size<=target){var originalUrl=URL.createObjectURL(file),originalName=file.name.replace(/\.pdf$/i,"").replace(/"/g,"")+"-compressed.pdf";say('<span class="ok">Размер файла уже составляет '+fmt(file.size)+", это меньше заданного размера.</span><small>Сжатие не требуется.</small><a class=\"dl\" href=\""+originalUrl+"\" download=\""+originalName+"\">Скачать PDF</a>");return}busy=true;$("go").disabled=true;say("Выполняется сжатие…");progress(.03);var result=null,note="",tone="ok";try{bytes=await file.arrayBuffer();try{var doc=await PDFLib.PDFDocument.load(bytes,{ignoreEncryption:true,updateMetadata:false}),lossless=new Blob([await doc.save({useObjectStreams:true})],{type:"application/pdf"});if(lossless.size<=target){result=lossless;note="Без потери качества. Текст по-прежнему можно выделять."}}catch(e){}if(!result){var pdf=await pdfjsLib.getDocument({data:bytes.slice(0)}).promise;progress(.1);var best=await attempt(pdf,[2,1.6,1.3,1.1],.75,.92,target,.1,.5);if(best&&best.fit){result=await build(best.pages,best.blobs);note="Качество сохранено насколько возможно. Страницы преобразованы в изображения, поэтому текст нельзя выделять.";freePages(best.pages)}else{if(best)freePages(best.pages);var rough=await attempt(pdf,[1,.8,.6,.45,.3,.2],.3,.85,target,.5,.92);result=await build(rough.pages,rough.blobs);freePages(rough.pages);note=rough.fit?"Ha sido necesario reducir algo la calidad. Prueba con un tamaño objetivo mayor para obtener un archivo más nítido.":"No se ha podido alcanzar el tamaño objetivo sin una gran pérdida de calidad. Este es el archivo más pequeño obtenido.";tone=rough.fit?"warn":"err"}}if(result.size>target){tone="warn";note="El archivo resultante sigue midiendo "+fmt(result.size)+" y supera el objetivo de "+fmt(target)+". Prueba con un objetivo mayor."}progress(1);var hit=result.size<=target*1.02;if(!hit&&tone==="ok")tone="warn";var url=URL.createObjectURL(result),name=file.name.replace(/\.pdf$/i,"").replace(/"/g,"")+"-compressed.pdf";say('<span class="'+tone+'">'+fmt(file.size)+" → "+fmt(result.size)+"</span><small>"+note+'</small><a class="dl" href="'+url+'" download="'+name+'">Скачать файл</a>')}catch(err){console.error(err);say('<span class="err">No se ha podido leer el PDF. Puede estar protegido con contraseña o dañado.</span>')}setTimeout(function(){progress(null)},500);busy=false;$("go").disabled=false}$("go").addEventListener("click",run)})();
+</script>
+</body>
+</html>
