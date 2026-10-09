@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Comprimă PDF online gratuit – Redu dimensiunea PDF</title>
+<meta name="description" content="Comprimă PDF online gratuit și redu dimensiunea fișierului la 100 KB, 200 KB, 500 KB sau 1 MB. Fără instalare, direct în browser.">
+<link rel="canonical" href="https://www.pdfcompressinkb.com/ro/">
+
+<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="theme-color" content="#fafaf9">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.pdfcompressinkb.com/ro/">
+<meta property="og:title" content="Comprimă PDF online – Compresor PDF gratuit">
+<meta property="og:description" content="Redu dimensiunea fișierelor PDF la 100 KB, 200 KB, 500 KB sau 1 MB. Compresor PDF gratuit pentru documente cu limită de încărcare.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Comprimă PDF online – Compresor PDF gratuit">
+<meta name="twitter:description" content="Redu dimensiunea fișierelor PDF la 100 KB, 200 KB, 500 KB sau 1 MB. Compresor PDF gratuit pentru documente cu limită de încărcare.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"PDFCompressInKB — comprimare PDF","url":"https://www.pdfcompressinkb.com/ro/","description":"Instrument gratuit pentru comprimarea PDF-urilor la o dimensiune țintă în KB sau MB, direct în browser.","applicationCategory":"UtilitiesApplication","operatingSystem":"Any","browserRequirements":"Requires a modern web browser with JavaScript enabled","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Cum comprim un PDF la 100 KB?","acceptedAnswer":{"@type":"Answer","text":"Selectează fișierul PDF, introdu 100 KB ca dimensiune țintă și apasă „Comprimă PDF”. Instrumentul încearcă să reducă fișierul la dimensiunea dorită."}},{"@type":"Question","name":"Pot comprima un PDF la 200 KB?","acceptedAnswer":{"@type":"Answer","text":"Da. Introdu 200 KB ca dimensiune țintă înainte de a începe comprimarea."}},{"@type":"Question","name":"Cum pot reduce dimensiunea unui PDF online?","acceptedAnswer":{"@type":"Answer","text":"Selectează PDF-ul, setează dimensiunea dorită în KB și apasă „Comprimă PDF”. Instrumentul încearcă să păstreze cât mai mult din calitatea documentului."}},{"@type":"Question","name":"Pot comprima un PDF fără pierderi de calitate?","acceptedAnswer":{"@type":"Answer","text":"Instrumentul încearcă să păstreze calitatea, însă o reducere mare a dimensiunii poate afecta imaginile sau lizibilitatea."}},{"@type":"Question","name":"Este gratuit acest compresor PDF?","acceptedAnswer":{"@type":"Answer","text":"Da. Poți comprima PDF-uri gratuit, online, fără să instalezi un program."}},{"@type":"Question","name":"Trebuie să instalez un program?","acceptedAnswer":{"@type":"Answer","text":"Nu. Ai nevoie doar de un browser modern cu JavaScript activat."}},{"@type":"Question","name":"Cum comprim gratuit un PDF la o anumită dimensiune?","acceptedAnswer":{"@type":"Answer","text":"Selectează PDF-ul, alege o dimensiune țintă precum 100 KB, 200 KB, 500 KB sau 1 MB și apasă „Comprimă PDF”."}}]}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<style>
+:root{--bg:#fafaf9;--fg:#1c1917;--muted:#78716c;--line:#d6d3d1;--card:#fff;--accent:#1c1917;--accent-fg:#fafaf9;--ok:#15803d;--warn:#b45309;--err:#b91c1c;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0c0a09;--fg:#fafaf9;--muted:#a8a29e;--line:#44403c;--card:#1c1917;--accent:#fafaf9;--accent-fg:#0c0a09;--ok:#4ade80;--warn:#fbbf24;--err:#f87171}}
+:root[data-theme="dark"]{--bg:#0c0a09;--fg:#fafaf9;--muted:#a8a29e;--line:#44403c;--card:#1c1917;--accent:#fafaf9;--accent-fg:#0c0a09;--ok:#4ade80;--warn:#fbbf24;--err:#f87171}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding:24px}
+main{width:100%;max-width:760px}
+h1{font-size:30px;line-height:1.15;font-weight:700;margin:0 0 10px;letter-spacing:-.02em}
+.lead{margin:0 auto 24px;max-width:680px;color:var(--muted);line-height:1.6}
+.tool{max-width:420px;margin:0 auto}
+#drop{display:block;border:1.5px dashed var(--line);border-radius:12px;padding:32px 16px;text-align:center;color:var(--muted);cursor:pointer;background:var(--card);transition:border-color .15s}
+#drop:hover,#drop.over{border-color:var(--fg)}
+#drop b{color:var(--fg);font-weight:500;display:block;word-break:break-all}
+#drop small{display:block;margin-top:4px}
+input[type=file]{display:none}
+.row{display:flex;gap:8px;margin-top:12px;align-items:center}
+.num{flex:1;display:flex;align-items:center;border:1px solid var(--line);border-radius:10px;background:var(--card);padding:0 12px}
+.num input{flex:1;min-width:0;border:0;background:transparent;color:var(--fg);font-size:16px;padding:12px 0;outline:none}
+.num span{color:var(--muted);font-size:14px}
+button{font:inherit;font-size:15px;font-weight:500;border:0;border-radius:10px;background:var(--accent);color:var(--accent-fg);padding:12px 20px;cursor:pointer}
+button:disabled{opacity:.4;cursor:not-allowed}
+.chips{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.chips a{font-size:13px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:4px 10px;cursor:pointer;user-select:none}
+.chips a:hover{color:var(--fg);border-color:var(--fg)}
+#out{margin-top:20px;font-size:14px;min-height:20px;line-height:1.5}
+#out .ok{color:var(--ok)}#out .warn{color:var(--warn)}#out .err{color:var(--err)}
+#out small{display:block;color:var(--muted)}
+#out a.dl{display:block;margin-top:10px;text-align:center;text-decoration:none;border-radius:10px;background:var(--accent);color:var(--accent-fg);padding:12px;font-weight:500}
+#bar{height:3px;background:var(--line);border-radius:2px;margin-top:20px;overflow:hidden;display:none}
+#bar i{display:block;height:100%;width:0;background:var(--fg);transition:width .2s}
+.content{margin-top:44px}
+section{margin:0 0 34px}
+h2{font-size:21px;margin:0 0 12px}
+h3{font-size:17px;margin:20px 0 8px}
+p{line-height:1.65;color:var(--muted);margin:0 0 12px}
+.steps{padding-left:20px;color:var(--muted);line-height:1.7}
+.steps strong{color:var(--fg)}
+.target-links{display:flex;flex-wrap:wrap;gap:8px}
+.target-links a{color:var(--fg);text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:7px 11px;background:var(--card);font-size:14px}
+.target-links a:hover{border-color:var(--fg)}
+details{border-top:1px solid var(--line);padding:14px 0}
+details:last-child{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;font-weight:600}
+details p{margin:8px 0 0}
+footer{margin-top:28px;padding-top:20px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);text-align:center}
+.sr-note{font-size:13px}
+@media (max-width:600px){body{padding:18px 14px}h1{font-size:26px}.row{align-items:stretch}button{padding-inline:16px}}
+.site-brand-logo{display:block;width:260px;margin:0 auto 22px;text-decoration:none}.site-brand-logo img{display:block;width:100%;height:auto}@media(max-width:480px){.site-brand-logo{width:220px}}
+</style>
+<link rel="alternate" hreflang="en" href="https://www.pdfcompressinkb.com/">
+<link rel="alternate" hreflang="es" href="https://www.pdfcompressinkb.com/es/">
+<link rel="alternate" hreflang="ja" href="https://www.pdfcompressinkb.com/ja/">
+<link rel="alternate" hreflang="fr" href="https://www.pdfcompressinkb.com/fr/">
+<link rel="alternate" hreflang="de" href="https://www.pdfcompressinkb.com/de/">
+<link rel="alternate" hreflang="pt" href="https://www.pdfcompressinkb.com/pt/">
+<link rel="alternate" hreflang="ko" href="https://www.pdfcompressinkb.com/ko/">
+<link rel="alternate" hreflang="it" href="https://www.pdfcompressinkb.com/it/">
+<link rel="alternate" hreflang="ar" href="https://www.pdfcompressinkb.com/ar/">
+<link rel="alternate" hreflang="ro" href="https://www.pdfcompressinkb.com/ro/">
+<link rel="alternate" hreflang="x-default" href="https://www.pdfcompressinkb.com/">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<main><a class="site-brand-logo" href="/" aria-label="PDFCompressInKB home"><img src="/assets/logo.svg" alt="PDFCompressInKB" width="260" height="60"></a>
+<div style="display:flex;justify-content:flex-end;gap:10px;margin:0 0 22px;padding:10px 0;font-size:14px"><span style="font-weight:600;color:var(--fg)">🌐 Limbă</span><select aria-label="Limbă" onchange="if(this.value)window.location.href=this.value" style="appearance:auto;border:1px solid var(--line);border-radius:9px;background:var(--card);color:var(--fg);padding:8px 34px 8px 10px;font:inherit;cursor:pointer"><option value="/">English</option><option value="/es/">Español</option><option value="/ja/">日本語</option><option value="/fr/">Français</option><option value="/de/">Deutsch</option><option value="/pt/">Português</option><option value="/ko/">한국어</option><option value="/it/">Italiano</option><option value="/no/">Norsk 🇳🇴</option><option value="/ar/">العربية</option></select></div>
+<section aria-labelledby="page-title"><h1 id="page-title">Comprimă PDF online gratuit</h1><p class="lead">Comprimă PDF online gratuit și redu dimensiunea fișierelor. Alege 100 KB, 200 KB, 500 KB sau 1 MB și descarcă PDF-ul comprimat direct din browser.</p></section>
+<div class="tool"><label id="drop" for="file"><b id="fname">Alege sau trage un fișier PDF aici</b><small id="fsize">Fișierul rămâne pe dispozitivul tău</small></label><input type="file" id="file" accept="application/pdf"><div class="row"><div class="num"><input id="kb" type="number" min="10" value="200" inputmode="numeric" aria-label="Dimensiune țintă în KB"><span>KB</span></div><button id="go" disabled>Comprimă PDF</button></div><div class="chips" id="chips" aria-label="Dimensiuni PDF frecvente"><a>50</a><a>100</a><a>200</a><a>500</a><a>1000</a></div><div id="bar" aria-hidden="true"><i></i></div><div id="out" aria-live="polite"></div></div>
+<div class="content">
+<section aria-labelledby="how-title"><h2 id="how-title">Cum comprimi un PDF la dimensiunea dorită</h2><ol class="steps"><li><strong>Alege PDF-ul:</strong> Selectează un fișier sau trage-l în zona de încărcare.</li><li><strong>Setează dimensiunea:</strong> Introdu 100 KB, 200 KB, 500 KB, 1 MB sau altă valoare.</li><li><strong>Comprimă PDF-ul:</strong> Apasă „Comprimă PDF” pentru a optimiza fișierul în browser.</li><li><strong>Descarcă rezultatul:</strong> Salvează PDF-ul comprimat după finalizarea procesării.</li></ol></section>
+<section aria-labelledby="why-title"><h2 id="why-title">De ce să folosești acest compresor PDF</h2><h3>Redu PDF-ul la o dimensiune exactă</h3><p>Setează dimensiunea țintă în KB, nu doar un nivel generic de comprimare. Este util când un formular, un portal sau un serviciu online impune o limită de dimensiune a fișierului.</p><h3>Comprimare PDF online, fără instalare</h3><p>Alege PDF-ul, introdu dimensiunea dorită, comprimă fișierul și descarcă rezultatul direct din browser, fără să instalezi programe.</p><h3>Calitatea contează</h3><p>Instrumentul încearcă să păstreze lizibilitatea documentului. O reducere foarte mare poate scădea calitatea imaginilor și poate transforma paginile în imagini, limitând selectarea textului.</p></section>
+<section aria-labelledby="faq-title"><h2 id="faq-title">Întrebări frecvente despre comprimarea PDF</h2><details><summary>Cum comprim un PDF la 100 KB?</summary><p>Selectează PDF-ul, introdu 100 KB ca dimensiune țintă și apasă „Comprimă PDF”. Instrumentul încearcă să reducă fișierul la dimensiunea dorită.</p></details><details><summary>Cum comprim un PDF la 200 KB?</summary><p>Introdu 200 KB în câmpul pentru dimensiunea țintă, apoi apasă „Comprimă PDF”.</p></details><details><summary>Cum micșorez un fișier PDF online?</summary><p>Selectează fișierul PDF, setează dimensiunea dorită în KB și apasă „Comprimă PDF”. După procesare, descarcă documentul rezultat.</p></details><details><summary>Pot comprima un PDF fără să pierd din calitate?</summary><p>Instrumentul încearcă să păstreze calitatea, dar o reducere mare a dimensiunii poate afecta imaginile. Rezultatul depinde de PDF-ul original.</p></details><details><summary>Este gratuit compresorul PDF?</summary><p>Da. Poți comprima PDF-uri gratuit, online, fără să instalezi un program.</p></details><details><summary>Trebuie să instalez un program?</summary><p>Nu. Ai nevoie doar de un browser modern cu JavaScript activat.</p></details><details><summary>Cum comprim gratuit un PDF la o anumită dimensiune?</summary><p>Selectează PDF-ul, alege 100 KB, 200 KB, 500 KB, 1 MB sau altă dimensiune și apasă „Comprimă PDF”.</p></details></section><p class="sr-note">Notă: Pentru o reducere mare, paginile pot fi transformate în imagini. În PDF-ul rezultat, selectarea textului poate fi limitată.</p></div><footer>PDFCompressInKB — comprimare PDF gratuită la dimensiunea dorită în KB sau MB.</footer>
+</main>
+<script>
+(function(){var $=function(id){return document.getElementById(id)},file=null,busy=false,bytes=null;var params=new URLSearchParams(window.location.search),requestedSize=parseInt(params.get("size"),10);if(Number.isFinite(requestedSize)&&requestedSize>=10){$("kb").value=Math.min(requestedSize,100000);$("page-title").textContent="Comprimă PDF la "+requestedSize+" KB"}try{pdfjsLib.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"}catch(e){}function fmt(b){return b>=1048576?(b/1048576).toFixed(2)+" MB":Math.round(b/1024)+" KB"}function say(h){$("out").innerHTML=h}function progress(p){var b=$("bar");b.style.display=p==null?"none":"block";if(p!=null)b.firstElementChild.style.width=Math.round(p*100)+"%"}function setFile(f){if(!f)return;if(f.type!=="application/pdf"&&!/\.pdf$/i.test(f.name)){file=null;$("go").disabled=true;$("fname").textContent="";$("fsize").textContent="";$("file").value="";say('<span class="err">Acesta nu este un fișier PDF.</span>');return}file=f;$("fname").textContent=f.name;$("fsize").textContent=fmt(f.size);$("go").disabled=false;say("")}$("file").addEventListener("change",function(e){setFile(e.target.files[0])});var drop=$("drop");["dragenter","dragover"].forEach(function(t){drop.addEventListener(t,function(e){e.preventDefault();drop.classList.add("over")})});["dragleave","drop"].forEach(function(t){drop.addEventListener(t,function(e){e.preventDefault();drop.classList.remove("over")})});drop.addEventListener("drop",function(e){setFile(e.dataTransfer.files[0])});$("chips").addEventListener("click",function(e){if(e.target.tagName==="A")$("kb").value=e.target.textContent});function toBlob(canvas,q){return new Promise(function(res){canvas.toBlob(res,"image/jpeg",q)})}async function renderPages(pdf,scale,onPage){var out=[];for(var i=1;i<=pdf.numPages;i++){var page=await pdf.getPage(i),vp=page.getViewport({scale:scale}),c=document.createElement("canvas");c.width=Math.max(1,Math.floor(vp.width));c.height=Math.max(1,Math.floor(vp.height));var ctx=c.getContext("2d");ctx.fillStyle="#fff";ctx.fillRect(0,0,c.width,c.height);await page.render({canvasContext:ctx,viewport:vp}).promise;var base=page.getViewport({scale:1});out.push({canvas:c,w:base.width,h:base.height});if(onPage)onPage(i)}return out}function freePages(pages){pages.forEach(function(p){p.canvas.width=0;p.canvas.height=0})}async function sizeAt(pages,q){var total=0,blobs=[];for(var i=0;i<pages.length;i++){var b=await toBlob(pages[i].canvas,q);blobs.push(b);total+=b.size+600}return{total:total+1500,blobs:blobs}}async function build(pages,blobs){var doc=await PDFLib.PDFDocument.create();for(var i=0;i<pages.length;i++){var img=await doc.embedJpg(await blobs[i].arrayBuffer()),pg=doc.addPage([pages[i].w,pages[i].h]);pg.drawImage(img,{x:0,y:0,width:pages[i].w,height:pages[i].h})}return new Blob([await doc.save()],{type:"application/pdf"})}async function attempt(pdf,scales,qMin,qMax,target,progFrom,progTo){var lastTry=null;for(var s=0;s<scales.length;s++){var pages=await renderPages(pdf,scales[s],function(i){progress(progFrom+((s+i/pdf.numPages)/scales.length)*(progTo-progFrom))});var first=await sizeAt(pages,qMin);if(first.total>target){if(lastTry)freePages(lastTry.pages);lastTry={pages:pages,blobs:first.blobs,fit:false};continue}var lo=qMin,hi=qMax,fit=first;for(var k=0;k<5;k++){var mid=(lo+hi)/2,r=await sizeAt(pages,mid);if(r.total<=target){lo=mid;fit=r}else hi=mid}if(lastTry)freePages(lastTry.pages);return{pages:pages,blobs:fit.blobs,fit:true}}return lastTry}async function run(){if(busy||!file)return;var requestedKB=parseInt($("kb").value,10);if(!Number.isFinite(requestedKB)||requestedKB<10||requestedKB>100000){say('<span class="err">Introdu o dimensiune țintă între 10 și 100000 KB.</span>');return}var target=requestedKB*1024;if(file.size<=target){var originalUrl=URL.createObjectURL(file),originalName=file.name.replace(/\.pdf$/i,"").replace(/"/g,"")+"-compressed.pdf";say('<span class="ok">Fișierul are deja '+fmt(file.size)+", sub dimensiunea țintă.</span><small>Nu este necesară comprimarea.</small><a class=\"dl\" href=\""+originalUrl+"\" download=\""+originalName+"\">Descarcă PDF</a>");return}busy=true;$("go").disabled=true;say("Se comprimă PDF-ul…");progress(.03);var result=null,note="",tone="ok";try{bytes=await file.arrayBuffer();try{var doc=await PDFLib.PDFDocument.load(bytes,{ignoreEncryption:true,updateMetadata:false}),lossless=new Blob([await doc.save({useObjectStreams:true})],{type:"application/pdf"});if(lossless.size<=target){result=lossless;note="Fără pierderi de calitate. Textul poate fi selectat în continuare."}}catch(e){}if(!result){var pdf=await pdfjsLib.getDocument({data:bytes.slice(0)}).promise;progress(.1);var best=await attempt(pdf,[2,1.6,1.3,1.1],.75,.92,target,.1,.5);if(best&&best.fit){result=await build(best.pages,best.blobs);note="Calitatea a fost păstrată pe cât posibil. Paginile sunt acum imagini, iar textul nu poate fi selectat.";freePages(best.pages)}else{if(best)freePages(best.pages);var rough=await attempt(pdf,[1,.8,.6,.45,.3,.2],.3,.85,target,.5,.92);result=await build(rough.pages,rough.blobs);freePages(rough.pages);note=rough.fit?"A fost necesară reducerea calității. Încearcă o dimensiune țintă mai mare pentru un rezultat mai clar.":"Dimensiunea țintă nu a putut fi atinsă fără o pierdere mare de calitate. Acesta este cel mai mic fișier obținut.";tone=rough.fit?"warn":"err"}}if(result.size>target){tone="warn";note="Fișierul rezultat are în continuare "+fmt(result.size)+" și depășește dimensiunea țintă de "+fmt(target)+". Încearcă o dimensiune țintă mai mare."}progress(1);var hit=result.size<=target*1.02;if(!hit&&tone==="ok")tone="warn";var url=URL.createObjectURL(result),name=file.name.replace(/\.pdf$/i,"").replace(/"/g,"")+"-compressed.pdf";say('<span class="'+tone+'">'+fmt(file.size)+" → "+fmt(result.size)+"</span><small>"+note+'</small><a class="dl" href="'+url+'" download="'+name+'">Descarcă fișierul</a>')}catch(err){console.error(err);say('<span class="err">PDF-ul nu poate fi citit. Poate fi protejat cu parolă sau deteriorat.</span>')}setTimeout(function(){progress(null)},500);busy=false;$("go").disabled=false}$("go").addEventListener("click",run)})();
+</script>
+</body>
+</html>
