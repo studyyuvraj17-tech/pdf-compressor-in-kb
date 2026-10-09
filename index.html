@@ -270,7 +270,7 @@ if(Number.isFinite(requested)&&requested>=10){$("kb").value=Math.min(requested,1
 try{pdfjsLib.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"}catch(e){}
 function fmt(b){return b>=1048576?(b/1048576).toFixed(2)+" MB":Math.round(b/1024)+" KB"}
 function say(h){$("out").innerHTML=h}
-function progress(p){var b=$("bar");b.style.display=p==null?"none":"block";if(p!=null)b.firstElementChild.style.width=Math.round(p*100)+"%"}
+function progress(p){var b=$("bar");b.style.display=p==null?"none":"block";if(p!=null)b.firstElementChild.style.width=Math.max(0,Math.min(100,Math.round(p*100)))+"%"}
 function setFile(f){
  if(!f)return;
  if(f.type!=="application/pdf"&&!/\.pdf$/i.test(f.name)){file=null;$("go").disabled=true;$("fname").textContent="";$("fsize").textContent="";$("file").value="";say('<span class="err">That is not a PDF.</span>');return}
@@ -281,8 +281,8 @@ var drop=$("drop");
 ["dragenter","dragover"].forEach(function(t){drop.addEventListener(t,function(e){e.preventDefault();drop.classList.add("over")})});
 ["dragleave","drop"].forEach(function(t){drop.addEventListener(t,function(e){e.preventDefault();drop.classList.remove("over")})});
 drop.addEventListener("drop",function(e){setFile(e.dataTransfer.files[0])});
-$("chips").addEventListener("click",function(e){if(e.target.tagName==="A")$("kb").value=e.target.textContent});
-function toBlob(canvas,q){return new Promise(function(res){canvas.toBlob(res,"image/jpeg",q)})}
+$("chips").addEventListener("click",function(e){if(e.target.tagName==="A"){$("kb").value=e.target.textContent;$("kb").dispatchEvent(new Event("change",{bubbles:true}));}});
+function toBlob(canvas,q){return new Promise(function(resolve,reject){canvas.toBlob(function(blob){if(blob)resolve(blob);else reject(new Error("Could not encode PDF page image"));},"image/jpeg",q)})}
 async function renderPages(pdf,scale,onPage){
  var out=[];
  for(var i=1;i<=pdf.numPages;i++){
