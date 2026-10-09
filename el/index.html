@@ -344,28 +344,28 @@ async function compressToTarget(pdf,target){
 }
 async function run(){
  if(busy||!file)return;
- var kb=parseInt($("kb").value,10);if(!Number.isFinite(kb)||kb<10||kb>100000){say('<span class="err">Enter a target size between 10 and 100000 KB.</span>');return}var target=kb*1024;
- if(file.size<=target){var originalUrl=URL.createObjectURL(file),originalName=file.name.replace(/\.pdf$/i,"").replace(/"/g,"")+"-compressed.pdf";say('<span class="ok">Already '+fmt(file.size)+", under your target.</span><small>No compression was needed.</small><a class=\"dl\" href=\""+originalUrl+"\" download=\""+originalName+"\">Download PDF</a>");return}
- busy=true;$("go").disabled=true;say("Compressing…");progress(.03);
+ var kb=parseInt($("kb").value,10);if(!Number.isFinite(kb)||kb<10||kb>100000){say('<span class="err">Ορίστε μέγεθος στόχο μεταξύ 10 και 100000 KB.</span>');return}var target=kb*1024;
+ if(file.size<=target){var originalUrl=URL.createObjectURL(file),originalName=file.name.replace(/\.pdf$/i,"").replace(/"/g,"")+"-compressed.pdf";say('<span class="ok">Ήδη '+fmt(file.size)+" και είναι μικρότερο από τον στόχο σας.</span><small>Δεν χρειάστηκε συμπίεση.</small><a class=\"dl\" href=\""+originalUrl+"\" download=\""+originalName+"\">Λήψη PDF</a>");return}
+ busy=true;$("go").disabled=true;say("Γίνεται συμπίεση…");progress(.03);
  try{
   var bytes=await file.arrayBuffer(),result=null,note="",tone="ok";
   try{
    var doc=await PDFLib.PDFDocument.load(bytes,{ignoreEncryption:true,updateMetadata:false});
    var lossless=new Blob([await doc.save({useObjectStreams:true})],{type:"application/pdf"});
-   if(lossless.size<=target){result=lossless;note="No quality loss. Text remains selectable."}
+   if(lossless.size<=target){result=lossless;note="Χωρίς απώλεια ποιότητας. Το κείμενο παραμένει επιλέξιμο."}
   }catch(e){}
   if(!result){
    var pdf=await pdfjsLib.getDocument({data:bytes.slice(0)}).promise;progress(.08);
    var best=await compressToTarget(pdf,target);
    if(!best)throw new Error("compression");
    result=await build(best.pages,best.blobs);freePages(best.pages);
-   if(best.fit)note="Compressed toward your target. Pages may be image-based, so text selection may be limited.";
-   else{tone="warn";note="This is the strongest browser-side result available for this PDF. Try a slightly larger target for better quality."}
+   if(best.fit)note="Το αρχείο συμπιέστηκε προς το επιθυμητό μέγεθος. Οι σελίδες μπορεί να έχουν μετατραπεί σε εικόνες, περιορίζοντας την επιλογή κειμένου.";
+   else{tone="warn";note="Αυτό είναι το καλύτερο αποτέλεσμα που μπορεί να επιτευχθεί στον browser για αυτό το PDF. Δοκιμάστε λίγο μεγαλύτερο μέγεθος για καλύτερη ποιότητα."}
   }
-  if(result.size>target){tone="warn";note="The output is still "+fmt(result.size)+" and exceeds your "+fmt(target)+" target. Try a larger target size."}progress(1);
+  if(result.size>target){tone="warn";note="Το τελικό αρχείο έχει μέγεθος "+fmt(result.size)+" και υπερβαίνει τον στόχο των "+fmt(target)+" . Δοκιμάστε μεγαλύτερο μέγεθος στόχο."}progress(1);
   var url=URL.createObjectURL(result),name=file.name.replace(/\.pdf$/i,"").replace(/"/g,"")+"-compressed.pdf";
   say('<span class="'+tone+'">'+fmt(file.size)+" → "+fmt(result.size)+'</span><small>'+note+'</small><a class="dl" href="'+url+'" download="'+name+'">Λήψη συμπιεσμένου PDF</a>');
- }catch(err){console.error(err);say('<span class="err">Could not process this PDF. It may be password-protected, damaged, or too complex for browser compression.</span>')}
+ }catch(err){console.error(err);say('<span class="err">Δεν ήταν δυνατή η επεξεργασία αυτού του PDF. Μπορεί να προστατεύεται με κωδικό, να είναι κατεστραμμένο ή πολύ σύνθετο για συμπίεση στον browser.</span>')}
  setTimeout(function(){progress(null)},500);busy=false;$("go").disabled=false
 }
 $("go").addEventListener("click",run);
