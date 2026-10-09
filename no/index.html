@@ -270,7 +270,7 @@ function say(h){$("out").innerHTML=h}
 function progress(p){var b=$("bar");b.style.display=p==null?"none":"block";if(p!=null)b.firstElementChild.style.width=Math.round(p*100)+"%"}
 function setFile(f){
  if(!f)return;
- if(f.type!=="application/pdf"&&!/\.pdf$/i.test(f.name)){say('<span class="err">Dette er ikke en PDF-fil.</span>');return}
+ if(f.type!=="application/pdf"&&!/\.pdf$/i.test(f.name)){file=null;$("go").disabled=true;$("fname").textContent="";$("fsize").textContent="";$("file").value="";say('<span class="err">Dette er ikke en PDF-fil.</span>');return}
  file=f;$("fname").textContent=f.name;$("fsize").textContent=fmt(f.size);$("go").disabled=false;say("")
 }
 $("file").addEventListener("change",function(e){setFile(e.target.files[0])});
@@ -347,7 +347,7 @@ async function run(){
    if(best.fit)note="Komprimert mot målstørrelsen. Sider kan være bildebaserte, så tekstmarkering kan være begrenset.";
    else{tone="warn";note="Dette er det sterkeste resultatet nettleseren kan oppnå for denne PDF-en. Prøv en litt større målstørrelse for bedre kvalitet."}
   }
-  progress(1);
+  if(result.size>target){tone="warn";note="Resultatfilen er fortsatt "+fmt(result.size)+" og er større enn målet på "+fmt(target)+". Prøv en større målstørrelse."}progress(1);
   var url=URL.createObjectURL(result),name=file.name.replace(/\.pdf$/i,"").replace(/"/g,"")+"-komprimert.pdf";
   say('<span class="'+tone+'">'+fmt(file.size)+" → "+fmt(result.size)+'</span><small>'+note+'</small><a class="dl" href="'+url+'" download="'+name+'">Last ned komprimert PDF</a>');
  }catch(err){console.error(err);say('<span class="err">Kunne ikke behandle denne PDF-filen. Den kan være passordbeskyttet, skadet eller for kompleks for komprimering i nettleseren.</span>')}

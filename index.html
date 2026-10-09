@@ -273,7 +273,7 @@ function say(h){$("out").innerHTML=h}
 function progress(p){var b=$("bar");b.style.display=p==null?"none":"block";if(p!=null)b.firstElementChild.style.width=Math.round(p*100)+"%"}
 function setFile(f){
  if(!f)return;
- if(f.type!=="application/pdf"&&!/\.pdf$/i.test(f.name)){say('<span class="err">That is not a PDF.</span>');return}
+ if(f.type!=="application/pdf"&&!/\.pdf$/i.test(f.name)){file=null;$("go").disabled=true;$("fname").textContent="";$("fsize").textContent="";$("file").value="";say('<span class="err">That is not a PDF.</span>');return}
  file=f;$("fname").textContent=f.name;$("fsize").textContent=fmt(f.size);$("go").disabled=false;say("")
 }
 $("file").addEventListener("change",function(e){setFile(e.target.files[0])});
@@ -350,7 +350,7 @@ async function run(){
    if(best.fit)note="Compressed toward your target. Pages may be image-based, so text selection may be limited.";
    else{tone="warn";note="This is the strongest browser-side result available for this PDF. Try a slightly larger target for better quality."}
   }
-  progress(1);
+  if(result.size>target){tone="warn";note="The output is still "+fmt(result.size)+" and exceeds your "+fmt(target)+" target. Try a larger target size."}progress(1);
   var url=URL.createObjectURL(result),name=file.name.replace(/\.pdf$/i,"").replace(/"/g,"")+"-compressed.pdf";
   say('<span class="'+tone+'">'+fmt(file.size)+" → "+fmt(result.size)+'</span><small>'+note+'</small><a class="dl" href="'+url+'" download="'+name+'">Download compressed PDF</a>');
  }catch(err){console.error(err);say('<span class="err">Could not process this PDF. It may be password-protected, damaged, or too complex for browser compression.</span>')}
