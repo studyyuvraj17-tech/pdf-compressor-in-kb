@@ -264,7 +264,7 @@ html{max-width:100%;overflow-x:hidden}body{overflow-wrap:anywhere}img,svg,video,
 
 <footer>PDFCompressInKB – gratis PDF-komprimering till önskad storlek i KB eller MB.</footer>
 
-<footer class="site-footer"><strong>PDFCompressInKB</strong><br><a href="/">Home</a> <a href="/about/">About</a> <a href="/contact/">Contact</a> <a href="/how-it-works/">Så fungerar det</a> <a href="/privacy-policy/">Integritetspolicy</a> <a href="/terms/">Villkor</a> <a href="/disclaimer/">Ansvarsfriskrivning</a><br><span>Gratis webbläsarbaserad PDF-komprimering till önskad storlek i KB eller MB.</span></footer>
+<footer class="site-footer"><strong>PDFCompressInKB</strong><br><a href="/">Home</a> <a href="/about/">Om oss</a> <a href="/contact/">Kontakt</a> <a href="/how-it-works/">Så fungerar det</a> <a href="/privacy-policy/">Integritetspolicy</a> <a href="/terms/">Villkor</a> <a href="/disclaimer/">Ansvarsfriskrivning</a><br><span>Gratis webbläsarbaserad PDF-komprimering till önskad storlek i KB eller MB.</span></footer>
 </main>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
@@ -339,28 +339,28 @@ async function compressToTarget(pdf,target){
 }
 async function run(){
  if(busy||!file)return;
- var kb=parseInt($("kb").value,10);if(!Number.isFinite(kb)||kb<10||kb>100000){say('<span class="err">Enter a target size between 10 and 100000 KB.</span>');return}var target=kb*1024;
- if(file.size<=target){var originalUrl=URL.createObjectURL(file),originalName=file.name.replace(/\.pdf$/i,"").replace(/"/g,"")+"-compressed.pdf";say('<span class="ok">Already '+fmt(file.size)+", under your target.</span><small>No compression was needed.</small><a class=\"dl\" href=\""+originalUrl+"\" download=\""+originalName+"\">Download PDF</a>");return}
- busy=true;$("go").disabled=true;say("Compressing…");progress(.03);
+ var kb=parseInt($("kb").value,10);if(!Number.isFinite(kb)||kb<10||kb>100000){say('<span class="err">Ange en målfilstorlek mellan 10 och 100000 KB.</span>');return}var target=kb*1024;
+ if(file.size<=target){var originalUrl=URL.createObjectURL(file),originalName=file.name.replace(/\.pdf$/i,"").replace(/"/g,"")+"-compressed.pdf";say('<span class="ok">Redan '+fmt(file.size)+" och under din målgräns.</span><small>Ingen komprimering behövdes.</small><a class=\"dl\" href=\""+originalUrl+"\" download=\""+originalName+"\">Ladda ner PDF</a>");return}
+ busy=true;$("go").disabled=true;say("Komprimerar PDF…");progress(.03);
  try{
   var bytes=await file.arrayBuffer(),result=null,note="",tone="ok";
   try{
    var doc=await PDFLib.PDFDocument.load(bytes,{ignoreEncryption:true,updateMetadata:false});
    var lossless=new Blob([await doc.save({useObjectStreams:true})],{type:"application/pdf"});
-   if(lossless.size<=target){result=lossless;note="No quality loss. Text remains selectable."}
+   if(lossless.size<=target){result=lossless;note="Ingen kvalitetsförlust. Texten går fortfarande att markera."}
   }catch(e){}
   if(!result){
    var pdf=await pdfjsLib.getDocument({data:bytes.slice(0)}).promise;progress(.08);
    var best=await compressToTarget(pdf,target);
    if(!best)throw new Error("compression");
    result=await build(best.pages,best.blobs);freePages(best.pages);
-   if(best.fit)note="Compressed toward your target. Pages may be image-based, so text selection may be limited.";
-   else{tone="warn";note="This is the strongest browser-side result available for this PDF. Try a slightly larger target for better quality."}
+   if(best.fit)note="Filen har komprimerats mot din målgräns. Sidorna kan ha konverterats till bilder, vilket kan begränsa textmarkering.";
+   else{tone="warn";note="Det här är den kraftigaste komprimeringen som webbläsaren kunde göra för PDF-filen. Prova en något större målfilstorlek för bättre kvalitet."}
   }
-  if(result.size>target){tone="warn";note="The output is still "+fmt(result.size)+" and exceeds your "+fmt(target)+" target. Prova en större målfilstorlek."}progress(1);
+  if(result.size>target){tone="warn";note="Resultatet är fortfarande "+fmt(result.size)+" och överskrider din målgräns på "+fmt(target)+" target. Prova en större målfilstorlek."}progress(1);
   var url=URL.createObjectURL(result),name=file.name.replace(/\.pdf$/i,"").replace(/"/g,"")+"-compressed.pdf";
   say('<span class="'+tone+'">'+fmt(file.size)+" → "+fmt(result.size)+'</span><small>'+note+'</small><a class="dl" href="'+url+'" download="'+name+'">Ladda ner komprimerad PDF</a>');
- }catch(err){console.error(err);say('<span class="err">Could not process this PDF. It may be password-protected, damaged, or too complex for browser compression.</span>')}
+ }catch(err){console.error(err);say('<span class="err">Det gick inte att bearbeta PDF-filen. Den kan vara lösenordsskyddad, skadad eller för komplex för komprimering i webbläsaren.</span>')}
  setTimeout(function(){progress(null)},500);busy=false;$("go").disabled=false
 }
 $("go").addEventListener("click",run);
