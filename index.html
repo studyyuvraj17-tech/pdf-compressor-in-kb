@@ -316,19 +316,24 @@ async function compressToTarget(pdf,target){
   var pages=await renderPages(pdf,scales[s],function(i){
    progress(Math.min(.9,.08+((s+i/pdf.numPages)/scales.length)*.75))
   });
+  var candidate=null;
   for(var q=0;q<qualities.length;q++){
    var r=await sizeAt(pages,qualities[q]);
-   if(r.total<=target){if(last)freePages(last.pages);return {pages:pages,blobs:r.blobs,fit:true}}
-   last={pages:pages,blobs:r.blobs};
+   if(r.total<=target){
+    if(last)freePages(last.pages);
+    return {pages:pages,blobs:r.blobs,fit:true}
+   }
+   candidate={pages:pages,blobs:r.blobs,fit:false};
   }
-  if(s<scales.length-1 && last.pages!==pages)freePages(pages);
+  if(last)freePages(last.pages);
+  last=candidate;
  }
- return last?{pages:last.pages,blobs:last.blobs,fit:false}:null
+ return last
 }
 async function run(){
  if(busy||!file)return;
- var kb=Math.max(10,parseInt($("kb").value,10)||0),target=kb*1024;
- if(file.size<=target){say('<span class="ok">Already '+fmt(file.size)+', under your target.</span>');return}
+ var kb=parseInt($("kb").value,10);if(!Number.isFinite(kb)||kb<10||kb>100000){say('<span class="err">Enter a target size between 10 and 100000 KB.</span>');return}var target=kb*1024;
+ if(file.size<=target){var originalUrl=URL.createObjectURL(file),originalName=file.name.replace(/\.pdf$/i,"").replace(/"/g,"")+"-compressed.pdf";say('<span class="ok">Already '+fmt(file.size)+", under your target.</span><small>No compression was needed.</small><a class=\"dl\" href=\""+originalUrl+"\" download=\""+originalName+"\">Download PDF</a>");return}
  busy=true;$("go").disabled=true;say("Compressing…");progress(.03);
  try{
   var bytes=await file.arrayBuffer(),result=null,note="",tone="ok";
