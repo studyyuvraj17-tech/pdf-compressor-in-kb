@@ -632,4 +632,11 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://www.pdfcompressinkb.com/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.pdfcompressinkb.com/"/>
   </url>
+  <url>
+    <loc>https://www.pdfcompressinkb.com/zh-cn/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.pdfcompressinkb.com/zh-cn/"/>
+    <xhtml:link rel="alternate" hreflang="zh-TW" href="https://www.pdfcompressinkb.com/zh-tw/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.pdfcompressinkb.com/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.pdfcompressinkb.com/"/>
+  </url>
 </urlset>
