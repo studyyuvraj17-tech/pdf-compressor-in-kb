@@ -1930,5 +1930,6 @@
     <xhtml:link rel="alternate" hreflang="sr" href="https://www.pdfcompressinkb.com/sr/"/>
     <xhtml:link rel="alternate" hreflang="dz" href="https://www.pdfcompressinkb.com/dz/"/>
 
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.pdfcompressinkb.com/"/>
   </url>
 </urlset>
