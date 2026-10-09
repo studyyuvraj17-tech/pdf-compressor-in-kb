@@ -1648,4 +1648,10 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://www.pdfcompressinkb.com/"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.pdfcompressinkb.com/"/>
   </url>
+  <url>
+    <loc>https://www.pdfcompressinkb.com/da/</loc>
+    <xhtml:link rel="alternate" hreflang="da" href="https://www.pdfcompressinkb.com/da/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.pdfcompressinkb.com/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.pdfcompressinkb.com/"/>
+  </url>
 </urlset>
