@@ -200,7 +200,7 @@ html{max-width:100%;overflow-x:hidden}body{overflow-wrap:anywhere}img,svg,video,
 <main>
 <header class="site-header">
 <a class="brand" href="/sv/" aria-label="PDFCompressInKB startsida"><img src="/assets/logo.svg" alt="PDFCompressInKB" width="230" height="53"></a>
-<div class="lang"><span>🌐</span><select aria-label="Language" onchange="if(this.value)window.location.href=this.value"><option value="/sv/" selected>Svenska</option><option value="/es/">Español</option><option value="/tr/">Türkçe</option><option value="/th/">ไทย</option><option value="/zh-cn/">简体中文</option><option value="/zh-tw/">繁體中文</option><option value="/ja/">日本語</option><option value="/fr/">Français</option><option value="/de/">Deutsch</option><option value="/pt/">Português</option><option value="/ko/">한국어</option><option value="/it/">Italiano</option><option value="/sv/" selected>Svenska</option><option value="/no/">Norsk 🇳🇴</option><option value="/ar/">العربية</option></select></div>
+<div class="lang"><span>🌐</span><select aria-label="Language" onchange="if(this.value)window.location.href=this.value"><option value="/sv/" selected>Svenska</option><option value="/es/">Español</option><option value="/tr/">Türkçe</option><option value="/th/">ไทย</option><option value="/zh-cn/">简体中文</option><option value="/zh-tw/">繁體中文</option><option value="/ja/">日本語</option><option value="/fr/">Français</option><option value="/de/">Deutsch</option><option value="/pt/">Português</option><option value="/ko/">한국어</option><option value="/it/">Italiano</option><option value="/no/">Norsk 🇳🇴</option><option value="/ar/">العربية</option></select></div>
 </header>
 
 <section class="hero" aria-labelledby="page-title">
@@ -246,10 +246,11 @@ html{max-width:100%;overflow-x:hidden}body{overflow-wrap:anywhere}img,svg,video,
 <h3>Välj en specifik filstorlek</h3><p>Ange en målgräns i KB i stället för att bara välja en generell komprimeringsnivå. Det är praktiskt när en ansökan eller ett formulär har en gräns för filstorleken.</p>
 <h3>Enkelt direkt i webbläsaren</h3><p>Välj en PDF, ange önskad storlek, komprimera filen och ladda ner resultatet utan att installera något program.</p>
 <h3>Kvaliteten prioriteras först</h3><p>Verktyget försöker först spara om PDF-filen utan kvalitetsförlust. Om filen behöver minskas mer kan sidor vid behov konverteras till bilder.</p>
+<p>Du kan också använda Adobe Acrobat för att komprimera PDF-filer. Om du vill komprimera PDF online utan att installera ett program kan du prova verktyget här. PDFCompressInKB är en oberoende tjänst och är inte ansluten till Adobe.</p>
 </section>
 
 <section aria-labelledby="faq-title">
-<h2 id="faq-title">Frequently Asked Questions</h2>
+<h2 id="faq-title">Vanliga frågor om PDF-komprimering</h2>
 <details><summary>Hur komprimerar jag en PDF till 100 KB?</summary><p>Välj din PDF, ange 100 KB som mål och klicka på Komprimera PDF. Verktyget försöker minska filen mot den valda storleken.</p></details>
 <details><summary>Kan jag komprimera en PDF till 200 KB?</summary><p>Ja. Ange 200 KB som mål innan du startar komprimeringen.</p></details>
 <details><summary>Kan jag komprimera en PDF till 500 KB?</summary><p>Ja. Välj 500 KB som mål och starta komprimeringen.</p></details>
@@ -279,7 +280,7 @@ function say(h){$("out").innerHTML=h}
 function progress(p){var b=$("bar");b.style.display=p==null?"none":"block";if(p!=null)b.firstElementChild.style.width=Math.max(0,Math.min(100,Math.round(p*100)))+"%"}
 function setFile(f){
  if(!f)return;
- if(f.type!=="application/pdf"&&!/\.pdf$/i.test(f.name)){file=null;$("go").disabled=true;$("fname").textContent="";$("fsize").textContent="";$("file").value="";say('<span class="err">That is not a PDF.</span>');return}
+ if(f.type!=="application/pdf"&&!/\.pdf$/i.test(f.name)){file=null;$("go").disabled=true;$("fname").textContent="";$("fsize").textContent="";$("file").value="";say('<span class="err">Det här är inte en PDF-fil.</span>');return}
  file=f;$("fname").textContent=f.name;$("fsize").textContent=fmt(f.size);$("go").disabled=false;say("")
 }
 $("file").addEventListener("change",function(e){setFile(e.target.files[0])});
@@ -288,7 +289,7 @@ var drop=$("drop");
 ["dragleave","drop"].forEach(function(t){drop.addEventListener(t,function(e){e.preventDefault();drop.classList.remove("over")})});
 drop.addEventListener("drop",function(e){setFile(e.dataTransfer.files[0])});
 $("chips").addEventListener("click",function(e){if(e.target.tagName==="A"){$("kb").value=e.target.textContent;$("kb").dispatchEvent(new Event("change",{bubbles:true}));}});
-function toBlob(canvas,q){return new Promise(function(resolve,reject){canvas.toBlob(function(blob){if(blob)resolve(blob);else reject(new Error("Could not encode PDF page image"));},"image/jpeg",q)})}
+function toBlob(canvas,q){return new Promise(function(resolve,reject){canvas.toBlob(function(blob){if(blob)resolve(blob);else reject(new Error("Det gick inte att skapa en sidbild från PDF-filen"));},"image/jpeg",q)})}
 async function renderPages(pdf,scale,onPage){
  var out=[];
  for(var i=1;i<=pdf.numPages;i++){
@@ -356,7 +357,7 @@ async function run(){
    if(best.fit)note="Compressed toward your target. Pages may be image-based, so text selection may be limited.";
    else{tone="warn";note="This is the strongest browser-side result available for this PDF. Try a slightly larger target for better quality."}
   }
-  if(result.size>target){tone="warn";note="The output is still "+fmt(result.size)+" and exceeds your "+fmt(target)+" target. Try a larger target size."}progress(1);
+  if(result.size>target){tone="warn";note="The output is still "+fmt(result.size)+" and exceeds your "+fmt(target)+" target. Prova en större målfilstorlek."}progress(1);
   var url=URL.createObjectURL(result),name=file.name.replace(/\.pdf$/i,"").replace(/"/g,"")+"-compressed.pdf";
   say('<span class="'+tone+'">'+fmt(file.size)+" → "+fmt(result.size)+'</span><small>'+note+'</small><a class="dl" href="'+url+'" download="'+name+'">Ladda ner komprimerad PDF</a>');
  }catch(err){console.error(err);say('<span class="err">Could not process this PDF. It may be password-protected, damaged, or too complex for browser compression.</span>')}
