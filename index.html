@@ -214,8 +214,18 @@ button:disabled{opacity:.4;cursor:not-allowed}
 #bar i{display:block;height:100%;width:0;background:var(--fg);transition:width .2s}
 #out{margin-top:18px;font-size:14px;min-height:20px;line-height:1.55}
 #out .ok{color:var(--ok)}#out .warn{color:var(--warn)}#out .err{color:var(--err)}
-#out small{display:block;color:var(--muted);margin-top:3px}
-#out a.dl{display:block;margin-top:10px;text-align:center;text-decoration:none;border-radius:11px;background:var(--accent);color:var(--accent-fg);padding:13px;font-weight:600}
+#out small{display:block;color:var(--muted);margin-top:5px}
+#out .result-card{border:1px solid var(--line);border-radius:14px;padding:16px;background:var(--card);text-align:left}
+#out .result-heading{display:flex;align-items:center;gap:9px;font-size:17px;font-weight:700;margin-bottom:12px}
+#out .result-heading .status-icon{font-size:20px}
+#out .result-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+#out .result-stat{padding:11px;border:1px solid var(--line);border-radius:10px;min-width:0}
+#out .result-stat span{display:block;color:var(--muted);font-size:12px;margin-bottom:4px}
+#out .result-stat strong{font-size:17px;overflow-wrap:anywhere}
+#out .result-note{font-size:13px;line-height:1.55;color:var(--muted);margin-top:10px}
+#out a.dl{display:block;margin-top:12px;text-align:center;text-decoration:none;border-radius:11px;background:var(--accent);color:var(--accent-fg);padding:13px;font-weight:700;min-height:46px}
+#out button.retry{width:100%;margin-top:9px;background:transparent;color:var(--fg);border:1px solid var(--line);padding:11px;min-height:44px}
+#out .ok{color:var(--ok)}#out .warn{color:var(--warn)}#out .err{color:var(--err)}
 .content{margin-top:52px}
 section{margin:0 0 36px}
 h2{font-size:22px;margin:0 0 12px}
@@ -378,10 +388,27 @@ async function compressToTarget(pdf,target){
  }
  return last
 }
+function showResult(result,target,originalSize,note,sourceFile){
+ var under=result.size<=target,percent=originalSize>0?Math.max(0,(1-result.size/originalSize)*100):0;
+ var card=document.createElement("div");card.className="result-card";
+ var heading=document.createElement("div");heading.className="result-heading";
+ var icon=document.createElement("span");icon.className="status-icon "+(under?"ok":"warn");icon.textContent=under?"✓":"!";
+ var title=document.createElement("span");title.textContent=under?"Target reached — check before upload":"Target not reached";
+ heading.appendChild(icon);heading.appendChild(title);card.appendChild(heading);
+ var stats=document.createElement("div");stats.className="result-stats";
+ function stat(label,value){var el=document.createElement("div");el.className="result-stat";var l=document.createElement("span");l.textContent=label;var v=document.createElement("strong");v.textContent=value;el.appendChild(l);el.appendChild(v);stats.appendChild(el)}
+ stat("Original size",fmt(originalSize));stat("Compressed size",(result.size/1024).toFixed(1)+" KB");
+ stat("Size reduction",(originalSize>result.size?percent.toFixed(1):"0.0")+"%");stat("Target",(target/1024).toFixed(0)+" KB maximum");card.appendChild(stats);
+ var detail=document.createElement("p");detail.className="result-note";detail.textContent=under?(note||"The output is within your selected size target. Open the downloaded file and check that all text, signatures and details remain readable."):(note||"The output is larger than your selected target. Do not submit it where the size limit is strict.");card.appendChild(detail);
+ var url=URL.createObjectURL(result),name=sourceFile.name.replace(/\.pdf$/i,"").replace(/"/g,"")+"-compressed.pdf";
+ var link=document.createElement("a");link.className="dl";link.href=url;link.download=name;link.textContent="Download compressed PDF";card.appendChild(link);
+ if(!under){var retry=document.createElement("button");retry.type="button";retry.className="retry";retry.textContent="Try a larger target ("+(Math.ceil(result.size/1024)+10)+" KB)";retry.addEventListener("click",function(){$("kb").value=Math.min(100000,Math.ceil(result.size/1024)+10);$("kb").focus();say('<span class="warn">Target updated. Click Compress PDF to try again.</span>');});card.appendChild(retry)}
+ say("");$("out").appendChild(card);
+}
 async function run(){
  if(busy||!file)return;
  var kb=parseInt($("kb").value,10);if(!Number.isFinite(kb)||kb<10||kb>100000){say('<span class="err">Enter a target size between 10 and 100000 KB.</span>');return}var target=kb*1024;
- if(file.size<=target){var originalUrl=URL.createObjectURL(file),originalName=file.name.replace(/\.pdf$/i,"").replace(/"/g,"")+"-compressed.pdf";say('<span class="ok">Already '+fmt(file.size)+", under your target.</span><small>No compression was needed.</small><a class=\"dl\" href=\""+originalUrl+"\" download=\""+originalName+"\">Download PDF</a>");return}
+ if(file.size<=target){showResult(file,target,file.size,"No compression was needed because the original file is already within your selected target.",file);return}
  busy=true;$("go").disabled=true;say("Compressing…");progress(.03);
  try{
   var bytes=await file.arrayBuffer(),result=null,note="",tone="ok";
@@ -398,9 +425,8 @@ async function run(){
    if(best.fit)note="Compressed toward your target. Pages may be image-based, so text selection may be limited.";
    else{tone="warn";note="This is the strongest browser-side result available for this PDF. Try a slightly larger target for better quality."}
   }
-  if(result.size>target){tone="warn";note="The output is still "+fmt(result.size)+" and exceeds your "+fmt(target)+" target. Try a larger target size."}progress(1);
-  var url=URL.createObjectURL(result),name=file.name.replace(/\.pdf$/i,"").replace(/"/g,"")+"-compressed.pdf";
-  say('<span class="'+tone+'">'+fmt(file.size)+" → "+fmt(result.size)+'</span><small>'+note+'</small><a class="dl" href="'+url+'" download="'+name+'">Download compressed PDF</a>');
+  if(result.size>target){tone="warn";note="The strongest attempt did not reach the selected limit. You can download this result to inspect it, or choose a larger target and try again."}progress(1);
+  showResult(result,target,file.size,note,file);
  }catch(err){console.error(err);say('<span class="err">Could not process this PDF. It may be password-protected, damaged, or too complex for browser compression.</span>')}
  setTimeout(function(){progress(null)},500);busy=false;$("go").disabled=false
 }
