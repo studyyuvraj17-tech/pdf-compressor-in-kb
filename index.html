@@ -249,7 +249,7 @@ html{max-width:100%;overflow-x:hidden}body{overflow-wrap:anywhere}img,svg,video,
 <p class="lead">Reduce a PDF to a target size such as 100 KB, 200 KB, 500 KB or 1 MB. Everything runs in your browser.</p>
 </section>
 
-<div class="tool">
+<div class="tool" id="tool">
 <label id="drop" for="file"><b id="fname">Choose or drop a PDF</b><small id="fsize">Your file stays on your device</small></label>
 <input type="file" id="file" accept="application/pdf">
 <div class="row">
@@ -314,6 +314,7 @@ html{max-width:100%;overflow-x:hidden}body{overflow-wrap:anywhere}img,svg,video,
 var $=function(id){return document.getElementById(id)},file=null,busy=false;
 var params=new URLSearchParams(location.search),requested=parseInt(params.get("size"),10);
 if(Number.isFinite(requested)&&requested>=10){$("kb").value=Math.min(requested,100000);$("page-title").textContent="Compress PDF to "+requested+" KB Online"}
+if(location.hash==="#tool"){window.addEventListener("load",function(){setTimeout(function(){$("tool").scrollIntoView({behavior:"smooth",block:"start"});$("drop").focus({preventScroll:true})},80)})}
 try{pdfjsLib.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"}catch(e){}
 function fmt(b){return b>=1048576?(b/1048576).toFixed(2)+" MB":Math.round(b/1024)+" KB"}
 function say(h){$("out").innerHTML=h}
