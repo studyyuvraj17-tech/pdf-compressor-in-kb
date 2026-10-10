@@ -230,7 +230,6 @@ html{max-width:100%;overflow-x:hidden}body{overflow-wrap:anywhere}img,svg,video,
 <div class="num"><input id="kb" type="number" min="10" value="1024" inputmode="numeric" aria-label="Target size in KB"><span>KB</span></div>
 <button id="go" disabled>Compress PDF</button>
 </div>
-<div class="chips" id="chips" aria-label="Common PDF target sizes"><a>50</a><a>100</a><a>200</a><a>500</a><a>1000</a></div>
 <div id="bar" aria-hidden="true"><i></i></div>
 <div id="out" aria-live="polite"></div>
 </div>
@@ -303,7 +302,6 @@ var drop=$("drop");
 ["dragenter","dragover"].forEach(function(t){drop.addEventListener(t,function(e){e.preventDefault();drop.classList.add("over")})});
 ["dragleave","drop"].forEach(function(t){drop.addEventListener(t,function(e){e.preventDefault();drop.classList.remove("over")})});
 drop.addEventListener("drop",function(e){setFile(e.dataTransfer.files[0])});
-$("chips").addEventListener("click",function(e){if(e.target.tagName==="A"){$("kb").value=e.target.textContent;$("kb").dispatchEvent(new Event("change",{bubbles:true}));}});
 function toBlob(canvas,q){return new Promise(function(resolve,reject){canvas.toBlob(function(blob){if(blob)resolve(blob);else reject(new Error("Could not encode PDF page image"));},"image/jpeg",q)})}
 async function renderPages(pdf,scale,onPage){
  var out=[];
