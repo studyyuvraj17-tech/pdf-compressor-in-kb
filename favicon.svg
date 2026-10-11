@@ -1,10 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
-  <title>PDFCompressInKB</title>
-  <path fill="#ff0808" d="M30 7h42c4 0 7 1 10 4l33 33c3 3 5 7 5 11v42c0 17-11 28-28 28H30C13 125 3 114 3 97V35C3 18 13 7 30 7Z"/>
-  <path fill="#606060" d="M30 21h37v21c0 8 5 13 13 13h26v41c0 9-5 15-14 15H31c-9 0-14-6-14-15V35c0-9 4-14 13-14Z"/>
-  <path fill="#ff8585" d="M81 23 104 46H81Z"/>
-  <path fill="#bdbdbd" d="M81 23 104 46H81Z"/>
-  <path fill="#ff0808" d="M38 51h11c5 0 8 4 8 8s-3 8-8 8H38c-6 0-9-4-9-8s3-8 9-8Zm0 27h43c6 0 10 4 10 9s-4 9-10 9H38c-6 0-10-4-10-9s4-9 10-9Z"/>
-  <rect x="28" y="79" width="62" height="14" rx="7" fill="#ff0808"/>
-  <rect x="28" y="52" width="23" height="15" rx="7.5" fill="#ff0808"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title">
+  <title id="title">PDFCompressInKB</title>
+  <rect width="128" height="128" rx="26" fill="#1c1917"/>
+  <path d="M28 14h43l27 27v73H28z" fill="#fff"/>
+  <path d="M71 14v27h27" fill="#d6d3d1"/>
+  <path d="M71 14v27h27" fill="none" stroke="#1c1917" stroke-width="3" stroke-linejoin="round"/>
+  <text x="35" y="57" fill="#1c1917" font-family="Arial,sans-serif" font-size="18" font-weight="700">PDF</text>
+  <g fill="none" stroke="#1c1917" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M48 70v27m-9-9 9 9 9-9"/>
+    <path d="M79 97V70m-9 9 9-9 9 9"/>
+  </g>
 </svg>
