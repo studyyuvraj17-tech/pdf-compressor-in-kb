@@ -58,3 +58,14 @@ test("canonical and sitemap metadata use the production host consistently", asyn
   assert.ok(urls.length > 0, "sitemap should contain URLs");
   assert.ok(urls.every((url) => new URL(url).host === host), "sitemap URLs should use the canonical host");
 });
+
+test("Vercel deployment defines baseline security headers and permits required assets", async () => {
+  const config = JSON.parse(await readFile(new URL("../vercel.json", import.meta.url), "utf8"));
+  const headers = config.headers?.[0]?.headers ?? [];
+  const values = Object.fromEntries(headers.map(({ key, value }) => [key.toLowerCase(), value]));
+  assert.equal(values["x-content-type-options"], "nosniff");
+  assert.equal(values["x-frame-options"], "DENY");
+  assert.match(values["content-security-policy"] ?? "", /object-src 'none'/);
+  assert.match(values["content-security-policy"] ?? "", /https:\/\/cdnjs\.cloudflare\.com/);
+  assert.match(values["content-security-policy"] ?? "", /worker-src 'self' blob:/);
+});
