@@ -250,6 +250,63 @@ details:last-child{border-bottom:1px solid var(--line)}
 summary{cursor:pointer;font-weight:600}
 footer{margin-top:30px;padding-top:20px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);text-align:center}
 @media(max-width:600px){.site-header{align-items:flex-start;flex-direction:column}.brand img{width:220px}.lang{width:100%;justify-content:flex-end}.row{grid-template-columns:1fr}.row button{width:100%}}
+
+/* Product UX refresh: clearer hierarchy, stronger tool focus, and responsive benefit cards. */
+:root{--bg:#080d18;--fg:#f4f7fb;--muted:#a8b4c7;--line:#26344a;--card:#101a2b;--accent:#a7f3d0;--accent-fg:#08251e;--ok:#4ade80;--warn:#fbbf24;--err:#fb7185}
+body{background:radial-gradient(ellipse at 50% -15%,rgba(45,112,164,.28),transparent 48%),var(--bg);padding:24px 18px 40px}
+main{max-width:980px}
+.site-header{margin-bottom:48px}
+.brand img{width:220px}
+.hero{max-width:780px;margin-bottom:30px}
+.hero:before{content:"FREE • BROWSER-BASED PDF TOOL";display:inline-block;font-size:11px;font-weight:800;letter-spacing:.14em;color:#a7f3d0;background:rgba(52,211,153,.1);border:1px solid rgba(110,231,183,.25);border-radius:999px;padding:8px 12px;margin-bottom:18px}
+h1{font-size:clamp(34px,6vw,58px);line-height:1.02;letter-spacing:-.045em;max-width:760px;margin:0 auto 18px}
+.lead{font-size:clamp(16px,2vw,19px);max-width:650px;margin:0 auto;line-height:1.7}
+.tool{max-width:680px;padding:22px;background:linear-gradient(145deg,rgba(19,34,54,.98),rgba(12,21,35,.98));border:1px solid #30425c;border-radius:24px;box-shadow:0 24px 70px rgba(0,0,0,.28)}
+#drop{border-color:#47617d;background:rgba(7,14,25,.72);padding:42px 20px;border-radius:17px}
+#drop b{font-size:18px}
+#drop small{font-size:13px}
+#drop:hover,#drop.over{border-color:#a7f3d0;background:rgba(14,38,45,.7)}
+.row{margin-top:16px}
+.num{border-color:#354963;background:#0b1423}
+.num input{min-width:0}
+button{background:var(--accent);transition:transform .15s ease,filter .15s ease}
+button:hover:not(:disabled){filter:brightness(1.05);transform:translateY(-1px)}
+.chips{align-items:center;margin-top:13px}
+.chips:before{content:"Quick targets";font-size:12px;color:#9fb0c5;margin-right:3px}
+.chips a{padding:7px 12px;border-color:#354963;background:#0b1423;color:#dbe6f4;text-decoration:none}
+.chips a:hover{border-color:#a7f3d0;color:#a7f3d0}
+#bar{background:#27374c}
+#bar i{background:#a7f3d0}
+#out .result-card{border-color:#354963;background:#0b1423}
+#out a.dl{background:#a7f3d0;color:#08251e}
+#out button.retry{border-color:#354963}
+.content{margin-top:58px}
+.content section{margin-bottom:44px}
+h2{font-size:clamp(22px,3vw,29px);letter-spacing:-.025em}
+h3{color:#e8f1fb}
+p,li{font-size:15px}
+.steps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 26px;padding-left:24px}
+.target-links a{padding:10px 14px;border-color:#30425c;background:#101a2b;transition:border-color .15s,transform .15s}
+.target-links a:hover{border-color:#a7f3d0;transform:translateY(-1px)}
+details{border-color:#26344a}
+summary{padding:2px 0}
+details p{margin-bottom:2px}
+footer{border-color:#26344a}
+.site-footer{line-height:2.2}
+.site-footer a{color:#dbe6f4;text-decoration:none;margin:0 5px}
+.site-footer a:hover{color:#a7f3d0}
+.trust-strip{max-width:680px;margin:16px auto 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.trust-item{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px 10px;border:1px solid rgba(78,104,135,.55);border-radius:12px;background:rgba(13,24,40,.7);color:#dce7f5;font-size:12px;text-align:center}
+.trust-item span{color:#a7f3d0;font-size:15px}
+.benefit-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:18px}
+.benefit-card{padding:20px;border:1px solid #2b3d55;border-radius:16px;background:linear-gradient(145deg,rgba(17,29,47,.9),rgba(11,19,32,.9))}
+.benefit-card .benefit-icon{display:grid;place-items:center;width:38px;height:38px;border-radius:11px;background:rgba(110,231,183,.1);color:#a7f3d0;font-size:19px;margin-bottom:14px}
+.benefit-card h3{font-size:16px;margin:0 0 8px}
+.benefit-card p{font-size:14px;margin:0;line-height:1.65}
+.privacy-note{max-width:680px;margin:14px auto 0;text-align:center;font-size:12px;color:#9fb0c5;line-height:1.6}
+@media(max-width:650px){body{padding:16px 12px 28px}.site-header{margin-bottom:38px}.hero{margin-bottom:24px}.tool{padding:14px;border-radius:18px}#drop{padding:32px 14px}.steps{grid-template-columns:1fr;gap:6px}.benefit-grid{grid-template-columns:1fr}.benefit-card{padding:17px}.trust-strip{grid-template-columns:1fr;gap:8px}.trust-item{justify-content:flex-start;padding:12px 14px}.content{margin-top:42px}.content section{margin-bottom:36px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important}}
+
 </style>
 <style>.site-footer{margin-top:48px;padding-top:22px;border-top:1px solid var(--line,#2a2a2a);font-size:13px;line-height:2;color:var(--muted,#a3a3a3);text-align:center}.site-footer a{color:var(--fg,#f5f5f5);text-decoration:none;margin:0 7px}.site-footer strong{color:var(--fg,#f5f5f5)}
 /* Mobile usability improvements */
@@ -265,8 +322,8 @@ html{max-width:100%;overflow-x:hidden}body{overflow-wrap:anywhere}img,svg,video,
 </header>
 
 <section class="hero" aria-labelledby="page-title">
-<h1 id="page-title">Compress PDF to KB Online</h1>
-<p class="lead">Reduce a PDF to a target size such as 100 KB, 200 KB, 500 KB or 1 MB. Everything runs in your browser.</p>
+<h1 id="page-title">Compress PDF to the size you need</h1>
+<p class="lead">Get your PDF under a specific file-size limit for forms, applications and uploads. Choose a target in KB, compress locally, then check the result before you download.</p>
 </section>
 
 <div class="tool" id="tool">
@@ -280,6 +337,12 @@ html{max-width:100%;overflow-x:hidden}body{overflow-wrap:anywhere}img,svg,video,
 <div id="bar" aria-hidden="true"><i></i></div>
 <div id="out" aria-live="polite"></div>
 </div>
+<div class="trust-strip" aria-label="Key benefits">
+  <div class="trust-item"><span aria-hidden="true">✓</span> Files stay on your device</div>
+  <div class="trust-item"><span aria-hidden="true">↘</span> Target size in KB</div>
+  <div class="trust-item"><span aria-hidden="true">◎</span> Check size before download</div>
+</div>
+<p class="privacy-note">Compression runs in your browser. Very aggressive compression can reduce readability or turn page content into images, so always inspect the downloaded PDF before submitting it.</p>
 
 <div class="content">
 <section aria-labelledby="how-title">
@@ -321,9 +384,11 @@ html{max-width:100%;overflow-x:hidden}body{overflow-wrap:anywhere}img,svg,video,
 
 <section aria-labelledby="why-title">
 <h2 id="why-title">Why Use This PDF Compressor?</h2>
-<h3>Target a specific file size</h3><p>Set a target in KB instead of choosing only a generic compression level. This is useful when an online application or form has a file-size limit.</p>
-<h3>Simple browser-based workflow</h3><p>Upload a PDF, choose a target, compress it and download the result without installing desktop software.</p>
-<h3>Quality is protected first</h3><p>The compressor first tries a lossless PDF re-save. Stronger reduction may convert pages to images when necessary.</p>
+<div class="benefit-grid">
+  <article class="benefit-card"><div class="benefit-icon" aria-hidden="true">↘</div><h3>Choose your size limit</h3><p>Set a target in KB for online forms, recruitment applications, email attachments and document portals.</p></article>
+  <article class="benefit-card"><div class="benefit-icon" aria-hidden="true">⌂</div><h3>Keep files on your device</h3><p>The compression workflow runs in your browser, without uploading your PDF to a compression server.</p></article>
+  <article class="benefit-card"><div class="benefit-icon" aria-hidden="true">✓</div><h3>Know what you download</h3><p>See the actual output size and whether the target was reached. Review text, signatures and image quality before use.</p></article>
+</div>
 </section>
 
 <section aria-labelledby="faq-title">
