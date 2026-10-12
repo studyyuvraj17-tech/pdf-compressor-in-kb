@@ -1,10 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 120" role="img" aria-labelledby="title">
   <title id="title">PDFCompressInKB</title>
   <rect width="520" height="120" rx="24" fill="#1c1917"/>
-  <g transform="translate(37 16)">
-    <path d="M14 5a12 12 0 0 1 12-12h31l21 21v64a12 12 0 0 1-12 12H14a12 12 0 0 1-12-12V5z" fill="#fff" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
-    <path d="M57-7v21h21" fill="none" stroke="#000" stroke-width="4" stroke-linejoin="round"/>
-    <text x="11" y="40" font-family="Arial,sans-serif" font-size="21" font-weight="900" fill="#000">PDF</text>
+  <g transform="translate(36 12)">
+    <circle cx="36" cy="48" r="48" fill="#218bd5"/>
+    <path d="M0 48 20 28h27l20 20v44H37z" fill="#155b8a" opacity=".5"/>
+    <path d="M23 25h26l10 10v45H23z" fill="#15517d" stroke="#fff" stroke-width="3" stroke-linejoin="miter"/>
+    <path d="M49 25v10h10" fill="none" stroke="#fff" stroke-width="3" stroke-linejoin="miter"/>
+    <text x="36" y="59" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="700" text-anchor="middle" fill="#fff">PDF</text>
   </g>
   <text x="130" y="73" font-family="Arial,sans-serif" font-size="34" font-weight="700" fill="#fff">PDFCompressInKB</text>
 </svg>
