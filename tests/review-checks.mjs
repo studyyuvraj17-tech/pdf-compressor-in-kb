@@ -69,3 +69,40 @@ test("Vercel deployment defines baseline security headers and permits required a
   assert.match(values["content-security-policy"] ?? "", /https:\/\/cdnjs\.cloudflare\.com/);
   assert.match(values["content-security-policy"] ?? "", /worker-src 'self' blob:/);
 });
+
+
+test("robots.txt advertises the sitemap on the canonical host", async () => {
+  const canonical = html.match(/<link rel="canonical" href="([^"]+)"/i)?.[1];
+  assert.ok(canonical, "homepage should declare a canonical URL");
+  const canonicalOrigin = new URL(canonical).origin;
+  const robots = await readFile(new URL("../robots.txt", import.meta.url), "utf8");
+  const sitemapUrl = robots.match(/^Sitemap:\s*(\S+)\s*$/im)?.[1];
+  assert.ok(sitemapUrl, "robots.txt should advertise a sitemap");
+  assert.equal(new URL(sitemapUrl).origin, canonicalOrigin, "robots sitemap should use the canonical origin");
+});
+
+test("sitemap hreflang alternates are present, self-referencing, unique and reciprocal", async () => {
+  const sitemap = await readFile(new URL("../sitemap.xml", import.meta.url), "utf8");
+  const entries = [...sitemap.matchAll(/<url>([\s\S]*?)<\/url>/g)].map(([, block]) => {
+    const loc = block.match(/<loc>([^<]+)<\/loc>/)?.[1];
+    const alternates = [...block.matchAll(/hreflang="([^"]+)" href="([^"]+)"/g)].map(([, lang, href]) => ({ lang, href }));
+    assert.ok(loc, "each sitemap entry should have a loc");
+    return { loc, alternates };
+  });
+  const byLoc = new Map(entries.map((entry) => [entry.loc, entry]));
+  assert.equal(byLoc.size, entries.length, "sitemap should not contain duplicate loc URLs");
+
+  for (const entry of entries) {
+    const languages = entry.alternates.map((alternate) => alternate.lang);
+    assert.equal(new Set(languages).size, languages.length, `duplicate hreflang on ${entry.loc}`);
+    assert.ok(entry.alternates.some((alternate) => alternate.href === entry.loc && alternate.lang !== "x-default"),
+      `each URL should have a self-referencing language alternate: ${entry.loc}`);
+
+    for (const alternate of entry.alternates) {
+      assert.ok(byLoc.has(alternate.href), `hreflang target must exist in sitemap: ${alternate.href}`);
+      const target = byLoc.get(alternate.href);
+      assert.ok(target.alternates.some((backlink) => backlink.href === entry.loc),
+        `hreflang relationship must be reciprocal: ${entry.loc} -> ${alternate.href}`);
+    }
+  }
+});
