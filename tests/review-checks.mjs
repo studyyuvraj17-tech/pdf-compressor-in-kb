@@ -61,6 +61,13 @@ test("canonical and sitemap metadata use the production host consistently", asyn
 
 test("Vercel deployment defines baseline security headers and permits required assets", async () => {
   const config = JSON.parse(await readFile(new URL("../vercel.json", import.meta.url), "utf8"));
+  const apexRedirect = config.redirects?.find((rule) =>
+    rule.source === "/:path*" &&
+    rule.destination === "https://www.pdfcompressinkb.com/:path*" &&
+    rule.permanent === true
+  );
+  assert.ok(apexRedirect, "Vercel should permanently redirect the apex host to the canonical www host");
+  assert.deepEqual(apexRedirect.has, [{ type: "host", value: "pdfcompressinkb.com" }]);
   const headers = config.headers?.[0]?.headers ?? [];
   const values = Object.fromEntries(headers.map(({ key, value }) => [key.toLowerCase(), value]));
   assert.equal(values["x-content-type-options"], "nosniff");
