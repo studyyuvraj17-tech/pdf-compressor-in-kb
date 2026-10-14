@@ -211,7 +211,7 @@ h1{max-width:680px;margin:0 auto 12px;font-size:clamp(30px,5vw,46px);line-height
 .row{grid-template-columns:minmax(0,1fr) auto;gap:10px;margin-top:12px}.num{min-width:0;min-height:48px;padding:0 12px;border:1px solid var(--line);border-radius:11px;background:#fff}.num:focus-within{border-color:#2457c5;box-shadow:0 0 0 3px rgba(36,87,197,.1)}.num input{min-width:0;padding:11px 0;color:var(--fg);font-size:15px}.num span{color:var(--muted);font-size:13px}
 #go{min-height:48px;padding:12px 19px;border-radius:11px;background:#2457c5;color:#fff;font-size:14px;font-weight:750;white-space:nowrap}#go:hover:not(:disabled){background:#1c469f;filter:none;transform:none}
 button:focus-visible,a:focus-visible,select:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid #9db5e8;outline-offset:2px}
-#bar{height:5px;margin-top:16px;background:#e8edf5}#bar i{background:#2457c5}#out{margin-top:14px;font-size:14px}#out .result-card{padding:16px;border:1px solid var(--line);border-radius:14px;background:#fff;box-shadow:none}#out .result-heading{font-size:16px;color:var(--fg)}#out .result-stats{gap:8px}#out .result-stat{padding:12px;border:1px solid var(--line);border-radius:10px;background:#f8faff}#out .result-stat span{font-size:12px;color:var(--muted)}#out .result-stat strong{font-size:17px;color:var(--fg)}#out .result-note{color:var(--muted)}#out a.dl{background:#2457c5;color:#fff;border-radius:10px;font-size:15px}#out button.retry{background:#fff;color:#34425a;border-color:var(--line);border-radius:10px}
+#bar{height:5px;margin-top:16px;background:#e8edf5}#bar i{background:#2457c5}#out{margin-top:14px;font-size:14px}#out .result-card{padding:16px;border:1px solid var(--line);border-radius:14px;background:#fff;box-shadow:none}#out .result-heading{font-size:16px;color:var(--fg)}#out .result-stats{gap:8px}#out .result-stat{padding:12px;border:1px solid var(--line);border-radius:10px;background:#f8faff}#out .result-stat span{font-size:12px;color:var(--muted)}#out .result-stat strong{font-size:17px;color:var(--fg)}#out .result-note{color:var(--muted)}#out a.dl{background:#2457c5;color:#fff;border-radius:10px;font-size:15px}#out button.retry{background:#fff;color:#34425a;border-color:var(--line);border-radius:10px}#out .result-actions{display:grid;grid-template-columns:1fr;gap:9px;margin-top:14px}#out .result-actions .dl{width:100%;box-sizing:border-box}#out .result-actions button{width:100%;min-height:44px}#out .result-card{scroll-margin-top:20px}
 .trust-strip{max-width:640px;margin:13px auto 0;gap:8px}.trust-item{justify-content:center;padding:10px 8px;border:0;border-radius:9px;background:transparent;color:#526078;font-size:12px}.trust-item span{color:#167746}.privacy-note{max-width:640px;margin:10px auto 0;color:#647187;font-size:12px;text-align:center}
 .content{margin-top:42px}.content>section{margin-bottom:16px;padding:22px;border:1px solid var(--line);border-radius:16px;background:#fff}.content>section>h2:first-child{margin-top:0}h2{font-size:clamp(20px,3vw,25px);color:var(--fg);letter-spacing:-.025em}h3{color:var(--fg)}p,li{color:var(--muted);font-size:15px;line-height:1.7}.steps{padding-left:22px}.steps strong{color:var(--fg)}
 .target-links{gap:8px}.target-links a{min-height:38px;padding:8px 12px;border:1px solid var(--line);border-radius:9px;background:#fff;color:#244b9e;font-size:13px}.target-links a:hover{border-color:#9db5e8;background:#f4f7ff;color:#173d8c}
@@ -382,12 +382,14 @@ if(location.hash==="#tool"){window.addEventListener("load",function(){setTimeout
 try{pdfjsLib.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"}catch(e){}
 function fmt(b){return b>=1048576?(b/1048576).toFixed(2)+" MB":Math.round(b/1024)+" KB"}
 function say(h){$("out").innerHTML=h}
+function track(name,params){if(typeof window.gtag==="function"){window.gtag("event",name,params||{})}}
+function clearPreviousResult(){if(activeObjectUrl){URL.revokeObjectURL(activeObjectUrl);activeObjectUrl=null}say("");progress(null)}
 function progress(p){var b=$("bar");b.style.display=p==null?"none":"block";if(p!=null)b.firstElementChild.style.width=Math.max(0,Math.min(100,Math.round(p*100)))+"%"}
 function setFile(f){
  if(!f)return;
  if(f.type!=="application/pdf"&&!/\.pdf$/i.test(f.name)){file=null;$("go").disabled=true;$("fname").textContent="";$("fsize").textContent="";$("file").value="";say('<span class="err">That is not a PDF.</span>');return}
  if(f.size===0){file=null;$("go").disabled=true;$("fname").textContent="";$("fsize").textContent="";say('<span class="err">The selected file is empty.</span>');return}
- file=f;$("fname").textContent=f.name;$("fsize").textContent=fmt(f.size);$("go").disabled=false;say("")
+ clearPreviousResult();file=f;$("fname").textContent=f.name;$("fsize").textContent=fmt(f.size);$("go").disabled=false;track("pdf_file_selected",{file_size_kb:Math.round(f.size/1024)})
 }
 $("file").addEventListener("change",function(e){setFile(e.target.files[0])});
 var drop=$("drop");
@@ -469,9 +471,11 @@ function showResult(result,target,originalSize,note,sourceFile){
  stat("Size reduction",(originalSize>result.size?percent.toFixed(1):"0.0")+"%");stat("Target",(target/1024).toFixed(0)+" KB maximum");card.appendChild(stats);
  var detail=document.createElement("p");detail.className="result-note";detail.textContent=under?(note||"The output is within your selected size target. Open the downloaded file and check that all text, signatures and details remain readable."):(note||"The output is larger than your selected target. Do not submit it where the size limit is strict.");card.appendChild(detail);
  activeObjectUrl=URL.createObjectURL(result);var name=sourceFile.name.replace(/\.pdf$/i,"").replace(/[\\/:"*?<>|]/g,"_")+"-compressed.pdf";
- var link=document.createElement("a");link.className="dl";link.href=activeObjectUrl;link.download=name;link.textContent="Download compressed PDF";card.appendChild(link);
- if(!under){var retry=document.createElement("button");retry.type="button";retry.className="retry";retry.textContent="Try a larger target ("+(Math.ceil(result.size/1024)+10)+" KB)";retry.addEventListener("click",function(){$("kb").value=Math.min(100000,Math.ceil(result.size/1024)+10);$("kb").focus();say('<span class="warn">Target updated. Click Compress PDF to try again.</span>');});card.appendChild(retry)}
- say("");$("out").appendChild(card);
+ var actions=document.createElement("div");actions.className="result-actions";
+ var link=document.createElement("a");link.className="dl";link.href=activeObjectUrl;link.download=name;link.textContent="Download compressed PDF";link.addEventListener("click",function(){track("pdf_download_click",{target_met:under,output_size_kb:Math.round(result.size/1024)})});actions.appendChild(link);
+ if(!under){var retry=document.createElement("button");retry.type="button";retry.className="retry";retry.textContent="Try a larger target ("+(Math.ceil(result.size/1024)+10)+" KB)";retry.addEventListener("click",function(){$("kb").value=Math.min(100000,Math.ceil(result.size/1024)+10);updatePresets();$("kb").focus();say('<span class="warn">Target updated. Click Compress PDF to try again.</span>');});actions.appendChild(retry)}
+ var another=document.createElement("button");another.type="button";another.className="retry";another.textContent="Choose another PDF";another.addEventListener("click",function(){clearPreviousResult();file=null;$("file").value="";$("fname").textContent="Drop your PDF here or browse";$("fsize").textContent="PDF files up to 100 MB · Your file stays on your device";$("go").disabled=true;$("file").click()});actions.appendChild(another);card.appendChild(actions);
+ say("");$("out").appendChild(card);card.setAttribute("tabindex","-1");card.focus({preventScroll:true});track("pdf_compression_complete",{target_met:under,input_size_kb:Math.round(originalSize/1024),output_size_kb:Math.round(result.size/1024),target_size_kb:Math.round(target/1024)})
 }
 async function run(){
  if(busy||!file)return;
@@ -484,7 +488,7 @@ async function run(){
   say('<span class="err">This file is larger than the 100 MB browser-processing limit. Please use a smaller PDF.</span>');return;
  }
  busy=true;$("go").disabled=true;$("file").disabled=true;$("kb").disabled=true;
- say("Validating PDF…");progress(.02);
+ track("pdf_compression_start",{input_size_kb:Math.round(file.size/1024),target_size_kb:kb});say("Validating PDF…");progress(.02);
  try{
   var bytes=await file.arrayBuffer();
   var signature=new Uint8Array(bytes,0,Math.min(bytes.byteLength,5));
@@ -534,7 +538,7 @@ async function run(){
   else if(err.message==="too-many-pages")message="This PDF has more than 150 pages, which exceeds the current browser-processing limit.";
   else if(err.message==="canvas-unavailable")message="Your browser could not create a canvas for this PDF page.";
   else if(err.message==="compression-failed")message="Compression could not create a valid output. Try a different PDF.";
-  say('<span class="err"></span>');
+  track("pdf_compression_error",{reason:err&&err.message?String(err.message).slice(0,40):"unknown"});
   $("out").textContent=message;
  }finally{
   progress(null);busy=false;$("go").disabled=!file;$("file").disabled=false;$("kb").disabled=false;
