@@ -27,12 +27,18 @@
     window.dataLayer = window.dataLayer || [];
     window.gtag = function () { window.dataLayer.push(arguments); };
     window.gtag("consent", "default", {
-      analytics_storage: "granted",
+      analytics_storage: "denied",
       ad_storage: "denied",
       ad_user_data: "denied",
       ad_personalization: "denied",
       functionality_storage: "granted",
       security_storage: "granted"
+    });
+    window.gtag("consent", "update", {
+      analytics_storage: "granted",
+      ad_storage: "denied",
+      ad_user_data: "denied",
+      ad_personalization: "denied"
     });
     window.gtag("js", new Date());
     window.gtag("config", GA_ID, { anonymize_ip: true });
@@ -84,7 +90,6 @@
     actions.append(reject, manage, accept);
     banner.append(heading, copy, policy, actions, prefs);
     document.body.appendChild(banner);
-    reject.focus({ preventScroll: true });
   }
   function installStyles() {
     var style = el("style");
