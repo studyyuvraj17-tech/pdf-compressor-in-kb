@@ -21,8 +21,26 @@
   };
   var t = words[lang] || words.en;
   function el(tag, text) { var n = document.createElement(tag); if (text) n.textContent = text; return n; }
+  function updateAnalyticsConsent(granted) {
+    if (typeof window.gtag === "function") {
+      window.gtag("consent", "update", {
+        analytics_storage: granted ? "granted" : "denied",
+        ad_storage: "denied",
+        ad_user_data: "denied",
+        ad_personalization: "denied"
+      });
+    }
+  }
+  function clearAnalyticsCookies() {
+    var names = document.cookie ? document.cookie.split(";").map(function (part) { return part.split("=")[0].trim(); }) : [];
+    names.filter(function (name) { return /^(_ga|_gid|_gat|_gac_|_gcl_)/.test(name); }).forEach(function (name) {
+      document.cookie = name + "=; Max-Age=0; path=/; SameSite=Lax";
+      document.cookie = name + "=; Max-Age=0; path=/; domain=" + location.hostname + "; SameSite=Lax";
+      if (location.hostname.indexOf(".") !== -1) document.cookie = name + "=; Max-Age=0; path=/; domain=." + location.hostname.split(".").slice(-2).join(".") + "; SameSite=Lax";
+    });
+  }
   function loadAnalytics() {
-    if (window.__pdfkbAnalyticsLoaded) return;
+    if (window.__pdfkbAnalyticsLoaded) { updateAnalyticsConsent(true); return; }
     window.__pdfkbAnalyticsLoaded = true;
     window.dataLayer = window.dataLayer || [];
     window.gtag = function () { window.dataLayer.push(arguments); };
@@ -34,12 +52,7 @@
       functionality_storage: "granted",
       security_storage: "granted"
     });
-    window.gtag("consent", "update", {
-      analytics_storage: "granted",
-      ad_storage: "denied",
-      ad_user_data: "denied",
-      ad_personalization: "denied"
-    });
+    updateAnalyticsConsent(true);
     window.gtag("js", new Date());
     window.gtag("config", GA_ID, { anonymize_ip: true });
     var s = document.createElement("script");
@@ -52,6 +65,10 @@
     choice = value;
     try { localStorage.setItem(KEY, value); } catch (e) {}
     if (value === "accepted") loadAnalytics();
+    else {
+      updateAnalyticsConsent(false);
+      clearAnalyticsCookies();
+    }
     renderSettingsButton();
     removeBanner();
   }
