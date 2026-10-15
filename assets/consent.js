@@ -116,7 +116,7 @@
   function start() {
     var siteDesign = document.createElement("link");
     siteDesign.rel = "stylesheet";
-    siteDesign.href = "/assets/site-system.css?v=1";
+    siteDesign.href = "/assets/site-system.css?v=2";
     document.head.appendChild(siteDesign);
     installStyles();
     if (choice === "accepted") loadAnalytics();
