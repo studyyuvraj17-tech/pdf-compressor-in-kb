@@ -275,3 +275,128 @@ html[dir="rtl"] main:has(> .site-brand-logo) .steps,
     padding: 8px 6px !important;
   }
 }
+
+
+/* Canonical homepage compression-tool layout for every translated landing page.
+   Override legacy inline/embedded page styles so only copy and text direction vary. */
+main:has(> .site-brand-logo) {
+  width: min(100% - 32px, 900px) !important;
+  max-width: 900px !important;
+  margin-inline: auto !important;
+}
+main:has(> .site-brand-logo) .tool {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: 660px !important;
+  margin: 0 auto !important;
+  padding: 18px !important;
+  border: 1px solid var(--site-line) !important;
+  border-radius: 20px !important;
+  background: #fff !important;
+  box-shadow: var(--site-shadow) !important;
+}
+main:has(> .site-brand-logo) #drop {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  min-height: 168px !important;
+  padding: 24px 18px !important;
+  border: 1.5px dashed #aabbd8 !important;
+  border-radius: 14px !important;
+  background: var(--site-surface-soft) !important;
+  text-align: center !important;
+}
+main:has(> .site-brand-logo) #drop b {
+  color: var(--site-ink) !important;
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  overflow-wrap: anywhere !important;
+}
+main:has(> .site-brand-logo) #drop small {
+  color: var(--site-muted) !important;
+  font-size: 13px !important;
+}
+main:has(> .site-brand-logo) .row {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto !important;
+  gap: 10px !important;
+  align-items: center !important;
+  margin-top: 12px !important;
+}
+main:has(> .site-brand-logo) .num {
+  box-sizing: border-box !important;
+  min-width: 0 !important;
+  min-height: 48px !important;
+  padding: 0 12px !important;
+  border: 1px solid var(--site-line) !important;
+  border-radius: 11px !important;
+  background: #fff !important;
+}
+main:has(> .site-brand-logo) .num input {
+  min-width: 0 !important;
+  padding: 11px 0 !important;
+  color: var(--site-ink) !important;
+  font-size: 15px !important;
+}
+main:has(> .site-brand-logo) .chips {
+  display: grid !important;
+  grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+  gap: 8px !important;
+  margin-top: 10px !important;
+}
+main:has(> .site-brand-logo) .chips button,
+main:has(> .site-brand-logo) .chips a {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box !important;
+  min-width: 0 !important;
+  min-height: 42px !important;
+  padding: 8px 6px !important;
+  border: 1px solid var(--site-line) !important;
+  border-radius: 10px !important;
+  background: #fff !important;
+  color: #34425a !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  text-align: center !important;
+  text-decoration: none !important;
+  white-space: normal !important;
+}
+main:has(> .site-brand-logo) #go,
+main:has(> .site-brand-logo) button.primary {
+  min-height: 46px !important;
+  padding: 11px 18px !important;
+  border: 1px solid var(--site-primary) !important;
+  border-radius: 11px !important;
+  background: var(--site-primary) !important;
+  color: #fff !important;
+  font-size: 14px !important;
+  font-weight: 750 !important;
+}
+main:has(> .site-brand-logo) #go:disabled {
+  background: #a9bce8 !important;
+  border-color: #a9bce8 !important;
+}
+@media (max-width: 650px) {
+  main:has(> .site-brand-logo) .tool {
+    max-width: 660px !important;
+    padding: 14px !important;
+    border-radius: 16px !important;
+  }
+  main:has(> .site-brand-logo) #drop {
+    min-height: 148px !important;
+    padding: 20px 12px !important;
+  }
+  main:has(> .site-brand-logo) .chips {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+  main:has(> .site-brand-logo) .row {
+    grid-template-columns: 1fr !important;
+  }
+  main:has(> .site-brand-logo) .row button {
+    width: 100% !important;
+  }
+}
