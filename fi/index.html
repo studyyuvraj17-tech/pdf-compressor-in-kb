@@ -12,8 +12,8 @@
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Pakkaa PDF verkossa – Pienennä PDF-tiedoston kokoa ilmaiseksi</title>
-<meta name="description" content="Pakkaa PDF-tiedosto verkossa ilmaiseksi. Pienennä PDF-tiedoston kokoa tiettyyn kokoon, kuten 100 KB, 200 KB, 500 KB tai 1 MB.">
+<title>Pakkaa PDF pienemmäksi verkossa – Ilmainen PDF-pakkaus</title>
+<meta name="description" content="Pakkaa PDF ilmaiseksi verkossa ja pienennä tiedosto haluttuun kokoon, kuten 100 KB, 200 KB tai 500 KB. Käsittely tapahtuu selaimessasi.">
 <link rel="canonical" href="https://www.pdfcompressinkb.com/fi/">
 <link rel="alternate" hreflang="fi" href="https://www.pdfcompressinkb.com/fi/">
 <link rel="alternate" hreflang="en" href="https://www.pdfcompressinkb.com/">
@@ -66,11 +66,11 @@
 <meta name="theme-color" content="#0b0b0b">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.pdfcompressinkb.com/fi/">
-<meta property="og:title" content="Pakkaa PDF verkossa – Pienennä PDF-tiedoston kokoa ilmaiseksi">
-<meta property="og:description" content="Pienennä PDF-tiedoston kokoa esimerkiksi 100 KB:hen, 200 KB:hen, 500 KB:hen tai 1 MB:hen.">
+<meta property="og:title" content="Pakkaa PDF pienemmäksi verkossa – Ilmainen PDF-pakkaus">
+<meta property="og:description" content="Pakkaa PDF ilmaiseksi haluttuun kokoon. Valitse tavoitekoko ja käsittele tiedosto suoraan selaimessasi.">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Pakkaa PDF verkossa – Pienennä PDF-tiedoston kokoa ilmaiseksi">
-<meta name="twitter:description" content="Pakkaa PDF-tiedosto tiettyyn kokoon, kuten 100 KB, 200 KB, 500 KB tai 1 MB.">
+<meta name="twitter:title" content="Pakkaa PDF pienemmäksi verkossa – Ilmainen PDF-pakkaus">
+<meta name="twitter:description" content="Pakkaa PDF ilmaiseksi haluttuun kokoon. Valitse tavoitekoko ja käsittele tiedosto selaimessasi.">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 <!-- SEO structured data -->
 <script type="application/ld+json">
@@ -245,8 +245,8 @@ html{max-width:100%;overflow-x:hidden}body{overflow-wrap:anywhere}img,svg,video,
 </header>
 
 <section class="hero" aria-labelledby="page-title">
-<h1 id="page-title">Pakkaa PDF verkossa</h1>
-<p class="lead">Pienennä PDF-tiedoston kokoa esimerkiksi 100 KB:hen, 200 KB:hen, 500 KB:hen tai 1 MB:hen. Kaikki toimii selaimessasi.</p>
+<h1 id="page-title">Pakkaa PDF pienemmäksi verkossa</h1>
+<p class="lead">Pienennä PDF-tiedosto haluttuun kokoon, esimerkiksi 100 KB:hen, 200 KB:hen tai 500 KB:hen. Ilmainen PDF-pakkaus toimii suoraan selaimessasi ilman ohjelman asentamista.</p>
 </section>
 
 <div class="tool">
@@ -283,10 +283,10 @@ html{max-width:100%;overflow-x:hidden}body{overflow-wrap:anywhere}img,svg,video,
 </section>
 
 <section aria-labelledby="why-title">
-<h2 id="why-title">Miksi käyttää tätä PDF-pakkaustyökalua?</h2>
-<h3>Valitse tarkka tiedostokoko</h3><p>Aseta tavoitekoko kilotavuina yleisen pakkaustason sijaan. Tämä on hyödyllistä, kun verkkopalvelu tai lomake asettaa tiedostokokorajan.</p>
-<h3>Helppo käyttää selaimessa</h3><p>Valitse PDF, aseta tavoitekoko, pakkaa tiedosto ja lataa tulos asentamatta ohjelmistoa.</p>
-<h3>Säilytä laatu mahdollisimman hyvin</h3><p>Työkalu yrittää ensin tallentaa PDF:n uudelleen ilman laadun heikkenemistä. Voimakkaampi pakkaus voi tarvittaessa muuntaa sivut kuviksi.</p>
+<h2 id="why-title">Miksi pakata PDF-tiedosto pienemmäksi?</h2>
+<h3>Pakkaa PDF tiettyyn kokoon</h3><p>Aseta tavoitekoko kilotavuina sen sijaan, että valitsisit vain yleisen pakkaustason. Tämä auttaa, kun sähköinen lomake, hakemus tai verkkopalvelu rajoittaa PDF-tiedoston kokoa.</p>
+<h3>Ilmainen PDF-pakkaus verkossa</h3><p>Valitse PDF, aseta tavoitekoko ja lataa valmis tiedosto. Erillistä ohjelmaa ei tarvitse asentaa.</p>
+<h3>Huomioi kuvanlaatu ja tekstin valittavuus</h3><p>Työkalu yrittää ensin pienentää tiedostoa ilman kuvasivuille muuntamista. Jos tarvitaan voimakkaampaa pakkausta, sivut voidaan muuntaa kuviksi, jolloin tekstin valitseminen ja linkit eivät välttämättä säily. Tarkista valmis PDF ennen lähettämistä.</p>
 </section>
 
 <section aria-labelledby="faq-title">
@@ -313,7 +313,7 @@ html{max-width:100%;overflow-x:hidden}body{overflow-wrap:anywhere}img,svg,video,
 (function(){
 var $=function(id){return document.getElementById(id)},file=null,busy=false;
 var params=new URLSearchParams(location.search),requested=parseInt(params.get("size"),10);
-if(Number.isFinite(requested)&&requested>=10){$("kb").value=Math.min(requested,100000);$("page-title").textContent="Pakkaa PDF to "+requested+" KB Online"}
+if(Number.isFinite(requested)&&requested>=10){$("kb").value=Math.min(requested,100000);$("page-title").textContent="Pakkaa PDF "+requested+" KB:n kokoon"}
 try{pdfjsLib.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"}catch(e){}
 function fmt(b){return b>=1048576?(b/1048576).toFixed(2)+" MB":Math.round(b/1024)+" KB"}
 function say(h){$("out").innerHTML=h}
