@@ -114,6 +114,10 @@
     document.head.appendChild(style);
   }
   function start() {
+    var siteDesign = document.createElement("link");
+    siteDesign.rel = "stylesheet";
+    siteDesign.href = "/assets/site-system.css?v=1";
+    document.head.appendChild(siteDesign);
     installStyles();
     if (choice === "accepted") loadAnalytics();
     renderSettingsButton();
