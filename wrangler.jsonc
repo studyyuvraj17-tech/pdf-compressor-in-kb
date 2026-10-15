@@ -1,0 +1,9 @@
+{
+  "$schema": "https://schema.ni.cloudflare.com/wrangler-configuration.schema.json",
+  "name": "pdf-compressor-in-kb",
+  "compatibility_date": "2026-10-15",
+  "assets": {
+    "directory": "."
+  },
+  "previews": {}
+}
