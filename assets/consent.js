@@ -116,7 +116,8 @@
     manage.addEventListener("click", function () { prefs.hidden = !prefs.hidden; manage.setAttribute("aria-expanded", String(!prefs.hidden)); if (!prefs.hidden) checkbox.focus(); });
     actions.append(reject, accept);
     banner.append(heading, copy, policy, actions, manage, prefs);
-    var footer = document.querySelector(".site-footer, footer");\n    (footer || document.body).appendChild(banner);
+    var footer = document.querySelector(".site-footer, footer");
+    (footer || document.body).appendChild(banner);
   }
   function installStyles() {
     var style = el("style");
