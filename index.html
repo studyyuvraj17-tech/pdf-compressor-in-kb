@@ -367,15 +367,39 @@ details{border-color:var(--line)}summary{color:var(--fg)}footer,.site-footer{bor
 <footer class="site-footer"><strong>PDFCompressInKB</strong><br><a href="/">Home</a> <a href="/about/">About</a> <a href="/contact/">Contact</a> <a href="/how-it-works/">How it works</a> <a href="/privacy-policy/">Privacy Policy</a> <a href="/terms/">Terms</a> <a href="/disclaimer/">Disclaimer</a><br><span>Free browser-based PDF compression to a target KB or MB size.</span></footer>
 </main>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+
 <script>
 (function(){
 var $=function(id){return document.getElementById(id)},file=null,busy=false;
 var params=new URLSearchParams(location.search),requested=parseInt(params.get("size"),10);
 if(Number.isFinite(requested)&&requested>=10){$("kb").value=Math.min(requested,100000);$("page-title").textContent="Compress PDF to "+requested+" KB Online"}
 if(location.hash==="#tool"){window.addEventListener("load",function(){setTimeout(function(){$("tool").scrollIntoView({behavior:"smooth",block:"start"});$("drop").focus({preventScroll:true})},80)})}
-try{pdfjsLib.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"}catch(e){}
+var pdfLibrariesPromise=null;
+function loadScript(src){
+ return new Promise(function(resolve,reject){
+  var script=document.createElement("script");
+  script.src=src;
+  script.async=true;
+  script.onload=resolve;
+  script.onerror=function(){reject(new Error("libraries-unavailable"))};
+  document.head.appendChild(script);
+ });
+}
+function loadPdfLibraries(){
+ if(!pdfLibrariesPromise){
+  pdfLibrariesPromise=Promise.all([
+   loadScript("https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"),
+   loadScript("https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js")
+  ]).then(function(){
+   if(!window.pdfjsLib||!window.PDFLib)throw new Error("libraries-unavailable");
+   window.pdfjsLib.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+  }).catch(function(error){
+   pdfLibrariesPromise=null;
+   throw error;
+  });
+ }
+ return pdfLibrariesPromise;
+}
 function fmt(b){return b>=1048576?(b/1048576).toFixed(2)+" MB":Math.round(b/1024)+" KB"}
 function say(h){$("out").innerHTML=h}
 function track(name,params){if(typeof window.gtag==="function"){window.gtag("event",name,params||{})}}
@@ -495,6 +519,8 @@ async function run(){
    showResult(file,target,file.size,"No compression was needed because the original file is already within your selected target.",file);
    return;
   }
+  say("Loading PDF tools…");progress(.05);
+  await loadPdfLibraries();
   var result=null,note="";
   try{
    var doc=await PDFLib.PDFDocument.load(bytes,{updateMetadata:false});
@@ -529,7 +555,8 @@ async function run(){
  }catch(err){
   console.error(err);
   var message="Could not process this PDF. Please try another file.";
-  if(err.message==="invalid-pdf")message="This file does not appear to be a valid PDF, or the PDF is damaged.";
+  if(err.message==="libraries-unavailable")message="The PDF tools could not be loaded. Check your internet connection and try again.";
+  else if(err.message==="invalid-pdf")message="This file does not appear to be a valid PDF, or the PDF is damaged.";
   else if(err.message==="encrypted-pdf")message="This PDF is password-protected. Remove its password protection and try again.";
   else if(err.message==="too-many-pages")message="This PDF has more than 150 pages, which exceeds the current browser-processing limit.";
   else if(err.message==="canvas-unavailable")message="Your browser could not create a canvas for this PDF page.";
