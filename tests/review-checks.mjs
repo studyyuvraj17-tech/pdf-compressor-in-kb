@@ -126,11 +126,13 @@ test("PDF processing libraries are lazy-loaded only when compression is requeste
 });
 
 test("homepage avoids duplicate render-blocking design stylesheets", async () => {
-  assert.doesNotMatch(html, /site-design-system\\.css/, "homepage should not load the legacy duplicate design system");
-  assert.match(html, /href="\\/assets\\/site-system\\.css\\?v=1"/, "homepage should keep the current shared stylesheet");
-  assert.match(html, /box-sizing:border-box/, "critical box sizing should remain inline");
-  assert.match(html, /body\\{margin:0/, "critical body reset should remain inline");
+  assert.equal(html.includes("site-design-system.css"), false,
+    "homepage should not load the legacy duplicate design system");
+  assert.ok(html.includes('href="/assets/site-system.css?v=1"'),
+    "homepage should keep the current shared stylesheet");
+  assert.ok(html.includes("box-sizing:border-box"), "critical box sizing should remain inline");
+  assert.ok(html.includes("body{margin:0"), "critical body reset should remain inline");
   const consent = await readFile(new URL("../assets/consent.js", import.meta.url), "utf8");
-  assert.match(consent, /if \\(!document\\.querySelector\\('link\\[rel="stylesheet"\\]\\[href\\^="\\/assets\\/site-system\\.css"\\]'\\)\\)/,
+  assert.ok(consent.includes('if (!document.querySelector(\'link[rel="stylesheet"][href^="/assets/site-system.css"]\'))'),
     "consent script should not inject a second copy of the shared stylesheet");
 });
