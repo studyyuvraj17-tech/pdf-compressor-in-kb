@@ -119,8 +119,8 @@ test("PDF processing libraries are lazy-loaded only when compression is requeste
     "PDF.js should not be parser-loaded during the initial page load");
   assert.equal(html.includes('src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"'), false,
     "pdf-lib should not be parser-loaded during the initial page load");
-  assert.match(html, /function loadPdfLibraries\\(/);
-  assert.match(html, /await loadPdfLibraries\\(\\)/);
-  assert.match(html, /GlobalWorkerOptions\\.workerSrc/);
-  assert.match(html, /libraries-unavailable/);
+  assert.ok(html.includes("function loadPdfLibraries()"));
+  assert.ok(html.includes("await loadPdfLibraries()"));
+  assert.ok(html.includes("GlobalWorkerOptions.workerSrc"));
+  assert.ok(html.includes("libraries-unavailable"));
 });
