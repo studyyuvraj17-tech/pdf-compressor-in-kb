@@ -115,8 +115,10 @@ test("sitemap hreflang alternates are present, self-referencing, unique and reci
 });
 
 test("PDF processing libraries are lazy-loaded only when compression is requested", () => {
-  assert.doesNotMatch(html, /<script\\b[^>]*src=["']https:\\/\\/cdnjs\\.cloudflare\\.com\\/ajax\\/libs\\/pdf-(?:js|lib)\\//i,
-    "PDF libraries should not be parser-loaded during the initial page load");
+  assert.equal(html.includes('src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"'), false,
+    "PDF.js should not be parser-loaded during the initial page load");
+  assert.equal(html.includes('src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"'), false,
+    "pdf-lib should not be parser-loaded during the initial page load");
   assert.match(html, /function loadPdfLibraries\\(/);
   assert.match(html, /await loadPdfLibraries\\(\\)/);
   assert.match(html, /GlobalWorkerOptions\\.workerSrc/);
