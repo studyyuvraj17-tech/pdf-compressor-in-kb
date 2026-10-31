@@ -125,11 +125,11 @@ test("PDF processing libraries are lazy-loaded only when compression is requeste
   assert.ok(html.includes("libraries-unavailable"));
 });
 
-test("homepage avoids duplicate render-blocking design stylesheets", async () => {
-  assert.equal(html.includes("site-design-system.css"), false,
-    "homepage should not load the legacy duplicate design system");
+test("homepage retains the site-wide design stylesheet and shared homepage styles", async () => {
+  assert.ok(html.includes('href="/assets/site-design-system.css?v=3"'),
+    "homepage should retain the site-wide design stylesheet");
   assert.ok(html.includes('href="/assets/site-system.css?v=1"'),
-    "homepage should keep the current shared stylesheet");
+    "homepage should keep the current shared homepage stylesheet");
   assert.ok(html.includes("box-sizing:border-box"), "critical box sizing should remain inline");
   assert.ok(html.includes("body{margin:0"), "critical body reset should remain inline");
   const consent = await readFile(new URL("../assets/consent.js", import.meta.url), "utf8");
