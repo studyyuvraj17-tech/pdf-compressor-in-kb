@@ -291,7 +291,7 @@ main:has(> .site-brand-logo) .tool {
   margin: 0 auto !important;
   padding: 18px !important;
   border: 1px solid var(--site-line) !important;
-  border-radius: 20px !important;
+  border-radius: 12px !important;
   background: #fff !important;
   box-shadow: var(--site-shadow) !important;
 }
@@ -304,7 +304,7 @@ main:has(> .site-brand-logo) #drop {
   min-height: 168px !important;
   padding: 24px 18px !important;
   border: 1.5px dashed #aabbd8 !important;
-  border-radius: 14px !important;
+  border-radius: 8px !important;
   background: var(--site-surface-soft) !important;
   text-align: center !important;
 }
@@ -331,7 +331,7 @@ main:has(> .site-brand-logo) .num {
   min-height: 48px !important;
   padding: 0 12px !important;
   border: 1px solid var(--site-line) !important;
-  border-radius: 11px !important;
+  border-radius: 8px !important;
   background: #fff !important;
 }
 main:has(> .site-brand-logo) .num input {
@@ -356,7 +356,7 @@ main:has(> .site-brand-logo) .chips a {
   min-height: 42px !important;
   padding: 8px 6px !important;
   border: 1px solid var(--site-line) !important;
-  border-radius: 10px !important;
+  border-radius: 6px !important;
   background: #fff !important;
   color: #34425a !important;
   font-size: 13px !important;
@@ -384,7 +384,7 @@ main:has(> .site-brand-logo) #go:disabled {
   main:has(> .site-brand-logo) .tool {
     max-width: 660px !important;
     padding: 14px !important;
-    border-radius: 16px !important;
+    border-radius: 12px !important;
   }
   main:has(> .site-brand-logo) #drop {
     min-height: 148px !important;
