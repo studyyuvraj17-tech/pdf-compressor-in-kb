@@ -132,7 +132,9 @@
     var siteDesign = document.createElement("link");
     siteDesign.rel = "stylesheet";
     siteDesign.href = "/assets/site-system.css?v=3";
-    document.head.appendChild(siteDesign);
+    if (!document.querySelector('link[rel="stylesheet"][href^="/assets/site-system.css"]')) {
+      document.head.appendChild(siteDesign);
+    }
     installStyles();
     if (choice === "accepted") loadAnalytics();
     renderSettingsButton();
