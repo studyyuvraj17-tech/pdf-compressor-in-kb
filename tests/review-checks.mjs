@@ -113,3 +113,12 @@ test("sitemap hreflang alternates are present, self-referencing, unique and reci
     }
   }
 });
+
+test("PDF processing libraries are lazy-loaded only when compression is requested", () => {
+  assert.doesNotMatch(html, /<script\\b[^>]*src=["']https:\\/\\/cdnjs\\.cloudflare\\.com\\/ajax\\/libs\\/pdf-(?:js|lib)\\//i,
+    "PDF libraries should not be parser-loaded during the initial page load");
+  assert.match(html, /function loadPdfLibraries\\(/);
+  assert.match(html, /await loadPdfLibraries\\(\\)/);
+  assert.match(html, /GlobalWorkerOptions\\.workerSrc/);
+  assert.match(html, /libraries-unavailable/);
+});
