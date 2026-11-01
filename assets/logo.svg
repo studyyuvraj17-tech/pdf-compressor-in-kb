@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 200" role="img" aria-labelledby="title">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 120" role="img" aria-labelledby="title">
   <title id="title">PDFCompressInKB</title>
   <defs>
     <linearGradient id="brandBlue" x1="0" y1="0" x2="1" y2="1">
@@ -6,9 +6,8 @@
       <stop offset="1" stop-color="#2850e8"/>
     </linearGradient>
   </defs>
-  <rect x="20" y="57" width="86" height="86" rx="24" fill="url(#brandBlue)"/>
-  <path d="M48 77h25l15 15v39H48a4 4 0 0 1-4-4V81a4 4 0 0 1 4-4Z" fill="none" stroke="#fff" stroke-width="5.5" stroke-linejoin="round"/>
-  <path d="M73 77v15h15M53 104h27M53 119h27" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-  <text x="126" y="124" font-family="Arial,Helvetica,sans-serif" font-size="46" font-weight="800" letter-spacing="-1.7" fill="#101b31">PDFCompressIn</text>
-  <text x="489" y="124" font-family="Arial,Helvetica,sans-serif" font-size="46" font-weight="800" letter-spacing="-1.7" fill="#315cf2">KB</text>
+  <rect x="4" y="12" width="90" height="90" rx="25" fill="url(#brandBlue)"/>
+  <path d="M31 31h27l17 17v38H31a4 4 0 0 1-4-4V35a4 4 0 0 1 4-4Z" fill="none" stroke="#fff" stroke-width="5.5" stroke-linejoin="round"/>
+  <path d="M58 31v17h17M37 61h34M37 76h34" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="112" y="79" font-family="Arial,Helvetica,sans-serif" font-size="52" font-weight="800" letter-spacing="-1.8" fill="#101b31">PDFCompressIn<tspan fill="#315cf2">KB</tspan></text>
 </svg>
