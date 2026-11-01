@@ -647,20 +647,26 @@ async function buildCandidate(pdf,scale,quality,onProgress){
  return new Blob([bytes],{type:"application/pdf"});
 }
 async function compressToTarget(pdf,target){
- var scales=[1.5,1.2,1,.7,.45];
- var qualities=[.85,.75,.65,.5,.35];
- var best=null,attempt=0,total=scales.length*qualities.length;
- for(var s=0;s<scales.length;s++){
-  for(var q=0;q<qualities.length;q++){
-   attempt++;
-   var candidate=await buildCandidate(pdf,scales[s],qualities[q],function(i,n){
-    progress(Math.min(.94,.08+.84*((attempt-1+i/n)/total)));
-   });
-   if(!best||candidate.size<best.size)best=candidate;
-   if(candidate.size<=target){
-    return {blob:candidate,fit:true,scale:scales[s],quality:qualities[q]};
-   }
-   if(candidate!==best)candidate=null;
+ // Try the clearest render settings first. Then move to smaller renders/quality.
+ // Stop once the target is met; keep only the best candidate to limit memory use.
+ var settings=[
+  [1.5,.88],[1.5,.78],[1.25,.82],[1.25,.72],
+  [1,.82],[1,.70],[.85,.72],[.70,.68],
+  [.55,.62],[.45,.55],[.35,.45]
+ ];
+ var best=null,attempt=0,total=settings.length;
+ for(var i=0;i<settings.length;i++){
+  attempt++;
+  var candidate=await buildCandidate(pdf,settings[i][0],settings[i][1],function(page,totalPages){
+   progress(Math.min(.94,.08+.84*((attempt-1+page/totalPages)/total)));
+  });
+  if(!best||candidate.size<best.size){
+   best=candidate;
+  }else{
+   candidate=null;
+  }
+  if(best.size<=target){
+   return {blob:best,fit:true,scale:settings[i][0],quality:settings[i][1]};
   }
  }
  return best?{blob:best,fit:false,scale:null,quality:null}:null;
