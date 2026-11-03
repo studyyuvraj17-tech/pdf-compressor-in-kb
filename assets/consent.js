@@ -148,7 +148,7 @@
     installStyles();
     if (choice === "accepted") loadAnalytics();
     renderSettingsButton();
-    // No intrusive first-visit banner; analytics remains off until a visitor opts in via the footer.
+    if (!choice) showBanner();
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start); else start();
 })();
