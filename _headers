@@ -218,3 +218,7 @@
   X-Robots-Tag: noindex, follow
 /compress-pdf-between-500kb-1mb/*
   X-Robots-Tag: noindex, follow
+/compress-pdf-between-20-500kb/
+  X-Robots-Tag: noindex, follow
+/compress-pdf-between-20-500kb/*
+  X-Robots-Tag: noindex, follow
