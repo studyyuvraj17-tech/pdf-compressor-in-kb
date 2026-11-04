@@ -88,32 +88,23 @@ test("robots.txt advertises the sitemap on the canonical host", async () => {
   assert.equal(new URL(sitemapUrl).origin, canonicalOrigin, "robots sitemap should use the canonical origin");
 });
 
-test("sitemap hreflang alternates are present, self-referencing, unique and reciprocal", async () => {
+test("sitemap contains only the maintained canonical English pages", async () => {
   const sitemap = await readFile(new URL("../sitemap.xml", import.meta.url), "utf8");
-  const entries = [...sitemap.matchAll(/<url>([\s\S]*?)<\/url>/g)].map(([, block]) => {
-    const loc = block.match(/<loc>([^<]+)<\/loc>/)?.[1];
-    const alternates = [...block.matchAll(/hreflang="([^"]+)" href="([^"]+)"/g)].map(([, lang, href]) => ({ lang, href }));
-    assert.ok(loc, "each sitemap entry should have a loc");
-    return { loc, alternates };
-  });
-  const byLoc = new Map(entries.map((entry) => [entry.loc, entry]));
-  assert.equal(byLoc.size, entries.length, "sitemap should not contain duplicate loc URLs");
-
-  for (const entry of entries) {
-    const languages = entry.alternates.map((alternate) => alternate.lang);
-    assert.equal(new Set(languages).size, languages.length, `duplicate hreflang on ${entry.loc}`);
-    assert.ok(entry.alternates.some((alternate) => alternate.href === entry.loc && alternate.lang !== "x-default"),
-      `each URL should have a self-referencing language alternate: ${entry.loc}`);
-
-    for (const alternate of entry.alternates) {
-      assert.ok(byLoc.has(alternate.href), `hreflang target must exist in sitemap: ${alternate.href}`);
-      const target = byLoc.get(alternate.href);
-      assert.ok(target.alternates.some((backlink) => backlink.href === entry.loc),
-        `hreflang relationship must be reciprocal: ${entry.loc} -> ${alternate.href}`);
-    }
-  }
+  const urls = [...sitemap.matchAll(/<loc>(https?:\\/\\/[^<]+)<\\/loc>/g)].map((m) => m[1]);
+  assert.deepEqual(urls, [
+    "https://www.pdfcompressinkb.com/",
+    "https://www.pdfcompressinkb.com/about/",
+    "https://www.pdfcompressinkb.com/contact/",
+    "https://www.pdfcompressinkb.com/how-it-works/",
+    "https://www.pdfcompressinkb.com/privacy-policy/",
+    "https://www.pdfcompressinkb.com/terms/",
+    "https://www.pdfcompressinkb.com/disclaimer/"
+  ]);
+  assert.ok(!sitemap.includes("hreflang="), "unreviewed translated pages should not be advertised as language alternates");
+  const cloudflareHeaders = await readFile(new URL("../_headers", import.meta.url), "utf8");
+  assert.match(cloudflareHeaders, /X-Robots-Tag: noindex, follow/);
+  assert.match(cloudflareHeaders, /\\/compress-pdf-between-20-500kb\\//);
 });
-
 test("PDF processing libraries are lazy-loaded only when compression is requested", () => {
   assert.equal(html.includes('src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"'), false,
     "PDF.js should not be parser-loaded during the initial page load");
