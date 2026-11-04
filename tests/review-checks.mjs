@@ -103,7 +103,7 @@ test("sitemap contains only the maintained canonical English pages", async () =>
   assert.ok(!sitemap.includes("hreflang="), "unreviewed translated pages should not be advertised as language alternates");
   const cloudflareHeaders = await readFile(new URL("../_headers", import.meta.url), "utf8");
   assert.match(cloudflareHeaders, /X-Robots-Tag: noindex, follow/);
-  assert.match(cloudflareHeaders, /\\/compress-pdf-between-20-500kb\\//);
+  assert.ok(cloudflareHeaders.includes("/compress-pdf-between-20-500kb/"));
 });
 test("PDF processing libraries are lazy-loaded only when compression is requested", () => {
   assert.equal(html.includes('src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"'), false,
