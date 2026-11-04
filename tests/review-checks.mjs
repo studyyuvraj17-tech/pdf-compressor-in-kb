@@ -54,7 +54,7 @@ test("canonical and sitemap metadata use the production host consistently", asyn
   const host = new URL(canonical).host;
   assert.equal(host, "www.pdfcompressinkb.com");
   const sitemap = await readFile(new URL("../sitemap.xml", import.meta.url), "utf8");
-  const urls = [...sitemap.matchAll(/<loc>(https?:\/\/[^<]+)<\/loc>/g)].map((m) => m[1]);
+  const urls = sitemap.split("<loc>").slice(1).map((part) => part.split("</loc>")[0]);
   assert.ok(urls.length > 0, "sitemap should contain URLs");
   assert.ok(urls.every((url) => new URL(url).host === host), "sitemap URLs should use the canonical host");
 });
