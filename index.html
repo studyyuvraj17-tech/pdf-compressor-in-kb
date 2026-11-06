@@ -682,7 +682,7 @@ function addPreview(card,result,sourceFile,method){
  var compare=makeEl("div","preview-compare");
  function pageSide(label,id,side){var box=makeEl("div","preview-page");box.appendChild(makeEl("h4","",label));var wrap=makeEl("div","preview-canvas-wrap");wrap.dataset.side=side;var canvas=makeEl("canvas");canvas.id=id;wrap.appendChild(canvas);box.appendChild(wrap);return box}
  compare.append(pageSide("Original PDF","preview-original","before"),pageSide("Compressed PDF","preview-compressed","after"));panel.appendChild(compare);
- card.appendChild(panel);renderPreview(result,sourceFile,method);
+ card.appendChild(panel);
 }
 function showResult(result,target,originalSize,note,sourceFile,method){
  if(activeObjectUrl){URL.revokeObjectURL(activeObjectUrl);activeObjectUrl=null}
@@ -709,7 +709,7 @@ function showResult(result,target,originalSize,note,sourceFile,method){
  }
  var adjust=document.createElement("button");adjust.type="button";adjust.className="retry";adjust.textContent="Adjust target size";adjust.addEventListener("click",function(){$("kb").disabled=false;$("kb").focus();$("kb").scrollIntoView({behavior:"smooth",block:"center"});});actions.appendChild(adjust);
  var another=document.createElement("button");another.type="button";another.className="retry";another.textContent="Choose another PDF";another.addEventListener("click",function(){clearPreviousResult();file=null;$("file").value="";$("fname").textContent="Drop your PDF here or browse";$("fsize").textContent="PDF files up to 100 MB · Your file stays on your device";$("go").disabled=true;$("file").click()});actions.appendChild(another);card.appendChild(actions);
- say("");$("out").appendChild(card);card.setAttribute("tabindex","-1");card.focus({preventScroll:true});track("pdf_compression_complete",{target_met:under,input_size_kb:Math.round(originalSize/1024),output_size_kb:Math.round(result.size/1024),target_size_kb:Math.round(target/1024)})
+ say("");$("out").appendChild(card);renderPreview(result,sourceFile,method||"lossless");card.setAttribute("tabindex","-1");card.focus({preventScroll:true});track("pdf_compression_complete",{target_met:under,input_size_kb:Math.round(originalSize/1024),output_size_kb:Math.round(result.size/1024),target_size_kb:Math.round(target/1024)})
 }
 async function run(){
  if(busy||!file)return;
