@@ -52,7 +52,7 @@ test("canonical and sitemap metadata use the production host consistently", asyn
   const canonical = html.match(/<link rel="canonical" href="([^"]+)"/i)?.[1];
   assert.ok(canonical, "homepage should declare a canonical URL");
   const host = new URL(canonical).host;
-  assert.equal(host, "www.pdfcompressinkb.com");
+  assert.equal(host, "pdfcompressinkb.com");
   const sitemap = await readFile(new URL("../sitemap.xml", import.meta.url), "utf8");
   const urls = sitemap.split("<loc>").slice(1).map((part) => part.split("</loc>")[0]);
   assert.ok(urls.length > 0, "sitemap should contain URLs");
@@ -92,14 +92,14 @@ test("sitemap contains only the maintained canonical English pages", async () =>
   const sitemap = await readFile(new URL("../sitemap.xml", import.meta.url), "utf8");
   const urls = sitemap.split("<loc>").slice(1).map((part) => part.split("</loc>")[0]);
   assert.deepEqual(urls, [
-    "https://www.pdfcompressinkb.com/",
-    "https://www.pdfcompressinkb.com/about/",
-    "https://www.pdfcompressinkb.com/contact/",
-    "https://www.pdfcompressinkb.com/how-it-works/",
-    "https://www.pdfcompressinkb.com/privacy-policy/",
-    "https://www.pdfcompressinkb.com/terms/",
-    "https://www.pdfcompressinkb.com/disclaimer/"
-  ]);
+    "/",
+    "/about/",
+    "/contact/",
+    "/how-it-works/",
+    "/privacy-policy/",
+    "/terms/",
+    "/disclaimer/"
+  ].map((path) => new URL(path, canonicalOrigin).href));
   assert.ok(!sitemap.includes("hreflang="), "unreviewed translated pages should not be advertised as language alternates");
   const cloudflareHeaders = await readFile(new URL("../_headers", import.meta.url), "utf8");
   assert.match(cloudflareHeaders, /X-Robots-Tag: noindex, follow/);
