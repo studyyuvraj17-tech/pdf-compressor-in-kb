@@ -17,6 +17,14 @@ test("inline JavaScript parses without executing browser code", () => {
   }
 });
 
+test("homepage exposes 300 KB and 400 KB presets and explains maximum-size targets", () => {
+  for (const size of [20, 50, 100, 200, 300, 400, 500, 1024]) {
+    assert.match(html, new RegExp(`data-kb="${size}"`), `expected ${size} KB preset`);
+  }
+  assert.match(html, /maximum file-size limits, not exact output sizes/i);
+  assert.match(html, /Within your size limit/);
+});
+
 test("target size has matching HTML and JavaScript bounds", () => {
   assert.match(html, /id="kb"[^>]*min="10"[^>]*max="100000"[^>]*step="1"/);
   assert.match(html, /kb<10\|\|kb>100000/);
