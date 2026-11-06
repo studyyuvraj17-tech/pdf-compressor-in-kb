@@ -89,6 +89,9 @@ test("robots.txt advertises the sitemap on the canonical host", async () => {
 });
 
 test("sitemap contains only the maintained canonical English pages", async () => {
+  const canonical = html.match(/<link rel="canonical" href="([^"]+)"/i)?.[1];
+  assert.ok(canonical, "homepage should declare a canonical URL");
+  const canonicalOrigin = new URL(canonical).origin;
   const sitemap = await readFile(new URL("../sitemap.xml", import.meta.url), "utf8");
   const urls = sitemap.split("<loc>").slice(1).map((part) => part.split("</loc>")[0]);
   assert.deepEqual(urls, [
