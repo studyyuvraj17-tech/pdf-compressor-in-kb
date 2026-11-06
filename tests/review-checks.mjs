@@ -125,3 +125,22 @@ test("homepage retains the site-wide design stylesheet and shared homepage style
   assert.ok(consent.includes('if (!document.querySelector(\'link[rel="stylesheet"][href^="/assets/site-system.css"]\'))'),
     "consent script should not inject a second copy of the shared stylesheet");
 });
+
+
+test("compression results provide a before-download PDF preview and method disclosure", () => {
+  assert.match(html, /function addPreview\(card,result,sourceFile,method\)/);
+  assert.match(html, /Image-based compression/);
+  assert.match(html, /Lossless/);
+  assert.match(html, /Text may be flattened into images/);
+  assert.match(html, /Preview before download/);
+  assert.match(html, /Download compressed PDF/);
+});
+
+test("preview is bounded to three pages and supports comparison and zoom", () => {
+  assert.match(html, /Math\.min\(3,docs\[0\]\.numPages,docs\[1\]\.numPages\)/);
+  assert.match(html, /previewState\.mode="both"/);
+  assert.match(html, /previewState\.zoom=Math\.min\(2\.2,previewState\.zoom\+\.15\)/);
+  assert.match(html, /previewState\.zoom=Math\.max\(\.65,previewState\.zoom-\.15\)/);
+  assert.match(html, /Try a softer quality/);
+  assert.match(html, /Adjust target size/);
+});
