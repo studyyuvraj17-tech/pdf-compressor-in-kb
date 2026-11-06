@@ -52,7 +52,7 @@ test("canonical and sitemap metadata use the production host consistently", asyn
   const canonical = html.match(/<link rel="canonical" href="([^"]+)"/i)?.[1];
   assert.ok(canonical, "homepage should declare a canonical URL");
   const host = new URL(canonical).host;
-  assert.equal(host, "www.pdfcompressinkb.com");
+  assert.equal(host, "pdfcompressinkb.com");
   const sitemap = await readFile(new URL("../sitemap.xml", import.meta.url), "utf8");
   const urls = sitemap.split("<loc>").slice(1).map((part) => part.split("</loc>")[0]);
   assert.ok(urls.length > 0, "sitemap should contain URLs");
@@ -89,21 +89,24 @@ test("robots.txt advertises the sitemap on the canonical host", async () => {
 });
 
 test("sitemap contains only the maintained canonical English pages", async () => {
+  const canonical = html.match(/<link rel="canonical" href="([^"]+)"/i)?.[1];
+  assert.ok(canonical, "homepage should declare a canonical URL");
+  const canonicalOrigin = new URL(canonical).origin;
   const sitemap = await readFile(new URL("../sitemap.xml", import.meta.url), "utf8");
   const urls = sitemap.split("<loc>").slice(1).map((part) => part.split("</loc>")[0]);
   assert.deepEqual(urls, [
-    "https://www.pdfcompressinkb.com/",
-    "https://www.pdfcompressinkb.com/about/",
-    "https://www.pdfcompressinkb.com/contact/",
-    "https://www.pdfcompressinkb.com/how-it-works/",
-    "https://www.pdfcompressinkb.com/privacy-policy/",
-    "https://www.pdfcompressinkb.com/terms/",
-    "https://www.pdfcompressinkb.com/disclaimer/"
-  ]);
+    "/",
+    "/about/",
+    "/contact/",
+    "/how-it-works/",
+    "/privacy-policy/",
+    "/terms/",
+    "/disclaimer/"
+  ].map((path) => new URL(path, canonicalOrigin).href));
   assert.ok(!sitemap.includes("hreflang="), "unreviewed translated pages should not be advertised as language alternates");
   const cloudflareHeaders = await readFile(new URL("../_headers", import.meta.url), "utf8");
   assert.match(cloudflareHeaders, /X-Robots-Tag: noindex, follow/);
-  assert.ok(cloudflareHeaders.includes("/compress-pdf-between-20-500kb/"));
+  assert.match(cloudflareHeaders, /\/compress-pdf-between-\*/);
 });
 test("PDF processing libraries are lazy-loaded only when compression is requested", () => {
   assert.equal(html.includes('src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"'), false,
@@ -124,4 +127,23 @@ test("homepage retains the site-wide design stylesheet and shared homepage style
   const consent = await readFile(new URL("../assets/consent.js", import.meta.url), "utf8");
   assert.ok(consent.includes('if (!document.querySelector(\'link[rel="stylesheet"][href^="/assets/site-system.css"]\'))'),
     "consent script should not inject a second copy of the shared stylesheet");
+});
+
+
+test("compression results provide a before-download PDF preview and method disclosure", () => {
+  assert.match(html, /function addPreview\(card,result,sourceFile,method\)/);
+  assert.match(html, /Image-based compression/);
+  assert.match(html, /Lossless/);
+  assert.match(html, /Text may be flattened into images/);
+  assert.match(html, /Preview before download/);
+  assert.match(html, /Download compressed PDF/);
+});
+
+test("preview is bounded to three pages and supports comparison and zoom", () => {
+  assert.match(html, /Math\.min\(3,docs\[0\]\.numPages,docs\[1\]\.numPages\)/);
+  assert.match(html, /previewState\.mode="both"/);
+  assert.match(html, /previewState\.zoom=Math\.min\(2\.2,previewState\.zoom\+\.15\)/);
+  assert.match(html, /previewState\.zoom=Math\.max\(\.65,previewState\.zoom-\.15\)/);
+  assert.match(html, /Try a softer quality/);
+  assert.match(html, /Adjust target size/);
 });

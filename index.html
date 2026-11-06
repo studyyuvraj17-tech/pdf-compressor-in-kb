@@ -374,6 +374,27 @@ details{border-color:var(--line)}summary{color:var(--fg)}footer,.site-footer{bor
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5723133469426985"
      crossorigin="anonymous"></script>
 <link rel="stylesheet" href="/assets/site-system.css?v=2" media="(min-width: 651px)">
+<style>
+/* Compression preview: inspect the first three pages before downloading. */
+.preview-panel{margin:18px 0 4px;padding:15px;border:1px solid #dfe5ee;border-radius:14px;background:#f8faff;color:#182238}
+.preview-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.preview-badge{display:inline-flex;padding:6px 9px;border-radius:999px;background:#eaf1ff;color:#204eaf;font-size:12px;font-weight:750}
+.preview-warning{margin:10px 0;padding:10px 12px;border-radius:10px;background:#fff6df;color:#765000;font-size:13px;line-height:1.55}
+.preview-controls,.preview-pages{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin:10px 0}
+.preview-controls button,.preview-pages button{min-height:34px;padding:7px 11px;border:1px solid #d2dbea;border-radius:9px;background:#fff!important;color:#34425a!important;font-size:12px;font-weight:700}
+.preview-pages button[aria-pressed=true]{background:#edf3ff!important;border-color:#2457c5;color:#204eaf!important}
+.preview-compare{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;align-items:start}
+.preview-page{min-width:0;padding:9px;border:1px solid #dfe5ee;border-radius:10px;background:#fff;text-align:center;overflow:hidden}
+.preview-page h4{margin:0 0 8px;color:#34425a;font-size:12px}
+.preview-canvas-wrap{max-height:560px;overflow:auto;background:#edf1f7;border-radius:7px;padding:6px}
+.preview-canvas-wrap canvas{display:block;max-width:none;margin:0 auto;background:#fff;box-shadow:0 2px 8px rgba(20,35,60,.12)}
+.preview-thumbs{display:flex;gap:8px;overflow-x:auto;padding:4px 0}
+.preview-thumb{flex:0 0 68px;min-height:80px!important;padding:5px!important;display:flex;flex-direction:column;align-items:center;gap:4px}
+.preview-thumb canvas{width:48px!important;height:auto!important;max-height:62px;object-fit:contain}
+.preview-thumb span{font-size:11px}
+.preview-loading{color:#5e6b80;font-size:13px}
+@media(max-width:600px){.preview-compare{grid-template-columns:1fr}.preview-canvas-wrap{max-height:420px}}
+</style>
 </head>
 <body>
 <main>
@@ -599,7 +620,71 @@ async function compressToTarget(pdf,target){
  return best?{blob:best,fit:false,scale:null,quality:null}:null;
 }
 var activeObjectUrl=null;
-function showResult(result,target,originalSize,note,sourceFile){
+var previewState={original:null,compressed:null,page:1,zoom:1,mode:"both",method:"lossless"};
+function makeEl(tag,className,textContent){var el=document.createElement(tag);if(className)el.className=className;if(textContent!=null)el.textContent=textContent;return el}
+function renderPdfPage(pdf,pageNumber,canvas,scale){
+ return pdf.getPage(pageNumber).then(function(page){
+  var viewport=page.getViewport({scale:scale});
+  canvas.width=Math.max(1,Math.floor(viewport.width));canvas.height=Math.max(1,Math.floor(viewport.height));
+  var ctx=canvas.getContext("2d",{alpha:false});
+  ctx.fillStyle="#fff";ctx.fillRect(0,0,canvas.width,canvas.height);
+  return page.render({canvasContext:ctx,viewport:viewport}).promise;
+ });
+}
+function updatePreviewPage(){
+ var state=previewState,wraps=$("out").querySelectorAll(".preview-canvas-wrap");
+ if(!state.original||!state.compressed)return;
+ var pairs=[{pdf:state.original,canvas:$("preview-original")},{pdf:state.compressed,canvas:$("preview-compressed")}];
+ pairs.forEach(function(pair){if(pair.canvas)renderPdfPage(pair.pdf,state.page,pair.canvas,1.15*state.zoom).catch(function(){})});
+ wraps.forEach(function(wrap){wrap.style.display=state.mode==="before"?(wrap.dataset.side==="after"?"none":"block"):state.mode==="after"?(wrap.dataset.side==="before"?"none":"block"):"block"});
+ var label=$("preview-page-label");if(label)label.textContent="Page "+state.page+" of "+Math.min(3,state.original.numPages,state.compressed.numPages);
+ var thumbs=$("out").querySelectorAll("[data-preview-page]");thumbs.forEach(function(button){button.setAttribute("aria-pressed",String(Number(button.dataset.previewPage)===state.page))});
+}
+async function renderPreview(result,sourceFile,method){
+ var panel=$("out").querySelector(".preview-panel");if(!panel)return;
+ var loading=panel.querySelector(".preview-loading");
+ try{
+  await loadPdfLibraries();
+  var originalTask=pdfjsLib.getDocument({data:await sourceFile.arrayBuffer(),isEvalSupported:false});
+  var compressedTask=pdfjsLib.getDocument({data:await result.arrayBuffer(),isEvalSupported:false});
+  var docs=await Promise.all([originalTask.promise,compressedTask.promise]);
+  previewState.original=docs[0];previewState.compressed=docs[1];previewState.page=1;previewState.zoom=1;previewState.mode="both";previewState.method=method;
+  var count=Math.min(3,docs[0].numPages,docs[1].numPages),thumbs=panel.querySelector(".preview-thumbs");
+  for(var i=1;i<=count;i++){
+   var btn=makeEl("button","preview-thumb");btn.type="button";btn.dataset.previewPage=String(i);btn.setAttribute("aria-pressed",String(i===1));
+   var canvas=makeEl("canvas");var label=makeEl("span","","Page "+i);btn.appendChild(canvas);btn.appendChild(label);thumbs.appendChild(btn);
+   await renderPdfPage(docs[0],i,canvas,.22);
+   btn.addEventListener("click",function(){previewState.page=Number(this.dataset.previewPage);updatePreviewPage()});
+  }
+  if(loading)loading.remove();
+  updatePreviewPage();
+ }catch(error){
+  if(loading)loading.textContent="Preview could not be rendered in this browser. You can still download and inspect the PDF in a PDF viewer.";
+ }
+}
+function addPreview(card,result,sourceFile,method){
+ var panel=makeEl("section","preview-panel");panel.setAttribute("aria-label","PDF preview before download");
+ var head=makeEl("div","preview-head");head.appendChild(makeEl("strong","","Preview before download"));
+ var badge=makeEl("span","preview-badge",method==="image"?"Image-based compression":method==="original"?"No compression needed":"Lossless");
+ head.appendChild(badge);panel.appendChild(head);
+ if(method==="image"){
+  panel.appendChild(makeEl("p","preview-warning","This output may lose text selectability and image clarity. Review every page before submitting. Text may be flattened into images."));
+ }
+ panel.appendChild(makeEl("p","preview-loading","Preparing a preview of the first pages…"));
+ var thumbs=makeEl("div","preview-thumbs");thumbs.setAttribute("aria-label","Page thumbnails");panel.appendChild(thumbs);
+ var controls=makeEl("div","preview-controls");
+ var before=makeEl("button","","Before");before.type="button";before.addEventListener("click",function(){previewState.mode="before";updatePreviewPage()});
+ var after=makeEl("button","","After");after.type="button";after.addEventListener("click",function(){previewState.mode="after";updatePreviewPage()});
+ var both=makeEl("button","","Compare");both.type="button";both.addEventListener("click",function(){previewState.mode="both";updatePreviewPage()});
+ var minus=makeEl("button","","−");minus.type="button";minus.setAttribute("aria-label","Zoom out");minus.addEventListener("click",function(){previewState.zoom=Math.max(.65,previewState.zoom-.15);updatePreviewPage()});
+ var plus=makeEl("button","","+");plus.type="button";plus.setAttribute("aria-label","Zoom in");plus.addEventListener("click",function(){previewState.zoom=Math.min(2.2,previewState.zoom+.15);updatePreviewPage()});
+ var pageLabel=makeEl("span","","Page 1");pageLabel.id="preview-page-label";controls.append(before,after,both,minus,plus,pageLabel);panel.appendChild(controls);
+ var compare=makeEl("div","preview-compare");
+ function pageSide(label,id,side){var box=makeEl("div","preview-page");box.appendChild(makeEl("h4","",label));var wrap=makeEl("div","preview-canvas-wrap");wrap.dataset.side=side;var canvas=makeEl("canvas");canvas.id=id;wrap.appendChild(canvas);box.appendChild(wrap);return box}
+ compare.append(pageSide("Original PDF","preview-original","before"),pageSide("Compressed PDF","preview-compressed","after"));panel.appendChild(compare);
+ card.appendChild(panel);
+}
+function showResult(result,target,originalSize,note,sourceFile,method){
  if(activeObjectUrl){URL.revokeObjectURL(activeObjectUrl);activeObjectUrl=null}
  var under=result.size<=target,percent=originalSize>0?Math.max(0,(1-result.size/originalSize)*100):0;
  var card=document.createElement("div");card.className="result-card";
@@ -612,12 +697,19 @@ function showResult(result,target,originalSize,note,sourceFile){
  stat("Original size",fmt(originalSize));stat("Compressed size",(result.size/1024).toFixed(1)+" KB");
  stat("Size reduction",(originalSize>result.size?percent.toFixed(1):"0.0")+"%");stat("Target",(target/1024).toFixed(0)+" KB maximum");card.appendChild(stats);
  var detail=document.createElement("p");detail.className="result-note";detail.textContent=under?(note||"The output is within your selected size target. Open the downloaded file and check that all text, signatures and details remain readable."):(note||"The output is larger than your selected target. Do not submit it where the size limit is strict.");card.appendChild(detail);
+ addPreview(card,result,sourceFile,method||"lossless");
  activeObjectUrl=URL.createObjectURL(result);var name=sourceFile.name.replace(/\.pdf$/i,"").replace(/[\\/:"*?<>|]/g,"_")+"-compressed.pdf";
  var actions=document.createElement("div");actions.className="result-actions";
  var link=document.createElement("a");link.className="dl";link.href=activeObjectUrl;link.download=name;link.textContent="Download compressed PDF";link.addEventListener("click",function(){track("pdf_download_click",{target_met:under,output_size_kb:Math.round(result.size/1024)})});actions.appendChild(link);
  if(!under){var retry=document.createElement("button");retry.type="button";retry.className="retry";retry.textContent="Try a larger target ("+(Math.ceil(result.size/1024)+10)+" KB)";retry.addEventListener("click",function(){$("kb").value=Math.min(100000,Math.ceil(result.size/1024)+10);updatePresets();$("kb").focus();say('<span class="warn">Target updated. Click Compress PDF to try again.</span>');});actions.appendChild(retry)}
+ if(method==="image"){
+  var softer=document.createElement("button");softer.type="button";softer.className="retry";softer.textContent="Try a softer quality";softer.addEventListener("click",function(){
+   var current=Number($("kb").value)||Math.ceil(target/1024);$("kb").value=Math.min(100000,Math.max(current+10,Math.ceil(current*1.2),Math.ceil(result.size/1024)+5));updatePresets();run();
+  });actions.appendChild(softer);
+ }
+ var adjust=document.createElement("button");adjust.type="button";adjust.className="retry";adjust.textContent="Adjust target size";adjust.addEventListener("click",function(){$("kb").disabled=false;$("kb").focus();$("kb").scrollIntoView({behavior:"smooth",block:"center"});});actions.appendChild(adjust);
  var another=document.createElement("button");another.type="button";another.className="retry";another.textContent="Choose another PDF";another.addEventListener("click",function(){clearPreviousResult();file=null;$("file").value="";$("fname").textContent="Drop your PDF here or browse";$("fsize").textContent="PDF files up to 100 MB · Your file stays on your device";$("go").disabled=true;$("file").click()});actions.appendChild(another);card.appendChild(actions);
- say("");$("out").appendChild(card);card.setAttribute("tabindex","-1");card.focus({preventScroll:true});track("pdf_compression_complete",{target_met:under,input_size_kb:Math.round(originalSize/1024),output_size_kb:Math.round(result.size/1024),target_size_kb:Math.round(target/1024)})
+ say("");$("out").appendChild(card);renderPreview(result,sourceFile,method||"lossless");card.setAttribute("tabindex","-1");card.focus({preventScroll:true});track("pdf_compression_complete",{target_met:under,input_size_kb:Math.round(originalSize/1024),output_size_kb:Math.round(result.size/1024),target_size_kb:Math.round(target/1024)})
 }
 async function run(){
  if(busy||!file)return;
@@ -638,12 +730,12 @@ async function run(){
    throw new Error("invalid-pdf");
   }
   if(file.size<=target){
-   showResult(file,target,file.size,"No compression was needed because the original file is already within your selected target.",file);
+   showResult(file,target,file.size,"No compression was needed because the original file is already within your selected target.",file,"original");
    return;
   }
   say("Loading PDF tools…");progress(.05);
   await loadPdfLibraries();
-  var result=null,note="";
+  var result=null,note="",method="lossless";
   try{
    var doc=await PDFLib.PDFDocument.load(bytes,{updateMetadata:false});
    var lossless=new Blob([await doc.save({useObjectStreams:true})],{type:"application/pdf"});
@@ -655,6 +747,7 @@ async function run(){
    // Some PDFs cannot be parsed by pdf-lib but can still be rendered by PDF.js.
   }
   if(!result){
+   method="image";
    say("Preparing PDF for compression…");
    var loading=pdfjsLib.getDocument({data:bytes.slice(0),isEvalSupported:false});
    var pdf;
@@ -673,7 +766,7 @@ async function run(){
   }
   progress(1);
   if(result.size>target)note="Target not reached: the best tested output is still above the limit. You can inspect the result, but do not submit it where the size limit is strict.";
-  showResult(result,target,file.size,note,file);
+  showResult(result,target,file.size,note,file,method);
  }catch(err){
   console.error(err);
   var message="Could not process this PDF. Please try another file.";
